@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.order.mapper.ComOrderMapper">
+    
+    <resultMap type="ComOrder" id="ComOrderResult">
+        <result property="id"    column="id"    />
+        <result property="orderCode"    column="order_code"    />
+        <result property="amount"    column="amount"    />
+        <result property="orderType"    column="order_type"    />
+        <result property="orderTypeName"    column="order_type_name"    />
+        <result property="orderStartName"    column="order_start_name"    />
+        <result property="orderEndName"    column="order_end_name"    />
+        <result property="customerId"    column="customer_id"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="staffId"    column="staff_id"    />
+        <result property="staffName"    column="staff_name"    />
+        <result property="status"    column="status"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="parentChannelId"    column="parent_channel_id"    />
+        <result property="channelName"    column="channel_name"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="isDeleted"    column="is_deleted"    />
+    </resultMap>
+
+    <sql id="selectComOrderVo">
+        select id, order_code, amount, order_type, order_type_name, order_start_name, order_end_name, customer_id, customer_name, staff_id, staff_name, status, channel_id, channel_code, parent_channel_id, channel_name, create_date, create_by, update_date, update_by, is_deleted from com_order
+    </sql>
+
+    <select id="selectComOrderList" parameterType="ComOrder" resultMap="ComOrderResult">
+        <include refid="selectComOrderVo"/>
+        <where>  
+            <if test="orderCode != null  and orderCode != ''"> and order_code = #{orderCode}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="orderType != null  and orderType != ''"> and order_type = #{orderType}</if>
+            <if test="orderTypeName != null  and orderTypeName != ''"> and order_type_name like concat('%', #{orderTypeName}, '%')</if>
+            <if test="orderStartName != null  and orderStartName != ''"> and order_start_name like concat('%', #{orderStartName}, '%')</if>
+            <if test="orderEndName != null  and orderEndName != ''"> and order_end_name like concat('%', #{orderEndName}, '%')</if>
+            <if test="customerId != null  and customerId != ''"> and customer_id = #{customerId}</if>
+            <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="staffId != null "> and staff_id = #{staffId}</if>
+            <if test="staffName != null  and staffName != ''"> and staff_name like concat('%', #{staffName}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="channelId != null "> and channel_id = #{channelId}</if>
+            <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+            <if test="parentChannelId != null "> and parent_channel_id = #{parentChannelId}</if>
+            <if test="channelName != null  and channelName != ''"> and channel_name like concat('%', #{channelName}, '%')</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
+            <if test="isDeleted != null  and isDeleted != ''"> and is_deleted = #{isDeleted}</if>
+        </where>
+    </select>
+    
+    <select id="selectComOrderById" parameterType="Long" resultMap="ComOrderResult">
+        <include refid="selectComOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComOrder" parameterType="ComOrder">
+        insert into com_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="orderCode != null">order_code,</if>
+            <if test="amount != null">amount,</if>
+            <if test="orderType != null">order_type,</if>
+            <if test="orderTypeName != null">order_type_name,</if>
+            <if test="orderStartName != null">order_start_name,</if>
+            <if test="orderEndName != null">order_end_name,</if>
+            <if test="customerId != null">customer_id,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="staffId != null">staff_id,</if>
+            <if test="staffName != null">staff_name,</if>
+            <if test="status != null">status,</if>
+            <if test="channelId != null">channel_id,</if>
+            <if test="channelCode != null">channel_code,</if>
+            <if test="parentChannelId != null">parent_channel_id,</if>
+            <if test="channelName != null">channel_name,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="orderCode != null">#{orderCode},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="orderType != null">#{orderType},</if>
+            <if test="orderTypeName != null">#{orderTypeName},</if>
+            <if test="orderStartName != null">#{orderStartName},</if>
+            <if test="orderEndName != null">#{orderEndName},</if>
+            <if test="customerId != null">#{customerId},</if>
+            <if test="customerName != null">#{customerName},</if>
+            <if test="staffId != null">#{staffId},</if>
+            <if test="staffName != null">#{staffName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="channelId != null">#{channelId},</if>
+            <if test="channelCode != null">#{channelCode},</if>
+            <if test="parentChannelId != null">#{parentChannelId},</if>
+            <if test="channelName != null">#{channelName},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComOrder" parameterType="ComOrder">
+        update com_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderCode != null">order_code = #{orderCode},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="orderType != null">order_type = #{orderType},</if>
+            <if test="orderTypeName != null">order_type_name = #{orderTypeName},</if>
+            <if test="orderStartName != null">order_start_name = #{orderStartName},</if>
+            <if test="orderEndName != null">order_end_name = #{orderEndName},</if>
+            <if test="customerId != null">customer_id = #{customerId},</if>
+            <if test="customerName != null">customer_name = #{customerName},</if>
+            <if test="staffId != null">staff_id = #{staffId},</if>
+            <if test="staffName != null">staff_name = #{staffName},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="channelId != null">channel_id = #{channelId},</if>
+            <if test="channelCode != null">channel_code = #{channelCode},</if>
+            <if test="parentChannelId != null">parent_channel_id = #{parentChannelId},</if>
+            <if test="channelName != null">channel_name = #{channelName},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComOrderById" parameterType="Long">
+        delete from com_order where id = #{id}
+    </delete>
+
+    <delete id="deleteComOrderByIds" parameterType="String">
+        delete from com_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

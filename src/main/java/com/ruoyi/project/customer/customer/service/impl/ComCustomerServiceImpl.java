@@ -1,12 +1,12 @@
-package com.ruoyi.project.customer.cusomer.service.impl;
+package com.ruoyi.project.customer.customer.service.impl;
 
 import java.util.List;
 
-import com.ruoyi.project.customer.cusomer.domain.ComCustomer;
-import com.ruoyi.project.customer.cusomer.mapper.ComCustomerMapper;
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
+import com.ruoyi.project.customer.customer.mapper.ComCustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.customer.cusomer.service.IComCustomerService;
+import com.ruoyi.project.customer.customer.service.IComCustomerService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**

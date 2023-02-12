@@ -27,161 +27,10 @@
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
                             </li>
                             <li>
-                                <label>更新时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateDate"/>
-                            </li>
-                            <li>
-                                <label>是否删除：</label>
-                                <input type="text" name="isDeleted"/>
-                            </li>
-                            <li>
-                                <label>客服id：</label>
-                                <input type="text" name="kefuId"/>
-                            </li>
-                            <li>
-                                <label>客服姓名：</label>
-                                <input type="text" name="kefuName"/>
-                            </li>
-                            <li>
-                                <label>客服手机号码：</label>
-                                <input type="text" name="kefuMobile"/>
-                            </li>
-                            <li>
-                                <label>联系邮箱：</label>
-                                <input type="text" name="kefuEmail"/>
-                            </li>
-                            <li>
-                                <label>城市id：</label>
-                                <input type="text" name="cityId"/>
-                            </li>
-                            <li>
-                                <label>城市名称：</label>
-                                <input type="text" name="cityName"/>
-                            </li>
-                            <li>
-                                <label>省份id：</label>
-                                <input type="text" name="provinceId"/>
-                            </li>
-                            <li>
-                                <label>省份名称：</label>
-                                <input type="text" name="provinceName"/>
-                            </li>
-                            <li>
-                                <label>产业：</label>
-                                <input type="text" name="industry"/>
-                            </li>
-                            <li>
-                                <label>服务费率：</label>
-                                <input type="text" name="serviceRate"/>
-                            </li>
-                            <li>
-                                <label>对接销售id：</label>
-                                <input type="text" name="salesId"/>
-                            </li>
-                            <li>
-                                <label>销售姓名：</label>
-                                <input type="text" name="salesName"/>
-                            </li>
-                            <li>
-                                <label>销售手机：</label>
-                                <input type="text" name="salesMobile"/>
-                            </li>
-                            <li>
-                                <label>销售邮箱：</label>
-                                <input type="text" name="salesEmail"/>
-                            </li>
-                            <li>
-                                <label>公司地址：</label>
-                                <input type="text" name="address"/>
-                            </li>
-                            <li>
                                 <label>公司电话：</label>
                                 <input type="text" name="telephone"/>
                             </li>
-                            <li>
-                                <label>开户行：</label>
-                                <input type="text" name="bankName"/>
-                            </li>
-                            <li>
-                                <label>银行账户：</label>
-                                <input type="text" name="bankNo"/>
-                            </li>
-                            <li>
-                                <label>账户：</label>
-                                <input type="text" name="accountNo"/>
-                            </li>
-                            <li>
-                                <label>收件地址：</label>
-                                <input type="text" name="receiveAddress"/>
-                            </li>
-                            <li>
-                                <label>收件城市id：</label>
-                                <input type="text" name="receiveCityId"/>
-                            </li>
-                            <li>
-                                <label>收件人名：</label>
-                                <input type="text" name="receiveName"/>
-                            </li>
-                            <li>
-                                <label>收件省份id：</label>
-                                <input type="text" name="receiveProvinceId"/>
-                            </li>
-                            <li>
-                                <label>收件电话：</label>
-                                <input type="text" name="receiveTelephone"/>
-                            </li>
-                            <li>
-                                <label>收件城市名：</label>
-                                <input type="text" name="receiveCityName"/>
-                            </li>
-                            <li>
-                                <label>收件身份名：</label>
-                                <input type="text" name="receiveProvinceName"/>
-                            </li>
-                            <li>
-                                <label>渠道id：</label>
-                                <input type="text" name="channelId"/>
-                            </li>
-                            <li>
-                                <label>渠道code：</label>
-                                <input type="text" name="channelCode"/>
-                            </li>
-                            <li>
-                                <label>企业分类：</label>
-                                <input type="text" name="classification"/>
-                            </li>
-                            <li>
-                                <label>组织机构代码：</label>
-                                <input type="text" name="orgCode"/>
-                            </li>
-                            <li>
-                                <label>注册地址：</label>
-                                <input type="text" name="regAddress"/>
-                            </li>
-                            <li>
-                                <label>注册资本：</label>
-                                <input type="text" name="regCapital"/>
-                            </li>
-                            <li>
-                                <label>成立日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择成立日期" name="establisDate"/>
-                            </li>
-                            <li>
-                                <label>法人代表：</label>
-                                <input type="text" name="legalRepresentative"/>
-                            </li>
-                            <li>
-                                <label>登记机关：</label>
-                                <input type="text" name="regAuthority"/>
-                            </li>
-                            <li>
-                                <label>关停企业日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择关停企业日期" name="closeDate"/>
-                            </li>
-                            <li>
-                                <label>关停原因：</label>
-                                <input type="text" name="closeReason"/>
-                            </li>
+
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -192,16 +41,16 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:customer:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="customer:customer:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:customer:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="customer:customer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:customer:remove">
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="customer:customer:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:customer:export">
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="customer:customer:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -212,9 +61,9 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:customer:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:customer:remove')}]];
-        var prefix = ctx + "system/customer";
+        var editFlag = [[${@permission.hasPermi('customer:customer:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('customer:customer:remove')}]];
+        var prefix = ctx + "customer/customer";
 
         $(function() {
             var options = {
@@ -242,7 +91,7 @@
                 },
                 {
                     field: 'companyStatus',
-                    title: '状态 1 正常 2 停用'
+                    title: '状态'
                 },
                 {
                     field: 'mobile',

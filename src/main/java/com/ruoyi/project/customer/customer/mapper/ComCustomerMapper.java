@@ -1,16 +1,16 @@
-package com.ruoyi.project.customer.cusomer.service;
-
-import com.ruoyi.project.customer.cusomer.domain.ComCustomer;
+package com.ruoyi.project.customer.customer.mapper;
 
 import java.util.List;
 
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
+
 /**
- * 客户基本信息Service接口
+ * 客户基本信息Mapper接口
  * 
  * @author ruoyi
  * @date 2023-02-12
  */
-public interface IComCustomerService 
+public interface ComCustomerMapper 
 {
     /**
      * 查询客户基本信息
@@ -45,18 +45,18 @@ public interface IComCustomerService
     public int updateComCustomer(ComCustomer comCustomer);
 
     /**
-     * 批量删除客户基本信息
-     * 
-     * @param ids 需要删除的客户基本信息主键集合
-     * @return 结果
-     */
-    public int deleteComCustomerByIds(String ids);
-
-    /**
-     * 删除客户基本信息信息
+     * 删除客户基本信息
      * 
      * @param id 客户基本信息主键
      * @return 结果
      */
     public int deleteComCustomerById(Long id);
+
+    /**
+     * 批量删除客户基本信息
+     * 
+     * @param ids 需要删除的数据主键集合
+     * @return 结果
+     */
+    public int deleteComCustomerByIds(String[] ids);
 }

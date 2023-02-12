@@ -1,8 +1,8 @@
-package com.ruoyi.project.customer.cusomer.controller;
+package com.ruoyi.project.customer.customer.controller;
 
 import java.util.List;
 
-import com.ruoyi.project.customer.cusomer.service.IComCustomerService;
+import com.ruoyi.project.customer.customer.service.IComCustomerService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.customer.cusomer.domain.ComCustomer;
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
