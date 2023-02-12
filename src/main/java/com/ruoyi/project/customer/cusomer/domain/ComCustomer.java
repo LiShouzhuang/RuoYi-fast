@@ -9,7 +9,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 企业对象 com_customer
+ * 客户基本信息对象 com_customer
  * 
  * @author ruoyi
  * @date 2023-02-12
@@ -37,16 +37,18 @@ public class ComCustomer extends BaseEntity
     @Excel(name = "客户联系人号码")
     private String mobile;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date createDate;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updateDate;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 是否删除 */
+    @Excel(name = "是否删除")
     private Integer isDeleted;
 
     /** 客服id */
@@ -65,24 +67,24 @@ public class ComCustomer extends BaseEntity
     @Excel(name = "联系邮箱")
     private String kefuEmail;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 城市id */
+    @Excel(name = "城市id")
     private Long cityId;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 城市名称 */
+    @Excel(name = "城市名称")
     private String cityName;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 省份id */
+    @Excel(name = "省份id")
     private Long provinceId;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 省份名称 */
+    @Excel(name = "省份名称")
     private String provinceName;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 产业 */
+    @Excel(name = "产业")
     private Long industry;
 
     /** 服务费率 */

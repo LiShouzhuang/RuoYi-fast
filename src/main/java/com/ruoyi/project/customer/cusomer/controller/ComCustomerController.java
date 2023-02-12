@@ -20,8 +20,9 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
 
+
 /**
- * 企业Controller
+ * 客户基本信息Controller
  * 
  * @author ruoyi
  * @date 2023-02-12
@@ -43,7 +44,7 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 查询企业列表
+     * 查询客户基本信息列表
      */
     @RequiresPermissions("customer:customer:list")
     @PostMapping("/list")
@@ -56,7 +57,7 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 导出企业列表
+     * 导出客户基本信息列表
      */
     @RequiresPermissions("customer:customer:export")
     @Log(title = "企业", businessType = BusinessType.EXPORT)
@@ -66,11 +67,11 @@ public class ComCustomerController extends BaseController
     {
         List<ComCustomer> list = comCustomerService.selectComCustomerList(comCustomer);
         ExcelUtil<ComCustomer> util = new ExcelUtil<ComCustomer>(ComCustomer.class);
-        return util.exportExcel(list, "企业数据");
+        return util.exportExcel(list, "客户基本信息数据");
     }
 
     /**
-     * 新增企业
+     * 新增客户基本信息
      */
     @GetMapping("/add")
     public String add()
@@ -79,10 +80,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 新增保存企业
+     * 新增保存客户基本信息
      */
     @RequiresPermissions("customer:customer:add")
-    @Log(title = "企业", businessType = BusinessType.INSERT)
+    @Log(title = "客户基本信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(ComCustomer comCustomer)
@@ -91,7 +92,7 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 修改企业
+     * 修改客户基本信息
      */
     @RequiresPermissions("customer:customer:edit")
     @GetMapping("/edit/{id}")
@@ -103,10 +104,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 修改保存企业
+     * 修改保存客户基本信息
      */
     @RequiresPermissions("customer:customer:edit")
-    @Log(title = "企业", businessType = BusinessType.UPDATE)
+    @Log(title = "客户基本信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(ComCustomer comCustomer)
@@ -115,10 +116,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 删除企业
+     * 删除客户基本信息
      */
     @RequiresPermissions("customer:customer:remove")
-    @Log(title = "企业", businessType = BusinessType.DELETE)
+    @Log(title = "客户基本信息", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
