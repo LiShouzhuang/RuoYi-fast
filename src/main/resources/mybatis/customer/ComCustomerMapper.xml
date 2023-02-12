@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.cusomer.mapper.ComCustomerMapper">
+    
+    <resultMap type="ComCustomer" id="ComCustomerResult">
+        <result property="id"    column="id"    />
+        <result property="companyCode"    column="company_code"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyStatus"    column="company_status"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="kefuId"    column="kefu_id"    />
+        <result property="kefuName"    column="kefu_name"    />
+        <result property="kefuMobile"    column="kefu_mobile"    />
+        <result property="kefuEmail"    column="kefu_email"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="cityName"    column="city_name"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="provinceName"    column="province_name"    />
+        <result property="industry"    column="industry"    />
+        <result property="serviceRate"    column="service_rate"    />
+        <result property="salesId"    column="sales_id"    />
+        <result property="salesName"    column="sales_name"    />
+        <result property="salesMobile"    column="sales_mobile"    />
+        <result property="salesEmail"    column="sales_email"    />
+        <result property="address"    column="address"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="bankNo"    column="bank_no"    />
+        <result property="accountNo"    column="account_no"    />
+        <result property="receiveAddress"    column="receive_address"    />
+        <result property="receiveCityId"    column="receive_city_id"    />
+        <result property="receiveName"    column="receive_name"    />
+        <result property="receiveProvinceId"    column="receive_province_id"    />
+        <result property="receiveTelephone"    column="receive_telephone"    />
+        <result property="receiveCityName"    column="receive_city_name"    />
+        <result property="receiveProvinceName"    column="receive_province_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="channelId"    column="channel_id"    />
+        <result property="channelCode"    column="channel_code"    />
+        <result property="classification"    column="classification"    />
+        <result property="orgCode"    column="org_code"    />
+        <result property="regAddress"    column="reg_address"    />
+        <result property="enterpriseType"    column="enterprise_type"    />
+        <result property="regCapital"    column="reg_capital"    />
+        <result property="establisDate"    column="establis_date"    />
+        <result property="legalRepresentative"    column="legal_representative"    />
+        <result property="regAuthority"    column="reg_authority"    />
+        <result property="businessScope"    column="business_scope"    />
+        <result property="industryType"    column="industry_type"    />
+        <result property="closeDate"    column="close_date"    />
+        <result property="closeReason"    column="close_reason"    />
+    </resultMap>
+
+    <sql id="selectComCustomerVo">
+        select id, company_code, company_name, company_status, mobile, create_date, create_by, update_date, update_by, is_deleted, kefu_id, kefu_name, kefu_mobile, kefu_email, city_id, city_name, province_id, province_name, industry, service_rate, sales_id, sales_name, sales_mobile, sales_email, address, telephone, bank_name, bank_no, account_no, receive_address, receive_city_id, receive_name, receive_province_id, receive_telephone, receive_city_name, receive_province_name, remark, channel_id, channel_code, classification, org_code, reg_address, enterprise_type, reg_capital, establis_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason from com_customer
+    </sql>
+
+    <select id="selectComCustomerList" parameterType="ComCustomer" resultMap="ComCustomerResult">
+        <include refid="selectComCustomerVo"/>
+        <where>  
+            <if test="companyCode != null  and companyCode != ''"> and company_code = #{companyCode}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyStatus != null "> and company_status = #{companyStatus}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
+            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
+            <if test="kefuId != null "> and kefu_id = #{kefuId}</if>
+            <if test="kefuName != null  and kefuName != ''"> and kefu_name like concat('%', #{kefuName}, '%')</if>
+            <if test="kefuMobile != null  and kefuMobile != ''"> and kefu_mobile = #{kefuMobile}</if>
+            <if test="kefuEmail != null  and kefuEmail != ''"> and kefu_email = #{kefuEmail}</if>
+            <if test="cityId != null "> and city_id = #{cityId}</if>
+            <if test="cityName != null  and cityName != ''"> and city_name like concat('%', #{cityName}, '%')</if>
+            <if test="provinceId != null "> and province_id = #{provinceId}</if>
+            <if test="provinceName != null  and provinceName != ''"> and province_name like concat('%', #{provinceName}, '%')</if>
+            <if test="industry != null "> and industry = #{industry}</if>
+            <if test="serviceRate != null "> and service_rate = #{serviceRate}</if>
+            <if test="salesId != null "> and sales_id = #{salesId}</if>
+            <if test="salesName != null  and salesName != ''"> and sales_name like concat('%', #{salesName}, '%')</if>
+            <if test="salesMobile != null  and salesMobile != ''"> and sales_mobile = #{salesMobile}</if>
+            <if test="salesEmail != null  and salesEmail != ''"> and sales_email = #{salesEmail}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="bankNo != null  and bankNo != ''"> and bank_no = #{bankNo}</if>
+            <if test="accountNo != null  and accountNo != ''"> and account_no = #{accountNo}</if>
+            <if test="receiveAddress != null  and receiveAddress != ''"> and receive_address = #{receiveAddress}</if>
+            <if test="receiveCityId != null "> and receive_city_id = #{receiveCityId}</if>
+            <if test="receiveName != null  and receiveName != ''"> and receive_name like concat('%', #{receiveName}, '%')</if>
+            <if test="receiveProvinceId != null "> and receive_province_id = #{receiveProvinceId}</if>
+            <if test="receiveTelephone != null  and receiveTelephone != ''"> and receive_telephone = #{receiveTelephone}</if>
+            <if test="receiveCityName != null  and receiveCityName != ''"> and receive_city_name like concat('%', #{receiveCityName}, '%')</if>
+            <if test="receiveProvinceName != null  and receiveProvinceName != ''"> and receive_province_name like concat('%', #{receiveProvinceName}, '%')</if>
+            <if test="channelId != null "> and channel_id = #{channelId}</if>
+            <if test="channelCode != null  and channelCode != ''"> and channel_code = #{channelCode}</if>
+            <if test="classification != null  and classification != ''"> and classification = #{classification}</if>
+            <if test="orgCode != null  and orgCode != ''"> and org_code = #{orgCode}</if>
+            <if test="regAddress != null  and regAddress != ''"> and reg_address = #{regAddress}</if>
+            <if test="enterpriseType != null  and enterpriseType != ''"> and enterprise_type = #{enterpriseType}</if>
+            <if test="regCapital != null  and regCapital != ''"> and reg_capital = #{regCapital}</if>
+            <if test="establisDate != null "> and establis_date = #{establisDate}</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''"> and legal_representative = #{legalRepresentative}</if>
+            <if test="regAuthority != null  and regAuthority != ''"> and reg_authority = #{regAuthority}</if>
+            <if test="businessScope != null  and businessScope != ''"> and business_scope = #{businessScope}</if>
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="closeDate != null "> and close_date = #{closeDate}</if>
+            <if test="closeReason != null  and closeReason != ''"> and close_reason = #{closeReason}</if>
+        </where>
+    </select>
+    
+    <select id="selectComCustomerById" parameterType="Long" resultMap="ComCustomerResult">
+        <include refid="selectComCustomerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComCustomer" parameterType="ComCustomer" useGeneratedKeys="true" keyProperty="id">
+        insert into com_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">company_code,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyStatus != null">company_status,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="kefuId != null">kefu_id,</if>
+            <if test="kefuName != null">kefu_name,</if>
+            <if test="kefuMobile != null">kefu_mobile,</if>
+            <if test="kefuEmail != null">kefu_email,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="cityName != null">city_name,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="provinceName != null">province_name,</if>
+            <if test="industry != null">industry,</if>
+            <if test="serviceRate != null">service_rate,</if>
+            <if test="salesId != null">sales_id,</if>
+            <if test="salesName != null">sales_name,</if>
+            <if test="salesMobile != null">sales_mobile,</if>
+            <if test="salesEmail != null">sales_email,</if>
+            <if test="address != null">address,</if>
+            <if test="telephone != null">telephone,</if>
+            <if test="bankName != null">bank_name,</if>
+            <if test="bankNo != null">bank_no,</if>
+            <if test="accountNo != null">account_no,</if>
+            <if test="receiveAddress != null">receive_address,</if>
+            <if test="receiveCityId != null">receive_city_id,</if>
+            <if test="receiveName != null">receive_name,</if>
+            <if test="receiveProvinceId != null">receive_province_id,</if>
+            <if test="receiveTelephone != null">receive_telephone,</if>
+            <if test="receiveCityName != null">receive_city_name,</if>
+            <if test="receiveProvinceName != null">receive_province_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="channelId != null">channel_id,</if>
+            <if test="channelCode != null">channel_code,</if>
+            <if test="classification != null">classification,</if>
+            <if test="orgCode != null">org_code,</if>
+            <if test="regAddress != null">reg_address,</if>
+            <if test="enterpriseType != null">enterprise_type,</if>
+            <if test="regCapital != null">reg_capital,</if>
+            <if test="establisDate != null">establis_date,</if>
+            <if test="legalRepresentative != null">legal_representative,</if>
+            <if test="regAuthority != null">reg_authority,</if>
+            <if test="businessScope != null">business_scope,</if>
+            <if test="industryType != null">industry_type,</if>
+            <if test="closeDate != null">close_date,</if>
+            <if test="closeReason != null">close_reason,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">#{companyCode},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyStatus != null">#{companyStatus},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="kefuId != null">#{kefuId},</if>
+            <if test="kefuName != null">#{kefuName},</if>
+            <if test="kefuMobile != null">#{kefuMobile},</if>
+            <if test="kefuEmail != null">#{kefuEmail},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="cityName != null">#{cityName},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="provinceName != null">#{provinceName},</if>
+            <if test="industry != null">#{industry},</if>
+            <if test="serviceRate != null">#{serviceRate},</if>
+            <if test="salesId != null">#{salesId},</if>
+            <if test="salesName != null">#{salesName},</if>
+            <if test="salesMobile != null">#{salesMobile},</if>
+            <if test="salesEmail != null">#{salesEmail},</if>
+            <if test="address != null">#{address},</if>
+            <if test="telephone != null">#{telephone},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="bankNo != null">#{bankNo},</if>
+            <if test="accountNo != null">#{accountNo},</if>
+            <if test="receiveAddress != null">#{receiveAddress},</if>
+            <if test="receiveCityId != null">#{receiveCityId},</if>
+            <if test="receiveName != null">#{receiveName},</if>
+            <if test="receiveProvinceId != null">#{receiveProvinceId},</if>
+            <if test="receiveTelephone != null">#{receiveTelephone},</if>
+            <if test="receiveCityName != null">#{receiveCityName},</if>
+            <if test="receiveProvinceName != null">#{receiveProvinceName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="channelId != null">#{channelId},</if>
+            <if test="channelCode != null">#{channelCode},</if>
+            <if test="classification != null">#{classification},</if>
+            <if test="orgCode != null">#{orgCode},</if>
+            <if test="regAddress != null">#{regAddress},</if>
+            <if test="enterpriseType != null">#{enterpriseType},</if>
+            <if test="regCapital != null">#{regCapital},</if>
+            <if test="establisDate != null">#{establisDate},</if>
+            <if test="legalRepresentative != null">#{legalRepresentative},</if>
+            <if test="regAuthority != null">#{regAuthority},</if>
+            <if test="businessScope != null">#{businessScope},</if>
+            <if test="industryType != null">#{industryType},</if>
+            <if test="closeDate != null">#{closeDate},</if>
+            <if test="closeReason != null">#{closeReason},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComCustomer" parameterType="ComCustomer">
+        update com_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyCode != null">company_code = #{companyCode},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyStatus != null">company_status = #{companyStatus},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="kefuId != null">kefu_id = #{kefuId},</if>
+            <if test="kefuName != null">kefu_name = #{kefuName},</if>
+            <if test="kefuMobile != null">kefu_mobile = #{kefuMobile},</if>
+            <if test="kefuEmail != null">kefu_email = #{kefuEmail},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="cityName != null">city_name = #{cityName},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="provinceName != null">province_name = #{provinceName},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="serviceRate != null">service_rate = #{serviceRate},</if>
+            <if test="salesId != null">sales_id = #{salesId},</if>
+            <if test="salesName != null">sales_name = #{salesName},</if>
+            <if test="salesMobile != null">sales_mobile = #{salesMobile},</if>
+            <if test="salesEmail != null">sales_email = #{salesEmail},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="telephone != null">telephone = #{telephone},</if>
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="bankNo != null">bank_no = #{bankNo},</if>
+            <if test="accountNo != null">account_no = #{accountNo},</if>
+            <if test="receiveAddress != null">receive_address = #{receiveAddress},</if>
+            <if test="receiveCityId != null">receive_city_id = #{receiveCityId},</if>
+            <if test="receiveName != null">receive_name = #{receiveName},</if>
+            <if test="receiveProvinceId != null">receive_province_id = #{receiveProvinceId},</if>
+            <if test="receiveTelephone != null">receive_telephone = #{receiveTelephone},</if>
+            <if test="receiveCityName != null">receive_city_name = #{receiveCityName},</if>
+            <if test="receiveProvinceName != null">receive_province_name = #{receiveProvinceName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="channelId != null">channel_id = #{channelId},</if>
+            <if test="channelCode != null">channel_code = #{channelCode},</if>
+            <if test="classification != null">classification = #{classification},</if>
+            <if test="orgCode != null">org_code = #{orgCode},</if>
+            <if test="regAddress != null">reg_address = #{regAddress},</if>
+            <if test="enterpriseType != null">enterprise_type = #{enterpriseType},</if>
+            <if test="regCapital != null">reg_capital = #{regCapital},</if>
+            <if test="establisDate != null">establis_date = #{establisDate},</if>
+            <if test="legalRepresentative != null">legal_representative = #{legalRepresentative},</if>
+            <if test="regAuthority != null">reg_authority = #{regAuthority},</if>
+            <if test="businessScope != null">business_scope = #{businessScope},</if>
+            <if test="industryType != null">industry_type = #{industryType},</if>
+            <if test="closeDate != null">close_date = #{closeDate},</if>
+            <if test="closeReason != null">close_reason = #{closeReason},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComCustomerById" parameterType="Long">
+        delete from com_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteComCustomerByIds" parameterType="String">
+        delete from com_customer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

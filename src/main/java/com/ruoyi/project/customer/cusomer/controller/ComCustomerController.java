@@ -1,0 +1,128 @@
+package com.ruoyi.project.customer.cusomer.controller;
+
+import java.util.List;
+
+import com.ruoyi.project.customer.cusomer.service.IComCustomerService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.project.customer.cusomer.domain.ComCustomer;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.web.page.TableDataInfo;
+
+/**
+ * 企业Controller
+ * 
+ * @author ruoyi
+ * @date 2023-02-12
+ */
+@Controller
+@RequestMapping("/customer/customer")
+public class ComCustomerController extends BaseController
+{
+    private String prefix = "customer/customer";
+
+    @Autowired
+    private IComCustomerService comCustomerService;
+
+    @RequiresPermissions("customer:customer:view")
+    @GetMapping()
+    public String customer()
+    {
+        return prefix + "/customer";
+    }
+
+    /**
+     * 查询企业列表
+     */
+    @RequiresPermissions("customer:customer:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(ComCustomer comCustomer)
+    {
+        startPage();
+        List<ComCustomer> list = comCustomerService.selectComCustomerList(comCustomer);
+        return getDataTable(list);
+    }
+
+    /**
+     * 导出企业列表
+     */
+    @RequiresPermissions("customer:customer:export")
+    @Log(title = "企业", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(ComCustomer comCustomer)
+    {
+        List<ComCustomer> list = comCustomerService.selectComCustomerList(comCustomer);
+        ExcelUtil<ComCustomer> util = new ExcelUtil<ComCustomer>(ComCustomer.class);
+        return util.exportExcel(list, "企业数据");
+    }
+
+    /**
+     * 新增企业
+     */
+    @GetMapping("/add")
+    public String add()
+    {
+        return prefix + "/add";
+    }
+
+    /**
+     * 新增保存企业
+     */
+    @RequiresPermissions("customer:customer:add")
+    @Log(title = "企业", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(ComCustomer comCustomer)
+    {
+        return toAjax(comCustomerService.insertComCustomer(comCustomer));
+    }
+
+    /**
+     * 修改企业
+     */
+    @RequiresPermissions("customer:customer:edit")
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, ModelMap mmap)
+    {
+        ComCustomer comCustomer = comCustomerService.selectComCustomerById(id);
+        mmap.put("comCustomer", comCustomer);
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存企业
+     */
+    @RequiresPermissions("customer:customer:edit")
+    @Log(title = "企业", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(ComCustomer comCustomer)
+    {
+        return toAjax(comCustomerService.updateComCustomer(comCustomer));
+    }
+
+    /**
+     * 删除企业
+     */
+    @RequiresPermissions("customer:customer:remove")
+    @Log(title = "企业", businessType = BusinessType.DELETE)
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids)
+    {
+        return toAjax(comCustomerService.deleteComCustomerByIds(ids));
+    }
+}
