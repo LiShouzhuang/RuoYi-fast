@@ -9,6 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="companyCode"    column="company_code"    />
         <result property="companyName"    column="company_name"    />
         <result property="companyStatus"    column="company_status"    />
+        <result property="companyUserName"    column="company_user_name"    />
+        <result property="companyTitle"    column="company_title"    />
         <result property="mobile"    column="mobile"    />
         <result property="telephone"    column="telephone"    />
         <result property="address"    column="address"    />
@@ -56,6 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="contractAmount"    column="contract_amount"    />
         <result property="contractTotalAmount"    column="contract_total_amount"    />
         <result property="contractIsContinue"    column="contract_is_continue"    />
+        <result property="invoiceName"    column="invoice_name"    />
+        <result property="invoiceNo"    column="invoice_no"    />
         <result property="createDate"    column="create_date"    />
         <result property="createBy"    column="create_by"    />
         <result property="updateDate"    column="update_date"    />
@@ -64,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectComCustomerVo">
-        select id, company_code, company_name, company_status, mobile, telephone, address, bank_name, bank_no, account_no, city_id, city_name, province_id, province_name, industry, kefu_id, kefu_name, kefu_mobile, kefu_email, sales_id, sales_name, sales_mobile, sales_email, receive_address, receive_city_id, receive_name, receive_province_id, receive_telephone, receive_city_name, receive_province_name, remark, channel_id, channel_code, classification, reg_address, enterprise_type, reg_capital, establis_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, company_contract_id, company_contract_code, contract_start_date, contract_end_date, contract_amount, contract_total_amount, contract_is_continue, create_date, create_by, update_date, update_by, is_deleted from com_customer
+        select id, company_code, company_name, company_status, company_user_name, company_title, mobile, telephone, address, bank_name, bank_no, account_no, city_id, city_name, province_id, province_name, industry, kefu_id, kefu_name, kefu_mobile, kefu_email, sales_id, sales_name, sales_mobile, sales_email, receive_address, receive_city_id, receive_name, receive_province_id, receive_telephone, receive_city_name, receive_province_name, remark, channel_id, channel_code, classification, reg_address, enterprise_type, reg_capital, establis_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, company_contract_id, company_contract_code, contract_start_date, contract_end_date, contract_amount, contract_total_amount, contract_is_continue, invoice_name, invoice_no, create_date, create_by, update_date, update_by, is_deleted from com_customer
     </sql>
 
     <select id="selectComCustomerList" parameterType="ComCustomer" resultMap="ComCustomerResult">
@@ -73,6 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="companyCode != null  and companyCode != ''"> and company_code = #{companyCode}</if>
             <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
             <if test="companyStatus != null "> and company_status = #{companyStatus}</if>
+            <if test="companyUserName != null  and companyUserName != ''"> and company_user_name like concat('%', #{companyUserName}, '%')</if>
+            <if test="companyTitle != null  and companyTitle != ''"> and company_title = #{companyTitle}</if>
             <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
             <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
@@ -119,6 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contractAmount != null "> and contract_amount = #{contractAmount}</if>
             <if test="contractTotalAmount != null "> and contract_total_amount = #{contractTotalAmount}</if>
             <if test="contractIsContinue != null  and contractIsContinue != ''"> and contract_is_continue = #{contractIsContinue}</if>
+            <if test="invoiceName != null  and invoiceName != ''"> and invoice_name like concat('%', #{invoiceName}, '%')</if>
+            <if test="invoiceNo != null "> and invoice_no = #{invoiceNo}</if>
             <if test="createDate != null "> and create_date = #{createDate}</if>
             <if test="updateDate != null "> and update_date = #{updateDate}</if>
             <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
@@ -136,6 +144,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="companyCode != null">company_code,</if>
             <if test="companyName != null">company_name,</if>
             <if test="companyStatus != null">company_status,</if>
+            <if test="companyUserName != null">company_user_name,</if>
+            <if test="companyTitle != null">company_title,</if>
             <if test="mobile != null">mobile,</if>
             <if test="telephone != null">telephone,</if>
             <if test="address != null">address,</if>
@@ -183,6 +193,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contractAmount != null">contract_amount,</if>
             <if test="contractTotalAmount != null">contract_total_amount,</if>
             <if test="contractIsContinue != null">contract_is_continue,</if>
+            <if test="invoiceName != null">invoice_name,</if>
+            <if test="invoiceNo != null">invoice_no,</if>
             <if test="createDate != null">create_date,</if>
             <if test="createBy != null">create_by,</if>
             <if test="updateDate != null">update_date,</if>
@@ -193,6 +205,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="companyCode != null">#{companyCode},</if>
             <if test="companyName != null">#{companyName},</if>
             <if test="companyStatus != null">#{companyStatus},</if>
+            <if test="companyUserName != null">#{companyUserName},</if>
+            <if test="companyTitle != null">#{companyTitle},</if>
             <if test="mobile != null">#{mobile},</if>
             <if test="telephone != null">#{telephone},</if>
             <if test="address != null">#{address},</if>
@@ -240,6 +254,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contractAmount != null">#{contractAmount},</if>
             <if test="contractTotalAmount != null">#{contractTotalAmount},</if>
             <if test="contractIsContinue != null">#{contractIsContinue},</if>
+            <if test="invoiceName != null">#{invoiceName},</if>
+            <if test="invoiceNo != null">#{invoiceNo},</if>
             <if test="createDate != null">#{createDate},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="updateDate != null">#{updateDate},</if>
@@ -254,6 +270,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="companyCode != null">company_code = #{companyCode},</if>
             <if test="companyName != null">company_name = #{companyName},</if>
             <if test="companyStatus != null">company_status = #{companyStatus},</if>
+            <if test="companyUserName != null">company_user_name = #{companyUserName},</if>
+            <if test="companyTitle != null">company_title = #{companyTitle},</if>
             <if test="mobile != null">mobile = #{mobile},</if>
             <if test="telephone != null">telephone = #{telephone},</if>
             <if test="address != null">address = #{address},</if>
@@ -301,6 +319,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="contractAmount != null">contract_amount = #{contractAmount},</if>
             <if test="contractTotalAmount != null">contract_total_amount = #{contractTotalAmount},</if>
             <if test="contractIsContinue != null">contract_is_continue = #{contractIsContinue},</if>
+            <if test="invoiceName != null">invoice_name = #{invoiceName},</if>
+            <if test="invoiceNo != null">invoice_no = #{invoiceNo},</if>
             <if test="createDate != null">create_date = #{createDate},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="updateDate != null">update_date = #{updateDate},</if>

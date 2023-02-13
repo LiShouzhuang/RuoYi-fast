@@ -32,8 +32,16 @@ public class ComCustomer extends BaseEntity
     @Excel(name = "状态")
     private Integer companyStatus;
 
-    /** 客户联系人号码 */
-    @Excel(name = "客户联系人号码")
+    /** 客户联系人名称 */
+    @Excel(name = "客户联系人名称")
+    private String companyUserName;
+
+    /** 客户职务 */
+    @Excel(name = "客户职务")
+    private String companyTitle;
+
+    /** 客户联系人电话 */
+    @Excel(name = "客户联系人电话")
     private String mobile;
 
     /** 客户联系人手机 */
@@ -220,6 +228,14 @@ public class ComCustomer extends BaseEntity
     @Excel(name = "是否续签客户")
     private String contractIsContinue;
 
+    /** 发票名称 */
+    @Excel(name = "发票名称")
+    private String invoiceName;
+
+    /** 纳税人识别号 */
+    @Excel(name = "纳税人识别号")
+    private Long invoiceNo;
+
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -269,6 +285,24 @@ public class ComCustomer extends BaseEntity
     public Integer getCompanyStatus()
     {
         return companyStatus;
+    }
+    public void setCompanyUserName(String companyUserName)
+    {
+        this.companyUserName = companyUserName;
+    }
+
+    public String getCompanyUserName()
+    {
+        return companyUserName;
+    }
+    public void setCompanyTitle(String companyTitle)
+    {
+        this.companyTitle = companyTitle;
+    }
+
+    public String getCompanyTitle()
+    {
+        return companyTitle;
     }
     public void setMobile(String mobile)
     {
@@ -684,6 +718,24 @@ public class ComCustomer extends BaseEntity
     {
         return contractIsContinue;
     }
+    public void setInvoiceName(String invoiceName)
+    {
+        this.invoiceName = invoiceName;
+    }
+
+    public String getInvoiceName()
+    {
+        return invoiceName;
+    }
+    public void setInvoiceNo(Long invoiceNo)
+    {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public Long getInvoiceNo()
+    {
+        return invoiceNo;
+    }
     public void setCreateDate(Date createDate)
     {
         this.createDate = createDate;
@@ -719,6 +771,8 @@ public class ComCustomer extends BaseEntity
             .append("companyCode", getCompanyCode())
             .append("companyName", getCompanyName())
             .append("companyStatus", getCompanyStatus())
+            .append("companyUserName", getCompanyUserName())
+            .append("companyTitle", getCompanyTitle())
             .append("mobile", getMobile())
             .append("telephone", getTelephone())
             .append("address", getAddress())
@@ -766,6 +820,8 @@ public class ComCustomer extends BaseEntity
             .append("contractAmount", getContractAmount())
             .append("contractTotalAmount", getContractTotalAmount())
             .append("contractIsContinue", getContractIsContinue())
+            .append("invoiceName", getInvoiceName())
+            .append("invoiceNo", getInvoiceNo())
             .append("createDate", getCreateDate())
             .append("createBy", getCreateBy())
             .append("updateDate", getUpdateDate())

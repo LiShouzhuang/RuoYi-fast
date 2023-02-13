@@ -30,7 +30,19 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客户联系人号码：</label>
+                <label class="col-sm-3 control-label">客户联系人名称：</label>
+                <div class="col-sm-8">
+                    <input name="companyUserName" th:field="*{companyUserName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户职务：</label>
+                <div class="col-sm-8">
+                    <input name="companyTitle" th:field="*{companyTitle}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户联系人电话：</label>
                 <div class="col-sm-8">
                     <input name="mobile" th:field="*{mobile}" class="form-control" type="text">
                 </div>
@@ -309,6 +321,18 @@
                 <label class="col-sm-3 control-label">是否续签客户：</label>
                 <div class="col-sm-8">
                     <input name="contractIsContinue" th:field="*{contractIsContinue}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发票名称：</label>
+                <div class="col-sm-8">
+                    <input name="invoiceName" th:field="*{invoiceName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">纳税人识别号：</label>
+                <div class="col-sm-8">
+                    <input name="invoiceNo" th:field="*{invoiceNo}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    

@@ -26,7 +26,15 @@
                                 </select>
                             </li>
                             <li>
-                                <label>客户联系人号码：</label>
+                                <label>客户联系人名称：</label>
+                                <input type="text" name="companyUserName"/>
+                            </li>
+                            <li>
+                                <label>客户职务：</label>
+                                <input type="text" name="companyTitle"/>
+                            </li>
+                            <li>
+                                <label>客户联系人电话：</label>
                                 <input type="text" name="mobile"/>
                             </li>
                             <li>
@@ -198,6 +206,14 @@
                                 <input type="text" name="contractIsContinue"/>
                             </li>
                             <li>
+                                <label>发票名称：</label>
+                                <input type="text" name="invoiceName"/>
+                            </li>
+                            <li>
+                                <label>纳税人识别号：</label>
+                                <input type="text" name="invoiceNo"/>
+                            </li>
+                            <li>
                                 <label>创建时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
                             </li>
@@ -277,8 +293,16 @@
                     }
                 },
                 {
+                    field: 'companyUserName',
+                    title: '客户联系人名称'
+                },
+                {
+                    field: 'companyTitle',
+                    title: '客户职务'
+                },
+                {
                     field: 'mobile',
-                    title: '客户联系人号码'
+                    title: '客户联系人电话'
                 },
                 {
                     field: 'telephone',
@@ -463,6 +487,14 @@
                 {
                     field: 'contractIsContinue',
                     title: '是否续签客户'
+                },
+                {
+                    field: 'invoiceName',
+                    title: '发票名称'
+                },
+                {
+                    field: 'invoiceNo',
+                    title: '纳税人识别号'
                 },
                 {
                     field: 'createDate',
