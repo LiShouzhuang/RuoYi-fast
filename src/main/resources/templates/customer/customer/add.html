@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('新增客户基本信息')" />
+    <th:block th:include="include :: header('新增客户')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-customer-add">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">企业编码：</label>
+                <label class="col-sm-3 control-label">客户编码：</label>
                 <div class="col-sm-8">
                     <input name="companyCode" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">企业名称：</label>
+                <label class="col-sm-3 control-label">客户名称：</label>
                 <div class="col-sm-8">
                     <input name="companyName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_order_status')}">
+                        <input type="radio" th:id="${'companyStatus_' + dict.dictCode}" name="companyStatus" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'companyStatus_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
@@ -26,51 +35,33 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">创建时间：</label>
+                <label class="col-sm-3 control-label">客户联系人手机：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="createDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
+                    <input name="telephone" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">更新时间：</label>
+                <label class="col-sm-3 control-label">公司地址：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="updateDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
+                    <input name="address" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">是否删除：</label>
+                <label class="col-sm-3 control-label">开户行：</label>
                 <div class="col-sm-8">
-                    <input name="isDeleted" class="form-control" type="text">
+                    <input name="bankName" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客服id：</label>
+                <label class="col-sm-3 control-label">银行账户：</label>
                 <div class="col-sm-8">
-                    <input name="kefuId" class="form-control" type="text">
+                    <input name="bankNo" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客服姓名：</label>
+                <label class="col-sm-3 control-label">账户：</label>
                 <div class="col-sm-8">
-                    <input name="kefuName" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">客服手机号码：</label>
-                <div class="col-sm-8">
-                    <input name="kefuMobile" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">联系邮箱：</label>
-                <div class="col-sm-8">
-                    <input name="kefuEmail" class="form-control" type="text">
+                    <input name="accountNo" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -104,9 +95,27 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">服务费率：</label>
+                <label class="col-sm-3 control-label">客服id：</label>
                 <div class="col-sm-8">
-                    <input name="serviceRate" class="form-control" type="text">
+                    <input name="kefuId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客服姓名：</label>
+                <div class="col-sm-8">
+                    <input name="kefuName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客服手机号码：</label>
+                <div class="col-sm-8">
+                    <input name="kefuMobile" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系邮箱：</label>
+                <div class="col-sm-8">
+                    <input name="kefuEmail" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -131,36 +140,6 @@
                 <label class="col-sm-3 control-label">销售邮箱：</label>
                 <div class="col-sm-8">
                     <input name="salesEmail" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司地址：</label>
-                <div class="col-sm-8">
-                    <input name="address" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司电话：</label>
-                <div class="col-sm-8">
-                    <input name="telephone" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">开户行：</label>
-                <div class="col-sm-8">
-                    <input name="bankName" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">银行账户：</label>
-                <div class="col-sm-8">
-                    <input name="bankNo" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">账户：</label>
-                <div class="col-sm-8">
-                    <input name="accountNo" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -230,12 +209,6 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">组织机构代码：</label>
-                <div class="col-sm-8">
-                    <input name="orgCode" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
                 <label class="col-sm-3 control-label">注册地址：</label>
                 <div class="col-sm-8">
                     <input name="regAddress" class="form-control" type="text">
@@ -289,6 +262,78 @@
                     <input name="closeReason" class="form-control" type="text">
                 </div>
             </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同id：</label>
+                <div class="col-sm-8">
+                    <input name="companyContractId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户合同号：</label>
+                <div class="col-sm-8">
+                    <input name="companyContractCode" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractStartDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractEndDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同金额：</label>
+                <div class="col-sm-8">
+                    <input name="contractAmount" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">累计金流：</label>
+                <div class="col-sm-8">
+                    <input name="contractTotalAmount" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否续签客户：</label>
+                <div class="col-sm-8">
+                    <input name="contractIsContinue" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="createDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">更新时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="updateDate" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否删除：</label>
+                <div class="col-sm-8">
+                    <input name="isDeleted" class="form-control" type="text">
+                </div>
+            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
@@ -305,18 +350,6 @@
             }
         }
 
-        $("input[name='createDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='updateDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
         $("input[name='establisDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
@@ -324,6 +357,30 @@
         });
 
         $("input[name='closeDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='contractStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='contractEndDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='createDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='updateDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true

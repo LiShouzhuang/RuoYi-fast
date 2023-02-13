@@ -27,7 +27,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectComContactsVo">
-        select contacts_id, user_id, dept_id, dept_name, post_id, post_code, post_name, login_name, user_name, email, phonenumber, sex, status, del_flag, create_by, create_time, update_by, update_time, remark from com_contacts
+        SELECT
+            u.user_id contacts_id,
+            u.user_id user_id,
+            u.dept_id dept_id,
+            d.dept_name dept_name,
+            sup.post_id post_id,
+            sp.post_code post_code,
+            sp.post_name post_name,
+            u.login_name,
+            u.user_name,
+            u.email,
+            u.phonenumber,
+            u.sex,
+            u.STATUS,
+            u.del_flag,
+            u.create_by,
+            u.create_time,
+            u.update_by,
+            u.update_time,
+            u.remark
+--             d.dept_id dept_name,
+--             d.parent_id,
+--             d.ancestors,
+--             d.dept_name,
+--             d.order_num,
+--             d.leader,
+--             d.STATUS AS dept_status,
+--             r.role_id,
+--             r.role_name,
+--             r.role_key,
+--             r.role_sort,
+--             r.data_scope,
+--             r.STATUS AS role_status
+        FROM
+            sys_user u
+                LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
+                LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+                LEFT JOIN sys_role r ON r.role_id = ur.role_id
+                left join sys_user_post sup on u.user_id = sup.user_id
+                left join sys_post sp on sup.post_id = sp.post_id
+
     </sql>
 
     <select id="selectComContactsList" parameterType="ComContacts" resultMap="ComContactsResult">
@@ -53,84 +93,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where contacts_id = #{contactsId}
     </select>
         
-    <insert id="insertComContacts" parameterType="ComContacts" useGeneratedKeys="true" keyProperty="contactsId">
-        insert into com_contacts
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null">user_id,</if>
-            <if test="deptId != null">dept_id,</if>
-            <if test="deptName != null">dept_name,</if>
-            <if test="postId != null">post_id,</if>
-            <if test="postCode != null">post_code,</if>
-            <if test="postName != null">post_name,</if>
-            <if test="loginName != null">login_name,</if>
-            <if test="userName != null">user_name,</if>
-            <if test="email != null">email,</if>
-            <if test="phonenumber != null">phonenumber,</if>
-            <if test="sex != null">sex,</if>
-            <if test="status != null">status,</if>
-            <if test="delFlag != null">del_flag,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
-            <if test="remark != null">remark,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userId != null">#{userId},</if>
-            <if test="deptId != null">#{deptId},</if>
-            <if test="deptName != null">#{deptName},</if>
-            <if test="postId != null">#{postId},</if>
-            <if test="postCode != null">#{postCode},</if>
-            <if test="postName != null">#{postName},</if>
-            <if test="loginName != null">#{loginName},</if>
-            <if test="userName != null">#{userName},</if>
-            <if test="email != null">#{email},</if>
-            <if test="phonenumber != null">#{phonenumber},</if>
-            <if test="sex != null">#{sex},</if>
-            <if test="status != null">#{status},</if>
-            <if test="delFlag != null">#{delFlag},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-            <if test="remark != null">#{remark},</if>
-         </trim>
-    </insert>
+<!--    <insert id="insertComContacts" parameterType="ComContacts" useGeneratedKeys="true" keyProperty="contactsId">-->
+<!--        insert into com_contacts-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="userId != null">user_id,</if>-->
+<!--            <if test="deptId != null">dept_id,</if>-->
+<!--            <if test="deptName != null">dept_name,</if>-->
+<!--            <if test="postId != null">post_id,</if>-->
+<!--            <if test="postCode != null">post_code,</if>-->
+<!--            <if test="postName != null">post_name,</if>-->
+<!--            <if test="loginName != null">login_name,</if>-->
+<!--            <if test="userName != null">user_name,</if>-->
+<!--            <if test="email != null">email,</if>-->
+<!--            <if test="phonenumber != null">phonenumber,</if>-->
+<!--            <if test="sex != null">sex,</if>-->
+<!--            <if test="status != null">status,</if>-->
+<!--            <if test="delFlag != null">del_flag,</if>-->
+<!--            <if test="createBy != null">create_by,</if>-->
+<!--            <if test="createTime != null">create_time,</if>-->
+<!--            <if test="updateBy != null">update_by,</if>-->
+<!--            <if test="updateTime != null">update_time,</if>-->
+<!--            <if test="remark != null">remark,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="userId != null">#{userId},</if>-->
+<!--            <if test="deptId != null">#{deptId},</if>-->
+<!--            <if test="deptName != null">#{deptName},</if>-->
+<!--            <if test="postId != null">#{postId},</if>-->
+<!--            <if test="postCode != null">#{postCode},</if>-->
+<!--            <if test="postName != null">#{postName},</if>-->
+<!--            <if test="loginName != null">#{loginName},</if>-->
+<!--            <if test="userName != null">#{userName},</if>-->
+<!--            <if test="email != null">#{email},</if>-->
+<!--            <if test="phonenumber != null">#{phonenumber},</if>-->
+<!--            <if test="sex != null">#{sex},</if>-->
+<!--            <if test="status != null">#{status},</if>-->
+<!--            <if test="delFlag != null">#{delFlag},</if>-->
+<!--            <if test="createBy != null">#{createBy},</if>-->
+<!--            <if test="createTime != null">#{createTime},</if>-->
+<!--            <if test="updateBy != null">#{updateBy},</if>-->
+<!--            <if test="updateTime != null">#{updateTime},</if>-->
+<!--            <if test="remark != null">#{remark},</if>-->
+<!--         </trim>-->
+<!--    </insert>-->
 
-    <update id="updateComContacts" parameterType="ComContacts">
-        update com_contacts
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="userId != null">user_id = #{userId},</if>
-            <if test="deptId != null">dept_id = #{deptId},</if>
-            <if test="deptName != null">dept_name = #{deptName},</if>
-            <if test="postId != null">post_id = #{postId},</if>
-            <if test="postCode != null">post_code = #{postCode},</if>
-            <if test="postName != null">post_name = #{postName},</if>
-            <if test="loginName != null">login_name = #{loginName},</if>
-            <if test="userName != null">user_name = #{userName},</if>
-            <if test="email != null">email = #{email},</if>
-            <if test="phonenumber != null">phonenumber = #{phonenumber},</if>
-            <if test="sex != null">sex = #{sex},</if>
-            <if test="status != null">status = #{status},</if>
-            <if test="delFlag != null">del_flag = #{delFlag},</if>
-            <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="remark != null">remark = #{remark},</if>
-        </trim>
-        where contacts_id = #{contactsId}
-    </update>
+<!--    <update id="updateComContacts" parameterType="ComContacts">-->
+<!--        update com_contacts-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="userId != null">user_id = #{userId},</if>-->
+<!--            <if test="deptId != null">dept_id = #{deptId},</if>-->
+<!--            <if test="deptName != null">dept_name = #{deptName},</if>-->
+<!--            <if test="postId != null">post_id = #{postId},</if>-->
+<!--            <if test="postCode != null">post_code = #{postCode},</if>-->
+<!--            <if test="postName != null">post_name = #{postName},</if>-->
+<!--            <if test="loginName != null">login_name = #{loginName},</if>-->
+<!--            <if test="userName != null">user_name = #{userName},</if>-->
+<!--            <if test="email != null">email = #{email},</if>-->
+<!--            <if test="phonenumber != null">phonenumber = #{phonenumber},</if>-->
+<!--            <if test="sex != null">sex = #{sex},</if>-->
+<!--            <if test="status != null">status = #{status},</if>-->
+<!--            <if test="delFlag != null">del_flag = #{delFlag},</if>-->
+<!--            <if test="createBy != null">create_by = #{createBy},</if>-->
+<!--            <if test="createTime != null">create_time = #{createTime},</if>-->
+<!--            <if test="updateBy != null">update_by = #{updateBy},</if>-->
+<!--            <if test="updateTime != null">update_time = #{updateTime},</if>-->
+<!--            <if test="remark != null">remark = #{remark},</if>-->
+<!--        </trim>-->
+<!--        where contacts_id = #{contactsId}-->
+<!--    </update>-->
 
-    <delete id="deleteComContactsByContactsId" parameterType="Long">
-        delete from com_contacts where contacts_id = #{contactsId}
-    </delete>
+<!--    <delete id="deleteComContactsByContactsId" parameterType="Long">-->
+<!--        delete from com_contacts where contacts_id = #{contactsId}-->
+<!--    </delete>-->
 
-    <delete id="deleteComContactsByContactsIds" parameterType="String">
-        delete from com_contacts where contacts_id in 
-        <foreach item="contactsId" collection="array" open="(" separator="," close=")">
-            #{contactsId}
-        </foreach>
-    </delete>
+<!--    <delete id="deleteComContactsByContactsIds" parameterType="String">-->
+<!--        delete from com_contacts where contacts_id in -->
+<!--        <foreach item="contactsId" collection="array" open="(" separator="," close=")">-->
+<!--            #{contactsId}-->
+<!--        </foreach>-->
+<!--    </delete>-->
 
 </mapper>

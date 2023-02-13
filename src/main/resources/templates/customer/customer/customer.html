@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('客户基本信息列表')" />
+    <th:block th:include="include :: header('客户列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,26 +11,204 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>企业编码：</label>
+                                <label>客户编码：</label>
                                 <input type="text" name="companyCode"/>
                             </li>
                             <li>
-                                <label>企业名称：</label>
+                                <label>客户名称：</label>
                                 <input type="text" name="companyName"/>
+                            </li>
+                            <li>
+                                <label>状态：</label>
+                                <select name="companyStatus" th:with="type=${@dict.getType('sys_order_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <label>客户联系人号码：</label>
                                 <input type="text" name="mobile"/>
                             </li>
                             <li>
+                                <label>客户联系人手机：</label>
+                                <input type="text" name="telephone"/>
+                            </li>
+                            <li>
+                                <label>公司地址：</label>
+                                <input type="text" name="address"/>
+                            </li>
+                            <li>
+                                <label>开户行：</label>
+                                <input type="text" name="bankName"/>
+                            </li>
+                            <li>
+                                <label>银行账户：</label>
+                                <input type="text" name="bankNo"/>
+                            </li>
+                            <li>
+                                <label>账户：</label>
+                                <input type="text" name="accountNo"/>
+                            </li>
+                            <li>
+                                <label>城市id：</label>
+                                <input type="text" name="cityId"/>
+                            </li>
+                            <li>
+                                <label>城市名称：</label>
+                                <input type="text" name="cityName"/>
+                            </li>
+                            <li>
+                                <label>省份id：</label>
+                                <input type="text" name="provinceId"/>
+                            </li>
+                            <li>
+                                <label>省份名称：</label>
+                                <input type="text" name="provinceName"/>
+                            </li>
+                            <li>
+                                <label>产业：</label>
+                                <input type="text" name="industry"/>
+                            </li>
+                            <li>
+                                <label>客服id：</label>
+                                <input type="text" name="kefuId"/>
+                            </li>
+                            <li>
+                                <label>客服姓名：</label>
+                                <input type="text" name="kefuName"/>
+                            </li>
+                            <li>
+                                <label>客服手机号码：</label>
+                                <input type="text" name="kefuMobile"/>
+                            </li>
+                            <li>
+                                <label>联系邮箱：</label>
+                                <input type="text" name="kefuEmail"/>
+                            </li>
+                            <li>
+                                <label>对接销售id：</label>
+                                <input type="text" name="salesId"/>
+                            </li>
+                            <li>
+                                <label>销售姓名：</label>
+                                <input type="text" name="salesName"/>
+                            </li>
+                            <li>
+                                <label>销售手机：</label>
+                                <input type="text" name="salesMobile"/>
+                            </li>
+                            <li>
+                                <label>销售邮箱：</label>
+                                <input type="text" name="salesEmail"/>
+                            </li>
+                            <li>
+                                <label>收件地址：</label>
+                                <input type="text" name="receiveAddress"/>
+                            </li>
+                            <li>
+                                <label>收件城市id：</label>
+                                <input type="text" name="receiveCityId"/>
+                            </li>
+                            <li>
+                                <label>收件人名：</label>
+                                <input type="text" name="receiveName"/>
+                            </li>
+                            <li>
+                                <label>收件省份id：</label>
+                                <input type="text" name="receiveProvinceId"/>
+                            </li>
+                            <li>
+                                <label>收件电话：</label>
+                                <input type="text" name="receiveTelephone"/>
+                            </li>
+                            <li>
+                                <label>收件城市名：</label>
+                                <input type="text" name="receiveCityName"/>
+                            </li>
+                            <li>
+                                <label>收件身份名：</label>
+                                <input type="text" name="receiveProvinceName"/>
+                            </li>
+                            <li>
+                                <label>渠道id：</label>
+                                <input type="text" name="channelId"/>
+                            </li>
+                            <li>
+                                <label>渠道code：</label>
+                                <input type="text" name="channelCode"/>
+                            </li>
+                            <li>
+                                <label>企业分类：</label>
+                                <input type="text" name="classification"/>
+                            </li>
+                            <li>
+                                <label>注册地址：</label>
+                                <input type="text" name="regAddress"/>
+                            </li>
+                            <li>
+                                <label>注册资本：</label>
+                                <input type="text" name="regCapital"/>
+                            </li>
+                            <li>
+                                <label>成立日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择成立日期" name="establisDate"/>
+                            </li>
+                            <li>
+                                <label>法人代表：</label>
+                                <input type="text" name="legalRepresentative"/>
+                            </li>
+                            <li>
+                                <label>登记机关：</label>
+                                <input type="text" name="regAuthority"/>
+                            </li>
+                            <li>
+                                <label>关停企业日期：</label>
+                                <input type="text" class="time-input" placeholder="请选择关停企业日期" name="closeDate"/>
+                            </li>
+                            <li>
+                                <label>关停原因：</label>
+                                <input type="text" name="closeReason"/>
+                            </li>
+                            <li>
+                                <label>合同id：</label>
+                                <input type="text" name="companyContractId"/>
+                            </li>
+                            <li>
+                                <label>客户合同号：</label>
+                                <input type="text" name="companyContractCode"/>
+                            </li>
+                            <li>
+                                <label>合同开始时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择合同开始时间" name="contractStartDate"/>
+                            </li>
+                            <li>
+                                <label>合同结束时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择合同结束时间" name="contractEndDate"/>
+                            </li>
+                            <li>
+                                <label>合同金额：</label>
+                                <input type="text" name="contractAmount"/>
+                            </li>
+                            <li>
+                                <label>累计金流：</label>
+                                <input type="text" name="contractTotalAmount"/>
+                            </li>
+                            <li>
+                                <label>是否续签客户：</label>
+                                <input type="text" name="contractIsContinue"/>
+                            </li>
+                            <li>
                                 <label>创建时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
                             </li>
                             <li>
-                                <label>公司电话：</label>
-                                <input type="text" name="telephone"/>
+                                <label>更新时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择更新时间" name="updateDate"/>
                             </li>
-
+                            <li>
+                                <label>是否删除：</label>
+                                <input type="text" name="isDeleted"/>
+                            </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -63,6 +241,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('customer:customer:edit')}]];
         var removeFlag = [[${@permission.hasPermi('customer:customer:remove')}]];
+        var companyStatusDatas = [[${@dict.getType('sys_order_status')}]];
+        var isDeletedDatas = [[${@dict.getType('sys_delete_status')}]];
         var prefix = ctx + "customer/customer";
 
         $(function() {
@@ -72,58 +252,53 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "客户基本信息",
+                modalName: "客户",
                 columns: [{
                     checkbox: true
                 },
                 {
                     field: 'id',
-                    title: '企业id',
+                    title: '客户id',
                     visible: false
                 },
                 {
                     field: 'companyCode',
-                    title: '企业编码'
+                    title: '客户编码'
                 },
                 {
                     field: 'companyName',
-                    title: '企业名称'
+                    title: '客户名称'
                 },
                 {
                     field: 'companyStatus',
-                    title: '状态'
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(companyStatusDatas, value);
+                    }
                 },
                 {
                     field: 'mobile',
                     title: '客户联系人号码'
                 },
                 {
-                    field: 'createDate',
-                    title: '创建时间'
+                    field: 'telephone',
+                    title: '客户联系人手机'
                 },
                 {
-                    field: 'updateDate',
-                    title: '更新时间'
+                    field: 'address',
+                    title: '公司地址'
                 },
                 {
-                    field: 'isDeleted',
-                    title: '是否删除'
+                    field: 'bankName',
+                    title: '开户行'
                 },
                 {
-                    field: 'kefuId',
-                    title: '客服id'
+                    field: 'bankNo',
+                    title: '银行账户'
                 },
                 {
-                    field: 'kefuName',
-                    title: '客服姓名'
-                },
-                {
-                    field: 'kefuMobile',
-                    title: '客服手机号码'
-                },
-                {
-                    field: 'kefuEmail',
-                    title: '联系邮箱'
+                    field: 'accountNo',
+                    title: '账户'
                 },
                 {
                     field: 'cityId',
@@ -146,8 +321,20 @@
                     title: '产业'
                 },
                 {
-                    field: 'serviceRate',
-                    title: '服务费率'
+                    field: 'kefuId',
+                    title: '客服id'
+                },
+                {
+                    field: 'kefuName',
+                    title: '客服姓名'
+                },
+                {
+                    field: 'kefuMobile',
+                    title: '客服手机号码'
+                },
+                {
+                    field: 'kefuEmail',
+                    title: '联系邮箱'
                 },
                 {
                     field: 'salesId',
@@ -164,26 +351,6 @@
                 {
                     field: 'salesEmail',
                     title: '销售邮箱'
-                },
-                {
-                    field: 'address',
-                    title: '公司地址'
-                },
-                {
-                    field: 'telephone',
-                    title: '公司电话'
-                },
-                {
-                    field: 'bankName',
-                    title: '开户行'
-                },
-                {
-                    field: 'bankNo',
-                    title: '银行账户'
-                },
-                {
-                    field: 'accountNo',
-                    title: '账户'
                 },
                 {
                     field: 'receiveAddress',
@@ -230,10 +397,6 @@
                     title: '企业分类'
                 },
                 {
-                    field: 'orgCode',
-                    title: '组织机构代码'
-                },
-                {
                     field: 'regAddress',
                     title: '注册地址'
                 },
@@ -272,6 +435,49 @@
                 {
                     field: 'closeReason',
                     title: '关停原因'
+                },
+                {
+                    field: 'companyContractId',
+                    title: '合同id'
+                },
+                {
+                    field: 'companyContractCode',
+                    title: '客户合同号'
+                },
+                {
+                    field: 'contractStartDate',
+                    title: '合同开始时间'
+                },
+                {
+                    field: 'contractEndDate',
+                    title: '合同结束时间'
+                },
+                {
+                    field: 'contractAmount',
+                    title: '合同金额'
+                },
+                {
+                    field: 'contractTotalAmount',
+                    title: '累计金流'
+                },
+                {
+                    field: 'contractIsContinue',
+                    title: '是否续签客户'
+                },
+                {
+                    field: 'createDate',
+                    title: '创建时间'
+                },
+                {
+                    field: 'updateDate',
+                    title: '更新时间'
+                },
+                {
+                    field: 'isDeleted',
+                    title: '是否删除',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(isDeletedDatas, value);
+                    }
                 },
                 {
                     title: '操作',

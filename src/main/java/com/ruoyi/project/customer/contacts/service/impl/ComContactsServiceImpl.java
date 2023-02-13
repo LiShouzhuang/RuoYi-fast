@@ -45,53 +45,53 @@ public class ComContactsServiceImpl implements IComContactsService
         return comContactsMapper.selectComContactsList(comContacts);
     }
 
-    /**
-     * 新增联系人
-     * 
-     * @param comContacts 联系人
-     * @return 结果
-     */
-    @Override
-    public int insertComContacts(ComContacts comContacts)
-    {
-        comContacts.setCreateTime(DateUtils.getNowDate());
-        return comContactsMapper.insertComContacts(comContacts);
-    }
-
-    /**
-     * 修改联系人
-     * 
-     * @param comContacts 联系人
-     * @return 结果
-     */
-    @Override
-    public int updateComContacts(ComContacts comContacts)
-    {
-        comContacts.setUpdateTime(DateUtils.getNowDate());
-        return comContactsMapper.updateComContacts(comContacts);
-    }
-
-    /**
-     * 批量删除联系人
-     * 
-     * @param contactsIds 需要删除的联系人主键
-     * @return 结果
-     */
-    @Override
-    public int deleteComContactsByContactsIds(String contactsIds)
-    {
-        return comContactsMapper.deleteComContactsByContactsIds(Convert.toStrArray(contactsIds));
-    }
-
-    /**
-     * 删除联系人信息
-     * 
-     * @param contactsId 联系人主键
-     * @return 结果
-     */
-    @Override
-    public int deleteComContactsByContactsId(Long contactsId)
-    {
-        return comContactsMapper.deleteComContactsByContactsId(contactsId);
-    }
+//    /**
+//     * 新增联系人
+//     *
+//     * @param comContacts 联系人
+//     * @return 结果
+//     */
+//    @Override
+//    public int insertComContacts(ComContacts comContacts)
+//    {
+//        comContacts.setCreateTime(DateUtils.getNowDate());
+//        return comContactsMapper.insertComContacts(comContacts);
+//    }
+//
+//    /**
+//     * 修改联系人
+//     *
+//     * @param comContacts 联系人
+//     * @return 结果
+//     */
+//    @Override
+//    public int updateComContacts(ComContacts comContacts)
+//    {
+//        comContacts.setUpdateTime(DateUtils.getNowDate());
+//        return comContactsMapper.updateComContacts(comContacts);
+//    }
+//
+//    /**
+//     * 批量删除联系人
+//     *
+//     * @param contactsIds 需要删除的联系人主键
+//     * @return 结果
+//     */
+//    @Override
+//    public int deleteComContactsByContactsIds(String contactsIds)
+//    {
+//        return comContactsMapper.deleteComContactsByContactsIds(Convert.toStrArray(contactsIds));
+//    }
+//
+//    /**
+//     * 删除联系人信息
+//     *
+//     * @param contactsId 联系人主键
+//     * @return 结果
+//     */
+//    @Override
+//    public int deleteComContactsByContactsId(Long contactsId)
+//    {
+//        return comContactsMapper.deleteComContactsByContactsId(contactsId);
+//    }
 }

@@ -68,60 +68,60 @@ public class ComContactsController extends BaseController
         return util.exportExcel(list, "联系人数据");
     }
 
-    /**
-     * 新增联系人
-     */
-    @GetMapping("/add")
-    public String add()
-    {
-        return prefix + "/add";
-    }
-
-    /**
-     * 新增保存联系人
-     */
-    @RequiresPermissions("customer:contacts:add")
-    @Log(title = "联系人", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(ComContacts comContacts)
-    {
-        return toAjax(comContactsService.insertComContacts(comContacts));
-    }
-
-    /**
-     * 修改联系人
-     */
-    @RequiresPermissions("customer:contacts:edit")
-    @GetMapping("/edit/{contactsId}")
-    public String edit(@PathVariable("contactsId") Long contactsId, ModelMap mmap)
-    {
-        ComContacts comContacts = comContactsService.selectComContactsByContactsId(contactsId);
-        mmap.put("comContacts", comContacts);
-        return prefix + "/edit";
-    }
-
-    /**
-     * 修改保存联系人
-     */
-    @RequiresPermissions("customer:contacts:edit")
-    @Log(title = "联系人", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(ComContacts comContacts)
-    {
-        return toAjax(comContactsService.updateComContacts(comContacts));
-    }
-
-    /**
-     * 删除联系人
-     */
-    @RequiresPermissions("customer:contacts:remove")
-    @Log(title = "联系人", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(comContactsService.deleteComContactsByContactsIds(ids));
-    }
+//    /**
+//     * 新增联系人
+//     */
+//    @GetMapping("/add")
+//    public String add()
+//    {
+//        return prefix + "/add";
+//    }
+//
+//    /**
+//     * 新增保存联系人
+//     */
+//    @RequiresPermissions("customer:contacts:add")
+//    @Log(title = "联系人", businessType = BusinessType.INSERT)
+//    @PostMapping("/add")
+//    @ResponseBody
+//    public AjaxResult addSave(ComContacts comContacts)
+//    {
+//        return toAjax(comContactsService.insertComContacts(comContacts));
+//    }
+//
+//    /**
+//     * 修改联系人
+//     */
+//    @RequiresPermissions("customer:contacts:edit")
+//    @GetMapping("/edit/{contactsId}")
+//    public String edit(@PathVariable("contactsId") Long contactsId, ModelMap mmap)
+//    {
+//        ComContacts comContacts = comContactsService.selectComContactsByContactsId(contactsId);
+//        mmap.put("comContacts", comContacts);
+//        return prefix + "/edit";
+//    }
+//
+//    /**
+//     * 修改保存联系人
+//     */
+//    @RequiresPermissions("customer:contacts:edit")
+//    @Log(title = "联系人", businessType = BusinessType.UPDATE)
+//    @PostMapping("/edit")
+//    @ResponseBody
+//    public AjaxResult editSave(ComContacts comContacts)
+//    {
+//        return toAjax(comContactsService.updateComContacts(comContacts));
+//    }
+//
+//    /**
+//     * 删除联系人
+//     */
+//    @RequiresPermissions("customer:contacts:remove")
+//    @Log(title = "联系人", businessType = BusinessType.DELETE)
+//    @PostMapping( "/remove")
+//    @ResponseBody
+//    public AjaxResult remove(String ids)
+//    {
+//        return toAjax(comContactsService.deleteComContactsByContactsIds(ids));
+//    }
 }

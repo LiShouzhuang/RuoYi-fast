@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改客户基本信息')" />
+    <th:block th:include="include :: header('修改客户')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
@@ -9,15 +9,24 @@
         <form class="form-horizontal m" id="form-customer-edit" th:object="${comCustomer}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">企业编码：</label>
+                <label class="col-sm-3 control-label">客户编码：</label>
                 <div class="col-sm-8">
                     <input name="companyCode" th:field="*{companyCode}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">企业名称：</label>
+                <label class="col-sm-3 control-label">客户名称：</label>
                 <div class="col-sm-8">
                     <input name="companyName" th:field="*{companyName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_order_status')}">
+                        <input type="radio" th:id="${'companyStatus_' + dict.dictCode}" name="companyStatus" th:value="${dict.dictValue}" th:field="*{companyStatus}">
+                        <label th:for="${'companyStatus_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
@@ -27,51 +36,33 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">创建时间：</label>
+                <label class="col-sm-3 control-label">客户联系人手机：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="createDate" th:value="${#dates.format(comCustomer.createDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
+                    <input name="telephone" th:field="*{telephone}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">更新时间：</label>
+                <label class="col-sm-3 control-label">公司地址：</label>
                 <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="updateDate" th:value="${#dates.format(comCustomer.updateDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
+                    <input name="address" th:field="*{address}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">是否删除：</label>
+                <label class="col-sm-3 control-label">开户行：</label>
                 <div class="col-sm-8">
-                    <input name="isDeleted" th:field="*{isDeleted}" class="form-control" type="text">
+                    <input name="bankName" th:field="*{bankName}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客服id：</label>
+                <label class="col-sm-3 control-label">银行账户：</label>
                 <div class="col-sm-8">
-                    <input name="kefuId" th:field="*{kefuId}" class="form-control" type="text">
+                    <input name="bankNo" th:field="*{bankNo}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客服姓名：</label>
+                <label class="col-sm-3 control-label">账户：</label>
                 <div class="col-sm-8">
-                    <input name="kefuName" th:field="*{kefuName}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">客服手机号码：</label>
-                <div class="col-sm-8">
-                    <input name="kefuMobile" th:field="*{kefuMobile}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">联系邮箱：</label>
-                <div class="col-sm-8">
-                    <input name="kefuEmail" th:field="*{kefuEmail}" class="form-control" type="text">
+                    <input name="accountNo" th:field="*{accountNo}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -105,9 +96,27 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">服务费率：</label>
+                <label class="col-sm-3 control-label">客服id：</label>
                 <div class="col-sm-8">
-                    <input name="serviceRate" th:field="*{serviceRate}" class="form-control" type="text">
+                    <input name="kefuId" th:field="*{kefuId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客服姓名：</label>
+                <div class="col-sm-8">
+                    <input name="kefuName" th:field="*{kefuName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客服手机号码：</label>
+                <div class="col-sm-8">
+                    <input name="kefuMobile" th:field="*{kefuMobile}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系邮箱：</label>
+                <div class="col-sm-8">
+                    <input name="kefuEmail" th:field="*{kefuEmail}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -132,36 +141,6 @@
                 <label class="col-sm-3 control-label">销售邮箱：</label>
                 <div class="col-sm-8">
                     <input name="salesEmail" th:field="*{salesEmail}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司地址：</label>
-                <div class="col-sm-8">
-                    <input name="address" th:field="*{address}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">公司电话：</label>
-                <div class="col-sm-8">
-                    <input name="telephone" th:field="*{telephone}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">开户行：</label>
-                <div class="col-sm-8">
-                    <input name="bankName" th:field="*{bankName}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">银行账户：</label>
-                <div class="col-sm-8">
-                    <input name="bankNo" th:field="*{bankNo}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">账户：</label>
-                <div class="col-sm-8">
-                    <input name="accountNo" th:field="*{accountNo}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -231,12 +210,6 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">组织机构代码：</label>
-                <div class="col-sm-8">
-                    <input name="orgCode" th:field="*{orgCode}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
                 <label class="col-sm-3 control-label">注册地址：</label>
                 <div class="col-sm-8">
                     <input name="regAddress" th:field="*{regAddress}" class="form-control" type="text">
@@ -290,6 +263,78 @@
                     <input name="closeReason" th:field="*{closeReason}" class="form-control" type="text">
                 </div>
             </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同id：</label>
+                <div class="col-sm-8">
+                    <input name="companyContractId" th:field="*{companyContractId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户合同号：</label>
+                <div class="col-sm-8">
+                    <input name="companyContractCode" th:field="*{companyContractCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractStartDate" th:value="${#dates.format(comCustomer.contractStartDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractEndDate" th:value="${#dates.format(comCustomer.contractEndDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同金额：</label>
+                <div class="col-sm-8">
+                    <input name="contractAmount" th:field="*{contractAmount}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">累计金流：</label>
+                <div class="col-sm-8">
+                    <input name="contractTotalAmount" th:field="*{contractTotalAmount}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否续签客户：</label>
+                <div class="col-sm-8">
+                    <input name="contractIsContinue" th:field="*{contractIsContinue}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="createDate" th:value="${#dates.format(comCustomer.createDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">更新时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="updateDate" th:value="${#dates.format(comCustomer.updateDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否删除：</label>
+                <div class="col-sm-8">
+                    <input name="isDeleted" th:field="*{isDeleted}" class="form-control" type="text">
+                </div>
+            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
@@ -306,18 +351,6 @@
             }
         }
 
-        $("input[name='createDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='updateDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
         $("input[name='establisDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
@@ -325,6 +358,30 @@
         });
 
         $("input[name='closeDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='contractStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='contractEndDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='createDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='updateDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true
