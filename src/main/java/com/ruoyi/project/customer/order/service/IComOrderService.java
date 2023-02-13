@@ -6,8 +6,8 @@ import com.ruoyi.project.customer.order.domain.ComOrder;
 /**
  * 订单Service接口
  * 
- * @author ruoyi
- * @date 2023-02-12
+ * @author 李守壮
+ * @date 2023-02-13
  */
 public interface IComOrderService 
 {

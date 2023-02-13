@@ -24,11 +24,11 @@
                             </li>
                             <li>
                                 <label>订单开始时间：</label>
-                                <input type="text" name="orderStartName"/>
+                                <input type="text" class="time-input" placeholder="请选择订单开始时间" name="orderStartName"/>
                             </li>
                             <li>
                                 <label>订单结束时间：</label>
-                                <input type="text" name="orderEndName"/>
+                                <input type="text" class="time-input" placeholder="请选择订单结束时间" name="orderEndName"/>
                             </li>
                             <li>
                                 <label>客户id：</label>
@@ -61,6 +61,18 @@
                             <li>
                                 <label>渠道名称：</label>
                                 <input type="text" name="channelName"/>
+                            </li>
+                            <li>
+                                <label>产品id：</label>
+                                <input type="text" name="productId"/>
+                            </li>
+                            <li>
+                                <label>产品编码：</label>
+                                <input type="text" name="productCode"/>
+                            </li>
+                            <li>
+                                <label>产品名称：</label>
+                                <input type="text" name="productName"/>
                             </li>
                             <li>
                                 <label>创建时间：</label>
@@ -183,6 +195,18 @@
                 {
                     field: 'channelName',
                     title: '渠道名称'
+                },
+                {
+                    field: 'productId',
+                    title: '产品id'
+                },
+                {
+                    field: 'productCode',
+                    title: '产品编码'
+                },
+                {
+                    field: 'productName',
+                    title: '产品名称'
                 },
                 {
                     field: 'createDate',

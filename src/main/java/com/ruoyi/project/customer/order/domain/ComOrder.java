@@ -10,8 +10,8 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 订单对象 com_order
  * 
- * @author ruoyi
- * @date 2023-02-12
+ * @author 李守壮
+ * @date 2023-02-13
  */
 public class ComOrder extends BaseEntity
 {
@@ -37,12 +37,14 @@ public class ComOrder extends BaseEntity
     private String orderTypeName;
 
     /** 订单开始时间 */
-    @Excel(name = "订单开始时间")
-    private String orderStartName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "订单开始时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date orderStartName;
 
     /** 订单结束时间 */
-    @Excel(name = "订单结束时间")
-    private String orderEndName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "订单结束时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date orderEndName;
 
     /** 客户id */
     @Excel(name = "客户id")
@@ -79,6 +81,18 @@ public class ComOrder extends BaseEntity
     /** 渠道名称 */
     @Excel(name = "渠道名称")
     private String channelName;
+
+    /** 产品id */
+    @Excel(name = "产品id")
+    private Long productId;
+
+    /** 产品编码 */
+    @Excel(name = "产品编码")
+    private String productCode;
+
+    /** 产品名称 */
+    @Excel(name = "产品名称")
+    private String productName;
 
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -139,21 +153,21 @@ public class ComOrder extends BaseEntity
     {
         return orderTypeName;
     }
-    public void setOrderStartName(String orderStartName)
+    public void setOrderStartName(Date orderStartName)
     {
         this.orderStartName = orderStartName;
     }
 
-    public String getOrderStartName()
+    public Date getOrderStartName()
     {
         return orderStartName;
     }
-    public void setOrderEndName(String orderEndName)
+    public void setOrderEndName(Date orderEndName)
     {
         this.orderEndName = orderEndName;
     }
 
-    public String getOrderEndName()
+    public Date getOrderEndName()
     {
         return orderEndName;
     }
@@ -238,6 +252,33 @@ public class ComOrder extends BaseEntity
     {
         return channelName;
     }
+    public void setProductId(Long productId)
+    {
+        this.productId = productId;
+    }
+
+    public Long getProductId()
+    {
+        return productId;
+    }
+    public void setProductCode(String productCode)
+    {
+        this.productCode = productCode;
+    }
+
+    public String getProductCode()
+    {
+        return productCode;
+    }
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
+    }
+
+    public String getProductName()
+    {
+        return productName;
+    }
     public void setCreateDate(Date createDate)
     {
         this.createDate = createDate;
@@ -285,6 +326,9 @@ public class ComOrder extends BaseEntity
             .append("channelCode", getChannelCode())
             .append("parentChannelId", getParentChannelId())
             .append("channelName", getChannelName())
+            .append("productId", getProductId())
+            .append("productCode", getProductCode())
+            .append("productName", getProductName())
             .append("createDate", getCreateDate())
             .append("createBy", getCreateBy())
             .append("updateDate", getUpdateDate())
