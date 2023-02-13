@@ -1,8 +1,6 @@
 package com.ruoyi.project.customer.customer.controller;
 
 import java.util.List;
-
-import com.ruoyi.project.customer.customer.service.IComCustomerService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.project.customer.customer.domain.ComCustomer;
+import com.ruoyi.project.customer.customer.service.IComCustomerService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
 
-
 /**
- * 客户基本信息Controller
+ * 客户Controller
  * 
- * @author ruoyi
- * @date 2023-02-12
+ * @author 李守壮
+ * @date 2023-02-13
  */
 @Controller
 @RequestMapping("/customer/customer")
@@ -44,7 +42,7 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 查询客户基本信息列表
+     * 查询客户列表
      */
     @RequiresPermissions("customer:customer:list")
     @PostMapping("/list")
@@ -57,21 +55,21 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 导出客户基本信息列表
+     * 导出客户列表
      */
     @RequiresPermissions("customer:customer:export")
-    @Log(title = "企业", businessType = BusinessType.EXPORT)
+    @Log(title = "客户", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(ComCustomer comCustomer)
     {
         List<ComCustomer> list = comCustomerService.selectComCustomerList(comCustomer);
         ExcelUtil<ComCustomer> util = new ExcelUtil<ComCustomer>(ComCustomer.class);
-        return util.exportExcel(list, "客户基本信息数据");
+        return util.exportExcel(list, "客户数据");
     }
 
     /**
-     * 新增客户基本信息
+     * 新增客户
      */
     @GetMapping("/add")
     public String add()
@@ -80,10 +78,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 新增保存客户基本信息
+     * 新增保存客户
      */
     @RequiresPermissions("customer:customer:add")
-    @Log(title = "客户基本信息", businessType = BusinessType.INSERT)
+    @Log(title = "客户", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(ComCustomer comCustomer)
@@ -92,7 +90,7 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 修改客户基本信息
+     * 修改客户
      */
     @RequiresPermissions("customer:customer:edit")
     @GetMapping("/edit/{id}")
@@ -104,10 +102,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 修改保存客户基本信息
+     * 修改保存客户
      */
     @RequiresPermissions("customer:customer:edit")
-    @Log(title = "客户基本信息", businessType = BusinessType.UPDATE)
+    @Log(title = "客户", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(ComCustomer comCustomer)
@@ -116,10 +114,10 @@ public class ComCustomerController extends BaseController
     }
 
     /**
-     * 删除客户基本信息
+     * 删除客户
      */
     @RequiresPermissions("customer:customer:remove")
-    @Log(title = "客户基本信息", businessType = BusinessType.DELETE)
+    @Log(title = "客户", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

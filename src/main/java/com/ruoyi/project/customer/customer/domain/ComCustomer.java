@@ -1,6 +1,5 @@
 package com.ruoyi.project.customer.customer.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -9,63 +8,53 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 客户基本信息对象 com_customer
+ * 客户对象 com_customer
  * 
- * @author ruoyi
- * @date 2023-02-12
+ * @author 李守壮
+ * @date 2023-02-13
  */
 public class ComCustomer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 企业id */
+    /** 客户id */
     private Long id;
 
-    /** 企业编码 */
-    @Excel(name = "企业编码")
+    /** 客户编码 */
+    @Excel(name = "客户编码")
     private String companyCode;
 
-    /** 企业名称 */
-    @Excel(name = "企业名称")
+    /** 客户名称 */
+    @Excel(name = "客户名称")
     private String companyName;
 
-    /** 状态 1 正常 2 停用 */
-    @Excel(name = "状态 1 正常 2 停用")
+    /** 状态 */
+    @Excel(name = "状态")
     private Integer companyStatus;
 
     /** 客户联系人号码 */
     @Excel(name = "客户联系人号码")
     private String mobile;
 
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date createDate;
+    /** 客户联系人手机 */
+    @Excel(name = "客户联系人手机")
+    private String telephone;
 
-    /** 更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date updateDate;
+    /** 公司地址 */
+    @Excel(name = "公司地址")
+    private String address;
 
-    /** 是否删除 */
-    @Excel(name = "是否删除")
-    private Integer isDeleted;
+    /** 开户行 */
+    @Excel(name = "开户行")
+    private String bankName;
 
-    /** 客服id */
-    @Excel(name = "客服id")
-    private Long kefuId;
+    /** 银行账户 */
+    @Excel(name = "银行账户")
+    private String bankNo;
 
-    /** 客服姓名 */
-    @Excel(name = "客服姓名")
-    private String kefuName;
-
-    /** 客服手机号码 */
-    @Excel(name = "客服手机号码")
-    private String kefuMobile;
-
-    /** 联系邮箱 */
-    @Excel(name = "联系邮箱")
-    private String kefuEmail;
+    /** 账户 */
+    @Excel(name = "账户")
+    private String accountNo;
 
     /** 城市id */
     @Excel(name = "城市id")
@@ -87,12 +76,24 @@ public class ComCustomer extends BaseEntity
     @Excel(name = "产业")
     private Long industry;
 
-    /** 服务费率 */
-    @Excel(name = "服务费率")
-    private BigDecimal serviceRate;
+    /** 客服id */
+    @Excel(name = "客服id")
+    private Long kefuId;
 
-    /** 对接销售id（来自大管家） */
-    @Excel(name = "对接销售id", readConverterExp = "来=自大管家")
+    /** 客服姓名 */
+    @Excel(name = "客服姓名")
+    private String kefuName;
+
+    /** 客服手机号码 */
+    @Excel(name = "客服手机号码")
+    private String kefuMobile;
+
+    /** 联系邮箱 */
+    @Excel(name = "联系邮箱")
+    private String kefuEmail;
+
+    /** 对接销售id */
+    @Excel(name = "对接销售id")
     private Long salesId;
 
     /** 销售姓名 */
@@ -106,26 +107,6 @@ public class ComCustomer extends BaseEntity
     /** 销售邮箱 */
     @Excel(name = "销售邮箱")
     private String salesEmail;
-
-    /** 公司地址 */
-    @Excel(name = "公司地址")
-    private String address;
-
-    /** 公司电话 */
-    @Excel(name = "公司电话")
-    private String telephone;
-
-    /** 开户行 */
-    @Excel(name = "开户行")
-    private String bankName;
-
-    /** 银行账户 */
-    @Excel(name = "银行账户")
-    private String bankNo;
-
-    /** 账户 */
-    @Excel(name = "账户")
-    private String accountNo;
 
     /** 收件地址 */
     @Excel(name = "收件地址")
@@ -166,10 +147,6 @@ public class ComCustomer extends BaseEntity
     /** 企业分类 */
     @Excel(name = "企业分类")
     private String classification;
-
-    /** 组织机构代码 */
-    @Excel(name = "组织机构代码")
-    private String orgCode;
 
     /** 注册地址 */
     @Excel(name = "注册地址")
@@ -212,6 +189,50 @@ public class ComCustomer extends BaseEntity
     /** 关停原因 */
     @Excel(name = "关停原因")
     private String closeReason;
+
+    /** 合同id */
+    @Excel(name = "合同id")
+    private String companyContractId;
+
+    /** 客户合同号 */
+    @Excel(name = "客户合同号")
+    private String companyContractCode;
+
+    /** 合同开始时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "合同开始时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date contractStartDate;
+
+    /** 合同结束时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "合同结束时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date contractEndDate;
+
+    /** 合同金额 */
+    @Excel(name = "合同金额")
+    private Long contractAmount;
+
+    /** 累计金流 */
+    @Excel(name = "累计金流")
+    private Long contractTotalAmount;
+
+    /** 是否续签客户 */
+    @Excel(name = "是否续签客户")
+    private String contractIsContinue;
+
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date createDate;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date updateDate;
+
+    /** 是否删除 */
+    @Excel(name = "是否删除")
+    private Integer isDeleted;
 
     public void setId(Long id)
     {
@@ -258,68 +279,50 @@ public class ComCustomer extends BaseEntity
     {
         return mobile;
     }
-    public void setCreateDate(Date createDate)
+    public void setTelephone(String telephone)
     {
-        this.createDate = createDate;
+        this.telephone = telephone;
     }
 
-    public Date getCreateDate()
+    public String getTelephone()
     {
-        return createDate;
+        return telephone;
     }
-    public void setUpdateDate(Date updateDate)
+    public void setAddress(String address)
     {
-        this.updateDate = updateDate;
-    }
-
-    public Date getUpdateDate()
-    {
-        return updateDate;
-    }
-    public void setIsDeleted(Integer isDeleted)
-    {
-        this.isDeleted = isDeleted;
+        this.address = address;
     }
 
-    public Integer getIsDeleted()
+    public String getAddress()
     {
-        return isDeleted;
+        return address;
     }
-    public void setKefuId(Long kefuId)
+    public void setBankName(String bankName)
     {
-        this.kefuId = kefuId;
-    }
-
-    public Long getKefuId()
-    {
-        return kefuId;
-    }
-    public void setKefuName(String kefuName)
-    {
-        this.kefuName = kefuName;
+        this.bankName = bankName;
     }
 
-    public String getKefuName()
+    public String getBankName()
     {
-        return kefuName;
+        return bankName;
     }
-    public void setKefuMobile(String kefuMobile)
+    public void setBankNo(String bankNo)
     {
-        this.kefuMobile = kefuMobile;
-    }
-
-    public String getKefuMobile()
-    {
-        return kefuMobile;
-    }
-    public void setKefuEmail(String kefuEmail)
-    {
-        this.kefuEmail = kefuEmail;
+        this.bankNo = bankNo;
     }
 
-    public String getKefuEmail()
+    public String getBankNo()
     {
-        return kefuEmail;
+        return bankNo;
+    }
+    public void setAccountNo(String accountNo)
+    {
+        this.accountNo = accountNo;
+    }
+
+    public String getAccountNo()
+    {
+        return accountNo;
     }
     public void setCityId(Long cityId)
     {
@@ -366,14 +369,41 @@ public class ComCustomer extends BaseEntity
     {
         return industry;
     }
-    public void setServiceRate(BigDecimal serviceRate)
+    public void setKefuId(Long kefuId)
     {
-        this.serviceRate = serviceRate;
+        this.kefuId = kefuId;
     }
 
-    public BigDecimal getServiceRate()
+    public Long getKefuId()
     {
-        return serviceRate;
+        return kefuId;
+    }
+    public void setKefuName(String kefuName)
+    {
+        this.kefuName = kefuName;
+    }
+
+    public String getKefuName()
+    {
+        return kefuName;
+    }
+    public void setKefuMobile(String kefuMobile)
+    {
+        this.kefuMobile = kefuMobile;
+    }
+
+    public String getKefuMobile()
+    {
+        return kefuMobile;
+    }
+    public void setKefuEmail(String kefuEmail)
+    {
+        this.kefuEmail = kefuEmail;
+    }
+
+    public String getKefuEmail()
+    {
+        return kefuEmail;
     }
     public void setSalesId(Long salesId)
     {
@@ -410,51 +440,6 @@ public class ComCustomer extends BaseEntity
     public String getSalesEmail()
     {
         return salesEmail;
-    }
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
-
-    public String getAddress()
-    {
-        return address;
-    }
-    public void setTelephone(String telephone)
-    {
-        this.telephone = telephone;
-    }
-
-    public String getTelephone()
-    {
-        return telephone;
-    }
-    public void setBankName(String bankName)
-    {
-        this.bankName = bankName;
-    }
-
-    public String getBankName()
-    {
-        return bankName;
-    }
-    public void setBankNo(String bankNo)
-    {
-        this.bankNo = bankNo;
-    }
-
-    public String getBankNo()
-    {
-        return bankNo;
-    }
-    public void setAccountNo(String accountNo)
-    {
-        this.accountNo = accountNo;
-    }
-
-    public String getAccountNo()
-    {
-        return accountNo;
     }
     public void setReceiveAddress(String receiveAddress)
     {
@@ -546,15 +531,6 @@ public class ComCustomer extends BaseEntity
     {
         return classification;
     }
-    public void setOrgCode(String orgCode)
-    {
-        this.orgCode = orgCode;
-    }
-
-    public String getOrgCode()
-    {
-        return orgCode;
-    }
     public void setRegAddress(String regAddress)
     {
         this.regAddress = regAddress;
@@ -645,6 +621,96 @@ public class ComCustomer extends BaseEntity
     {
         return closeReason;
     }
+    public void setCompanyContractId(String companyContractId)
+    {
+        this.companyContractId = companyContractId;
+    }
+
+    public String getCompanyContractId()
+    {
+        return companyContractId;
+    }
+    public void setCompanyContractCode(String companyContractCode)
+    {
+        this.companyContractCode = companyContractCode;
+    }
+
+    public String getCompanyContractCode()
+    {
+        return companyContractCode;
+    }
+    public void setContractStartDate(Date contractStartDate)
+    {
+        this.contractStartDate = contractStartDate;
+    }
+
+    public Date getContractStartDate()
+    {
+        return contractStartDate;
+    }
+    public void setContractEndDate(Date contractEndDate)
+    {
+        this.contractEndDate = contractEndDate;
+    }
+
+    public Date getContractEndDate()
+    {
+        return contractEndDate;
+    }
+    public void setContractAmount(Long contractAmount)
+    {
+        this.contractAmount = contractAmount;
+    }
+
+    public Long getContractAmount()
+    {
+        return contractAmount;
+    }
+    public void setContractTotalAmount(Long contractTotalAmount)
+    {
+        this.contractTotalAmount = contractTotalAmount;
+    }
+
+    public Long getContractTotalAmount()
+    {
+        return contractTotalAmount;
+    }
+    public void setContractIsContinue(String contractIsContinue)
+    {
+        this.contractIsContinue = contractIsContinue;
+    }
+
+    public String getContractIsContinue()
+    {
+        return contractIsContinue;
+    }
+    public void setCreateDate(Date createDate)
+    {
+        this.createDate = createDate;
+    }
+
+    public Date getCreateDate()
+    {
+        return createDate;
+    }
+    public void setUpdateDate(Date updateDate)
+    {
+        this.updateDate = updateDate;
+    }
+
+    public Date getUpdateDate()
+    {
+        return updateDate;
+    }
+    public void setIsDeleted(Integer isDeleted)
+    {
+        this.isDeleted = isDeleted;
+    }
+
+    public Integer getIsDeleted()
+    {
+        return isDeleted;
+    }
 
     @Override
     public String toString() {
@@ -654,30 +720,24 @@ public class ComCustomer extends BaseEntity
             .append("companyName", getCompanyName())
             .append("companyStatus", getCompanyStatus())
             .append("mobile", getMobile())
-            .append("createDate", getCreateDate())
-            .append("createBy", getCreateBy())
-            .append("updateDate", getUpdateDate())
-            .append("updateBy", getUpdateBy())
-            .append("isDeleted", getIsDeleted())
-            .append("kefuId", getKefuId())
-            .append("kefuName", getKefuName())
-            .append("kefuMobile", getKefuMobile())
-            .append("kefuEmail", getKefuEmail())
+            .append("telephone", getTelephone())
+            .append("address", getAddress())
+            .append("bankName", getBankName())
+            .append("bankNo", getBankNo())
+            .append("accountNo", getAccountNo())
             .append("cityId", getCityId())
             .append("cityName", getCityName())
             .append("provinceId", getProvinceId())
             .append("provinceName", getProvinceName())
             .append("industry", getIndustry())
-            .append("serviceRate", getServiceRate())
+            .append("kefuId", getKefuId())
+            .append("kefuName", getKefuName())
+            .append("kefuMobile", getKefuMobile())
+            .append("kefuEmail", getKefuEmail())
             .append("salesId", getSalesId())
             .append("salesName", getSalesName())
             .append("salesMobile", getSalesMobile())
             .append("salesEmail", getSalesEmail())
-            .append("address", getAddress())
-            .append("telephone", getTelephone())
-            .append("bankName", getBankName())
-            .append("bankNo", getBankNo())
-            .append("accountNo", getAccountNo())
             .append("receiveAddress", getReceiveAddress())
             .append("receiveCityId", getReceiveCityId())
             .append("receiveName", getReceiveName())
@@ -689,7 +749,6 @@ public class ComCustomer extends BaseEntity
             .append("channelId", getChannelId())
             .append("channelCode", getChannelCode())
             .append("classification", getClassification())
-            .append("orgCode", getOrgCode())
             .append("regAddress", getRegAddress())
             .append("enterpriseType", getEnterpriseType())
             .append("regCapital", getRegCapital())
@@ -700,6 +759,18 @@ public class ComCustomer extends BaseEntity
             .append("industryType", getIndustryType())
             .append("closeDate", getCloseDate())
             .append("closeReason", getCloseReason())
+            .append("companyContractId", getCompanyContractId())
+            .append("companyContractCode", getCompanyContractCode())
+            .append("contractStartDate", getContractStartDate())
+            .append("contractEndDate", getContractEndDate())
+            .append("contractAmount", getContractAmount())
+            .append("contractTotalAmount", getContractTotalAmount())
+            .append("contractIsContinue", getContractIsContinue())
+            .append("createDate", getCreateDate())
+            .append("createBy", getCreateBy())
+            .append("updateDate", getUpdateDate())
+            .append("updateBy", getUpdateBy())
+            .append("isDeleted", getIsDeleted())
             .toString();
     }
 }

@@ -1,19 +1,18 @@
 package com.ruoyi.project.customer.customer.service.impl;
 
 import java.util.List;
-
-import com.ruoyi.project.customer.customer.domain.ComCustomer;
-import com.ruoyi.project.customer.customer.mapper.ComCustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.project.customer.customer.mapper.ComCustomerMapper;
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.project.customer.customer.service.IComCustomerService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
- * 客户基本信息Service业务层处理
+ * 客户Service业务层处理
  * 
- * @author ruoyi
- * @date 2023-02-12
+ * @author 李守壮
+ * @date 2023-02-13
  */
 @Service
 public class ComCustomerServiceImpl implements IComCustomerService 
@@ -22,10 +21,10 @@ public class ComCustomerServiceImpl implements IComCustomerService
     private ComCustomerMapper comCustomerMapper;
 
     /**
-     * 查询客户基本信息
+     * 查询客户
      * 
-     * @param id 客户基本信息主键
-     * @return 客户基本信息
+     * @param id 客户主键
+     * @return 客户
      */
     @Override
     public ComCustomer selectComCustomerById(Long id)
@@ -34,10 +33,10 @@ public class ComCustomerServiceImpl implements IComCustomerService
     }
 
     /**
-     * 查询客户基本信息列表
+     * 查询客户列表
      * 
-     * @param comCustomer 客户基本信息
-     * @return 客户基本信息
+     * @param comCustomer 客户
+     * @return 客户
      */
     @Override
     public List<ComCustomer> selectComCustomerList(ComCustomer comCustomer)
@@ -46,9 +45,9 @@ public class ComCustomerServiceImpl implements IComCustomerService
     }
 
     /**
-     * 新增客户基本信息
+     * 新增客户
      * 
-     * @param comCustomer 客户基本信息
+     * @param comCustomer 客户
      * @return 结果
      */
     @Override
@@ -58,9 +57,9 @@ public class ComCustomerServiceImpl implements IComCustomerService
     }
 
     /**
-     * 修改客户基本信息
+     * 修改客户
      * 
-     * @param comCustomer 客户基本信息
+     * @param comCustomer 客户
      * @return 结果
      */
     @Override
@@ -70,9 +69,9 @@ public class ComCustomerServiceImpl implements IComCustomerService
     }
 
     /**
-     * 批量删除客户基本信息
+     * 批量删除客户
      * 
-     * @param ids 需要删除的客户基本信息主键
+     * @param ids 需要删除的客户主键
      * @return 结果
      */
     @Override
@@ -82,9 +81,9 @@ public class ComCustomerServiceImpl implements IComCustomerService
     }
 
     /**
-     * 删除客户基本信息信息
+     * 删除客户信息
      * 
-     * @param id 客户基本信息主键
+     * @param id 客户主键
      * @return 结果
      */
     @Override
