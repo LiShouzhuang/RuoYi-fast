@@ -1,5 +1,6 @@
 package com.ruoyi.project.customer.customer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,20 @@ public class ComCustomerController extends BaseController
     {
         return prefix + "/customer";
     }
+
+
+    /**
+     * 查询单个客户
+     */
+    @RequiresPermissions("customer:customer:detail")
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id, ModelMap mmap)
+    {
+        ComCustomer comCustomer = comCustomerService.selectComCustomerById(id);
+        mmap.put("comCustomer", comCustomer);
+        return prefix + "/detail";
+    }
+
 
     /**
      * 查询客户列表
