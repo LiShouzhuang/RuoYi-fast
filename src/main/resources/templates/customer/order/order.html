@@ -15,14 +15,6 @@
                                 <input type="text" name="orderCode"/>
                             </li>
                             <li>
-                                <label>订单金额：</label>
-                                <input type="text" name="amount"/>
-                            </li>
-                            <li>
-                                <label>订单类型名称：</label>
-                                <input type="text" name="orderTypeName"/>
-                            </li>
-                            <li>
                                 <label>订单开始时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择订单开始时间" name="orderStartName"/>
                             </li>
@@ -31,12 +23,30 @@
                                 <input type="text" class="time-input" placeholder="请选择订单结束时间" name="orderEndName"/>
                             </li>
                             <li>
-                                <label>客户id：</label>
-                                <input type="text" name="customerId"/>
-                            </li>
-                            <li>
                                 <label>客户名称：</label>
                                 <input type="text" name="customerName"/>
+                            </li>
+                            <li>
+                                <label>客户联系人名称：</label>
+                                <input type="text" name="companyUserName"/>
+                            </li>
+                            <li>
+                                <label>客户联系人电话：</label>
+                                <input type="text" name="mobile"/>
+                            </li>
+                            <li>
+                                <label>支付方式：</label>
+                                <select name="paymentType" th:with="type=${@dict.getType('sys_pay_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>订单状态：</label>
+                                <select name="status" th:with="type=${@dict.getType('com_order_type')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <label>员工id：</label>
@@ -47,30 +57,6 @@
                                 <input type="text" name="staffName"/>
                             </li>
                             <li>
-                                <label>渠道id：</label>
-                                <input type="text" name="channelId"/>
-                            </li>
-                            <li>
-                                <label>渠道代码：</label>
-                                <input type="text" name="channelCode"/>
-                            </li>
-                            <li>
-                                <label>上级渠道id：</label>
-                                <input type="text" name="parentChannelId"/>
-                            </li>
-                            <li>
-                                <label>渠道名称：</label>
-                                <input type="text" name="channelName"/>
-                            </li>
-                            <li>
-                                <label>产品id：</label>
-                                <input type="text" name="productId"/>
-                            </li>
-                            <li>
-                                <label>产品编码：</label>
-                                <input type="text" name="productCode"/>
-                            </li>
-                            <li>
                                 <label>产品名称：</label>
                                 <input type="text" name="productName"/>
                             </li>
@@ -79,12 +65,11 @@
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
                             </li>
                             <li>
-                                <label>修改时间：</label>
-                                <input type="text" class="time-input" placeholder="请选择修改时间" name="updateDate"/>
-                            </li>
-                            <li>
                                 <label>删除标识：</label>
-                                <input type="text" name="isDeleted"/>
+                                <select name="isDeleted" th:with="type=${@dict.getType('sys_delete_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -118,6 +103,12 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('customer:order:edit')}]];
         var removeFlag = [[${@permission.hasPermi('customer:order:remove')}]];
+        var paymentTypeDatas = [[${@dict.getType('sys_pay_status')}]];
+        var statusDatas = [[${@dict.getType('com_order_type')}]];
+        var isInvoiceFlagDatas = [[${@dict.getType('sys_yes_no')}]];
+        var isPostFlagDatas = [[${@dict.getType('sys_yes_no')}]];
+        var postStatusDatas = [[${@dict.getType('sys_yes_no')}]];
+        var isDeletedDatas = [[${@dict.getType('sys_delete_status')}]];
         var prefix = ctx + "customer/order";
 
         $(function() {
@@ -145,12 +136,22 @@
                     title: '订单金额'
                 },
                 {
+                    field: 'postFee',
+                    title: '邮费'
+                },
+                {
+                    field: 'payment',
+                    title: '实付金额'
+                },
+                {
                     field: 'orderType',
-                    title: '订单类型'
+                    title: '订单类型',
+                    visible: false
                 },
                 {
                     field: 'orderTypeName',
-                    title: '订单类型名称'
+                    title: '订单类型名称',
+                    visible: false
                 },
                 {
                     field: 'orderStartName',
@@ -162,11 +163,40 @@
                 },
                 {
                     field: 'customerId',
-                    title: '客户id'
+                    title: '客户id',
+                    visible: false
                 },
                 {
                     field: 'customerName',
                     title: '客户名称'
+                },
+                {
+                    field: 'companyUserName',
+                    title: '客户联系人名称'
+                },
+                {
+                    field: 'companyTitle',
+                    title: '客户职务',
+                    visible: false
+                },
+                {
+                    field: 'mobile',
+                    title: '客户联系人电话',
+                    visible: false
+                },
+                {
+                    field: 'paymentType',
+                    title: '支付方式',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(paymentTypeDatas, value);
+                    }
+                },
+                {
+                    field: 'status',
+                    title: '订单状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(statusDatas, value);
+                    }
                 },
                 {
                     field: 'staffId',
@@ -177,20 +207,19 @@
                     title: '员工姓名'
                 },
                 {
-                    field: 'status',
-                    title: '订单状态'
-                },
-                {
                     field: 'channelId',
-                    title: '渠道id'
+                    title: '渠道id',
+                    visible: false
                 },
                 {
                     field: 'channelCode',
-                    title: '渠道代码'
+                    title: '渠道代码',
+                    visible: false
                 },
                 {
                     field: 'parentChannelId',
-                    title: '上级渠道id'
+                    title: '上级渠道id',
+                    visible: false
                 },
                 {
                     field: 'channelName',
@@ -198,7 +227,8 @@
                 },
                 {
                     field: 'productId',
-                    title: '产品id'
+                    title: '产品id',
+                    visible: false
                 },
                 {
                     field: 'productCode',
@@ -209,16 +239,71 @@
                     title: '产品名称'
                 },
                 {
+                    field: 'paymentCode',
+                    title: '支付流水号'
+                },
+                {
+                    field: 'isInvoiceFlag',
+                    title: '是否开发票',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(isInvoiceFlagDatas, value);
+                    }
+                },
+                {
+                    field: 'invoiceNo',
+                    title: '发票号'
+                },
+                {
+                    field: 'invoiceAmount',
+                    title: '发票金额'
+                },
+                {
+                    field: 'isPostFlag',
+                    title: '是否快递',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(isPostFlagDatas, value);
+                    }
+                },
+                {
+                    field: 'postNo',
+                    title: '快递号'
+                },
+                {
+                    field: 'postStartDate',
+                    title: '快递开始时间',
+                    visible: false
+                },
+                {
+                    field: 'postEndDate',
+                    title: '快递结束时间',
+                    visible: false
+                },
+                {
+                    field: 'postStatus',
+                    title: '快递完成状态',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(postStatusDatas, value);
+                    }
+                },
+                {
                     field: 'createDate',
                     title: '创建时间'
                 },
                 {
                     field: 'updateDate',
-                    title: '修改时间'
+                    title: '修改时间',
+                    visible: false
                 },
                 {
                     field: 'isDeleted',
-                    title: '删除标识'
+                    title: '删除标识',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(isDeletedDatas, value);
+                    }
+                },
+                {
+                    field: 'remark',
+                    title: '备注'
                 },
                 {
                     title: '操作',

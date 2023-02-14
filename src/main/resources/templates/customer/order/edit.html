@@ -21,6 +21,18 @@
                 </div>
             </div>
             <div class="form-group">    
+                <label class="col-sm-3 control-label">邮费：</label>
+                <div class="col-sm-8">
+                    <input name="postFee" th:field="*{postFee}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实付金额：</label>
+                <div class="col-sm-8">
+                    <input name="payment" th:field="*{payment}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
                 <label class="col-sm-3 control-label">订单类型名称：</label>
                 <div class="col-sm-8">
                     <input name="orderTypeName" th:field="*{orderTypeName}" class="form-control" type="text">
@@ -54,6 +66,40 @@
                 <label class="col-sm-3 control-label">客户名称：</label>
                 <div class="col-sm-8">
                     <input name="customerName" th:field="*{customerName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户联系人名称：</label>
+                <div class="col-sm-8">
+                    <input name="companyUserName" th:field="*{companyUserName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户职务：</label>
+                <div class="col-sm-8">
+                    <input name="companyTitle" th:field="*{companyTitle}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户联系人电话：</label>
+                <div class="col-sm-8">
+                    <input name="mobile" th:field="*{mobile}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">支付方式：</label>
+                <div class="col-sm-8">
+                    <select name="paymentType" class="form-control m-b" th:with="type=${@dict.getType('sys_pay_status')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{paymentType}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订单状态：</label>
+                <div class="col-sm-8">
+                    <select name="status" class="form-control m-b" th:with="type=${@dict.getType('com_order_type')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{status}"></option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
@@ -111,6 +157,72 @@
                 </div>
             </div>
             <div class="form-group">    
+                <label class="col-sm-3 control-label">支付流水号：</label>
+                <div class="col-sm-8">
+                    <input name="paymentCode" th:field="*{paymentCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否开发票：</label>
+                <div class="col-sm-8">
+                    <select name="isInvoiceFlag" class="form-control m-b" th:with="type=${@dict.getType('sys_yes_no')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{isInvoiceFlag}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发票号：</label>
+                <div class="col-sm-8">
+                    <input name="invoiceNo" th:field="*{invoiceNo}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发票金额：</label>
+                <div class="col-sm-8">
+                    <input name="invoiceAmount" th:field="*{invoiceAmount}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否快递：</label>
+                <div class="col-sm-8">
+                    <select name="isPostFlag" class="form-control m-b" th:with="type=${@dict.getType('sys_yes_no')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{isPostFlag}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递号：</label>
+                <div class="col-sm-8">
+                    <input name="postNo" th:field="*{postNo}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="postStartDate" th:value="${#dates.format(comOrder.postStartDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="postEndDate" th:value="${#dates.format(comOrder.postEndDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">快递完成状态：</label>
+                <div class="col-sm-8">
+                    <select name="postStatus" class="form-control m-b" th:with="type=${@dict.getType('sys_yes_no')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{postStatus}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
                 <label class="col-sm-3 control-label">创建时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
@@ -131,7 +243,15 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">删除标识：</label>
                 <div class="col-sm-8">
-                    <input name="isDeleted" th:field="*{isDeleted}" class="form-control" type="text">
+                    <select name="isDeleted" class="form-control m-b" th:with="type=${@dict.getType('sys_delete_status')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{isDeleted}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control">[[*{remark}]]</textarea>
                 </div>
             </div>
         </form>
@@ -157,6 +277,18 @@
         });
 
         $("input[name='orderEndName']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='postStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='postEndDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true

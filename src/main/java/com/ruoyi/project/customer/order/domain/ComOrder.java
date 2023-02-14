@@ -11,7 +11,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * 订单对象 com_order
  * 
  * @author 李守壮
- * @date 2023-02-13
+ * @date 2023-02-14
  */
 public class ComOrder extends BaseEntity
 {
@@ -27,6 +27,14 @@ public class ComOrder extends BaseEntity
     /** 订单金额 */
     @Excel(name = "订单金额")
     private Long amount;
+
+    /** 邮费 */
+    @Excel(name = "邮费")
+    private Long postFee;
+
+    /** 实付金额 */
+    @Excel(name = "实付金额")
+    private Long payment;
 
     /** 订单类型 */
     @Excel(name = "订单类型")
@@ -54,6 +62,26 @@ public class ComOrder extends BaseEntity
     @Excel(name = "客户名称")
     private String customerName;
 
+    /** 客户联系人名称 */
+    @Excel(name = "客户联系人名称")
+    private String companyUserName;
+
+    /** 客户职务 */
+    @Excel(name = "客户职务")
+    private String companyTitle;
+
+    /** 客户联系人电话 */
+    @Excel(name = "客户联系人电话")
+    private String mobile;
+
+    /** 支付方式 */
+    @Excel(name = "支付方式")
+    private String paymentType;
+
+    /** 订单状态 */
+    @Excel(name = "订单状态")
+    private String status;
+
     /** 员工id */
     @Excel(name = "员工id")
     private Long staffId;
@@ -61,10 +89,6 @@ public class ComOrder extends BaseEntity
     /** 员工姓名 */
     @Excel(name = "员工姓名")
     private String staffName;
-
-    /** 订单状态 */
-    @Excel(name = "订单状态")
-    private String status;
 
     /** 渠道id */
     @Excel(name = "渠道id")
@@ -93,6 +117,45 @@ public class ComOrder extends BaseEntity
     /** 产品名称 */
     @Excel(name = "产品名称")
     private String productName;
+
+    /** 支付流水号 */
+    @Excel(name = "支付流水号")
+    private String paymentCode;
+
+    /** 是否开发票 */
+    @Excel(name = "是否开发票")
+    private String isInvoiceFlag;
+
+    /** 发票号 */
+    @Excel(name = "发票号")
+    private String invoiceNo;
+
+    /** 发票金额 */
+    @Excel(name = "发票金额")
+    private String invoiceAmount;
+
+    /** 是否快递 */
+    @Excel(name = "是否快递")
+    private String isPostFlag;
+
+    /** 快递号 */
+    @Excel(name = "快递号")
+    private String postNo;
+
+    /** 快递开始时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "快递开始时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date postStartDate;
+
+    /** 快递结束时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "快递结束时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date postEndDate;
+
+    /** 快递完成状态 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "快递完成状态", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date postStatus;
 
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -134,6 +197,24 @@ public class ComOrder extends BaseEntity
     public Long getAmount()
     {
         return amount;
+    }
+    public void setPostFee(Long postFee)
+    {
+        this.postFee = postFee;
+    }
+
+    public Long getPostFee()
+    {
+        return postFee;
+    }
+    public void setPayment(Long payment)
+    {
+        this.payment = payment;
+    }
+
+    public Long getPayment()
+    {
+        return payment;
     }
     public void setOrderType(String orderType)
     {
@@ -189,6 +270,51 @@ public class ComOrder extends BaseEntity
     {
         return customerName;
     }
+    public void setCompanyUserName(String companyUserName)
+    {
+        this.companyUserName = companyUserName;
+    }
+
+    public String getCompanyUserName()
+    {
+        return companyUserName;
+    }
+    public void setCompanyTitle(String companyTitle)
+    {
+        this.companyTitle = companyTitle;
+    }
+
+    public String getCompanyTitle()
+    {
+        return companyTitle;
+    }
+    public void setMobile(String mobile)
+    {
+        this.mobile = mobile;
+    }
+
+    public String getMobile()
+    {
+        return mobile;
+    }
+    public void setPaymentType(String paymentType)
+    {
+        this.paymentType = paymentType;
+    }
+
+    public String getPaymentType()
+    {
+        return paymentType;
+    }
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
     public void setStaffId(Long staffId)
     {
         this.staffId = staffId;
@@ -206,15 +332,6 @@ public class ComOrder extends BaseEntity
     public String getStaffName()
     {
         return staffName;
-    }
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getStatus()
-    {
-        return status;
     }
     public void setChannelId(Long channelId)
     {
@@ -279,6 +396,87 @@ public class ComOrder extends BaseEntity
     {
         return productName;
     }
+    public void setPaymentCode(String paymentCode)
+    {
+        this.paymentCode = paymentCode;
+    }
+
+    public String getPaymentCode()
+    {
+        return paymentCode;
+    }
+    public void setIsInvoiceFlag(String isInvoiceFlag)
+    {
+        this.isInvoiceFlag = isInvoiceFlag;
+    }
+
+    public String getIsInvoiceFlag()
+    {
+        return isInvoiceFlag;
+    }
+    public void setInvoiceNo(String invoiceNo)
+    {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public String getInvoiceNo()
+    {
+        return invoiceNo;
+    }
+    public void setInvoiceAmount(String invoiceAmount)
+    {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public String getInvoiceAmount()
+    {
+        return invoiceAmount;
+    }
+    public void setIsPostFlag(String isPostFlag)
+    {
+        this.isPostFlag = isPostFlag;
+    }
+
+    public String getIsPostFlag()
+    {
+        return isPostFlag;
+    }
+    public void setPostNo(String postNo)
+    {
+        this.postNo = postNo;
+    }
+
+    public String getPostNo()
+    {
+        return postNo;
+    }
+    public void setPostStartDate(Date postStartDate)
+    {
+        this.postStartDate = postStartDate;
+    }
+
+    public Date getPostStartDate()
+    {
+        return postStartDate;
+    }
+    public void setPostEndDate(Date postEndDate)
+    {
+        this.postEndDate = postEndDate;
+    }
+
+    public Date getPostEndDate()
+    {
+        return postEndDate;
+    }
+    public void setPostStatus(Date postStatus)
+    {
+        this.postStatus = postStatus;
+    }
+
+    public Date getPostStatus()
+    {
+        return postStatus;
+    }
     public void setCreateDate(Date createDate)
     {
         this.createDate = createDate;
@@ -313,15 +511,21 @@ public class ComOrder extends BaseEntity
             .append("id", getId())
             .append("orderCode", getOrderCode())
             .append("amount", getAmount())
+            .append("postFee", getPostFee())
+            .append("payment", getPayment())
             .append("orderType", getOrderType())
             .append("orderTypeName", getOrderTypeName())
             .append("orderStartName", getOrderStartName())
             .append("orderEndName", getOrderEndName())
             .append("customerId", getCustomerId())
             .append("customerName", getCustomerName())
+            .append("companyUserName", getCompanyUserName())
+            .append("companyTitle", getCompanyTitle())
+            .append("mobile", getMobile())
+            .append("paymentType", getPaymentType())
+            .append("status", getStatus())
             .append("staffId", getStaffId())
             .append("staffName", getStaffName())
-            .append("status", getStatus())
             .append("channelId", getChannelId())
             .append("channelCode", getChannelCode())
             .append("parentChannelId", getParentChannelId())
@@ -329,11 +533,21 @@ public class ComOrder extends BaseEntity
             .append("productId", getProductId())
             .append("productCode", getProductCode())
             .append("productName", getProductName())
+            .append("paymentCode", getPaymentCode())
+            .append("isInvoiceFlag", getIsInvoiceFlag())
+            .append("invoiceNo", getInvoiceNo())
+            .append("invoiceAmount", getInvoiceAmount())
+            .append("isPostFlag", getIsPostFlag())
+            .append("postNo", getPostNo())
+            .append("postStartDate", getPostStartDate())
+            .append("postEndDate", getPostEndDate())
+            .append("postStatus", getPostStatus())
             .append("createDate", getCreateDate())
             .append("createBy", getCreateBy())
             .append("updateDate", getUpdateDate())
             .append("updateBy", getUpdateBy())
             .append("isDeleted", getIsDeleted())
+            .append("remark", getRemark())
             .toString();
     }
 }
