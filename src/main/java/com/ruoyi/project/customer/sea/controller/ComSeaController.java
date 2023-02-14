@@ -1,6 +1,8 @@
 package com.ruoyi.project.customer.sea.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 客户公海Controller
@@ -124,4 +127,34 @@ public class ComSeaController extends BaseController
     {
         return toAjax(comSeaService.deleteComSeaByIds(ids));
     }
+
+
+
+    /**
+     * 导入数据
+     */
+    @Log(title = "客户公海", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:sea:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<ComSea> util = new ExcelUtil<ComSea>(ComSea.class);
+        List<ComSea> comSeaList = util.importExcel(file.getInputStream());
+        String message = comSeaService.importSea(comSeaList, updateSupport);
+        return AjaxResult.success(message);
+    }
+
+    /**
+     * 导入-下载模版
+     */
+    @RequiresPermissions("customer:sea:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<ComSea> util = new ExcelUtil<ComSea>(ComSea.class);
+        return util.importTemplateExcel("客户数据");
+    }
+
 }

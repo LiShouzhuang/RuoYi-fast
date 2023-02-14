@@ -90,6 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectComSeaVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectCustomerByPhone" parameterType="String" resultMap="ComSeaResult">
+        <include refid="selectComSeaVo"/>
+        where phone = #{phone}
+    </select>
         
     <insert id="insertComSea" parameterType="ComSea" useGeneratedKeys="true" keyProperty="id">
         insert into com_sea

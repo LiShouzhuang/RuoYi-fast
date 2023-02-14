@@ -11,10 +11,6 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <label>客户代码：</label>
-                                <input type="text" name="companyCode"/>
-                            </li>
-                            <li>
                                 <label>客户名称：</label>
                                 <input type="text" name="companyName"/>
                             </li>
@@ -26,7 +22,7 @@
                                 <label>手机：</label>
                                 <input type="text" name="phone"/>
                             </li>
-                            <li>
+                            <!--<li>
                                 <label>电话：</label>
                                 <input type="text" name="tel"/>
                             </li>
@@ -80,63 +76,7 @@
                             <li>
                                 <label>企业分类：</label>
                                 <input type="text" name="classification"/>
-                            </li>
-                            <li>
-                                <label>注册地址：</label>
-                                <input type="text" name="regAddress"/>
-                            </li>
-                            <li>
-                                <label>注册资本：</label>
-                                <input type="text" name="regCapital"/>
-                            </li>
-                            <li>
-                                <label>成立日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择成立日期" name="establishDate"/>
-                            </li>
-                            <li>
-                                <label>法人代表：</label>
-                                <input type="text" name="legalRepresentative"/>
-                            </li>
-                            <li>
-                                <label>登记机关：</label>
-                                <input type="text" name="regAuthority"/>
-                            </li>
-                            <li>
-                                <label>关停企业日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择关停企业日期" name="closeDate"/>
-                            </li>
-                            <li>
-                                <label>关停原因：</label>
-                                <input type="text" name="closeReason"/>
-                            </li>
-                            <li>
-                                <label>用户ID：</label>
-                                <input type="text" name="userId"/>
-                            </li>
-                            <li>
-                                <label>部门ID：</label>
-                                <input type="text" name="deptId"/>
-                            </li>
-                            <li>
-                                <label>部门名称：</label>
-                                <input type="text" name="deptName"/>
-                            </li>
-                            <li>
-                                <label>岗位ID：</label>
-                                <input type="text" name="postId"/>
-                            </li>
-                            <li>
-                                <label>岗位编码：</label>
-                                <input type="text" name="postCode"/>
-                            </li>
-                            <li>
-                                <label>岗位名称：</label>
-                                <input type="text" name="postName"/>
-                            </li>
-                            <li>
-                                <label>登录账号：</label>
-                                <input type="text" name="loginName"/>
-                            </li>
+                            </li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -155,6 +95,9 @@
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="customer:sea:remove">
                     <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="customer:sea:import">
+                    <i class="fa fa-upload"></i> 导入
                 </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="customer:sea:export">
                     <i class="fa fa-download"></i> 导出
@@ -184,6 +127,8 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+                importUrl: prefix + "/importData",
+                importTemplateUrl: prefix + "/importTemplate",
                 modalName: "客户公海",
                 columns: [{
                     checkbox: true
@@ -195,7 +140,8 @@
                 },
                 {
                     field: 'companyCode',
-                    title: '客户代码'
+                    title: '客户代码',
+                    visible: false
                 },
                 {
                     field: 'companyName',
@@ -247,7 +193,8 @@
                     title: '帐号状态',
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(statusDatas, value);
-                    }
+                    },
+                    visible: false
                 },
                 {
                     field: 'followStatus',
@@ -258,83 +205,103 @@
                 },
                 {
                     field: 'invoiceNo',
-                    title: '纳税人识别号'
+                    title: '纳税人识别号',
+                    visible: false
                 },
                 {
                     field: 'classification',
-                    title: '企业分类'
+                    title: '企业分类',
+                    visible: false
                 },
                 {
                     field: 'regAddress',
-                    title: '注册地址'
+                    title: '注册地址',
+                    visible: false
                 },
                 {
                     field: 'enterpriseType',
-                    title: '企业类型'
+                    title: '企业类型',
+                    visible: false
                 },
                 {
                     field: 'regCapital',
-                    title: '注册资本'
+                    title: '注册资本',
+                    visible: false
                 },
                 {
                     field: 'establishDate',
-                    title: '成立日期'
+                    title: '成立日期',
+                    visible: false
                 },
                 {
                     field: 'legalRepresentative',
-                    title: '法人代表'
+                    title: '法人代表',
+                    visible: false
                 },
                 {
                     field: 'regAuthority',
-                    title: '登记机关'
+                    title: '登记机关',
+                    visible: false
                 },
                 {
                     field: 'businessScope',
-                    title: '经营范围'
+                    title: '经营范围',
+                    visible: false
                 },
                 {
                     field: 'industryType',
-                    title: '行业类型'
+                    title: '行业类型',
+                    visible: false
                 },
                 {
                     field: 'closeDate',
-                    title: '关停企业日期'
+                    title: '关停企业日期',
+                    visible: false
                 },
                 {
                     field: 'closeReason',
-                    title: '关停原因'
+                    title: '关停原因',
+                    visible: false
                 },
                 {
                     field: 'userId',
-                    title: '用户ID'
+                    title: '用户ID',
+                    visible: false
                 },
                 {
                     field: 'deptId',
-                    title: '部门ID'
+                    title: '部门ID',
+                    visible: false
                 },
                 {
                     field: 'deptName',
-                    title: '部门名称'
+                    title: '部门名称',
+                    visible: false
                 },
                 {
                     field: 'postId',
-                    title: '岗位ID'
+                    title: '岗位ID',
+                    visible: false
                 },
                 {
                     field: 'postCode',
-                    title: '岗位编码'
+                    title: '岗位编码',
+                    visible: false
                 },
                 {
                     field: 'postName',
-                    title: '岗位名称'
+                    title: '岗位名称',
+                    visible: false
                 },
                 {
                     field: 'loginName',
-                    title: '登录账号'
+                    title: '登录账号',
+                    visible: false
                 },
                 {
                     field: 'remark',
-                    title: '备注'
+                    title: '备注',
+                    visible: false
                 },
                 {
                     title: '操作',
@@ -351,4 +318,19 @@
         });
     </script>
 </body>
+<!-- 导入区域 -->
+<script id="importTpl" type="text/template">
+    <form enctype="multipart/form-data" class="mt20 mb10">
+        <div class="col-xs-offset-1">
+            <input type="file" id="file" name="file"/>
+            <div class="mt10 pt5">
+                <input type="checkbox" id="updateSupport" name="updateSupport" title="如果登录账户已经存在，更新这条数据。"> 是否更新已经存在的用户数据
+                &nbsp;	<a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
+            </div>
+            <font color="red" class="pull-left mt10">
+                提示：仅允许导入“xls”或“xlsx”格式文件！
+            </font>
+        </div>
+    </form>
+</script>
 </html>

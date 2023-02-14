@@ -1,6 +1,8 @@
 package com.ruoyi.project.customer.sea.mapper;
 
 import java.util.List;
+
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.project.customer.sea.domain.ComSea;
 
 /**
@@ -58,4 +60,7 @@ public interface ComSeaMapper
      * @return 结果
      */
     public int deleteComSeaByIds(String[] ids);
+
+
+    public ComCustomer selectCustomerByPhone(String phone);
 }

@@ -1,6 +1,8 @@
 package com.ruoyi.project.customer.sea.service;
 
 import java.util.List;
+
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.project.customer.sea.domain.ComSea;
 
 /**
@@ -58,4 +60,10 @@ public interface IComSeaService
      * @return 结果
      */
     public int deleteComSeaById(Long id);
+
+
+    /**
+     * 导入数据
+     */
+    public String importSea(List<ComSea> comSeaList, Boolean isUpdateSupport);
 }
