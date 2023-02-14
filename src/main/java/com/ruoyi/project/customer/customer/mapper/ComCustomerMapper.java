@@ -58,4 +58,7 @@ public interface ComCustomerMapper
      * @return 结果
      */
     public int deleteComCustomerByIds(String[] ids);
+
+
+    public ComCustomer selectCustomerByCompanyName(String companyName);
 }

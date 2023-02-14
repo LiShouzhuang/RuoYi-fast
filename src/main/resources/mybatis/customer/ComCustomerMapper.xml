@@ -135,8 +135,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectComCustomerById" parameterType="Long" resultMap="ComCustomerResult">
         <include refid="selectComCustomerVo"/>
-        where id = #{id}
+        where id =  #{id}
     </select>
+
+
+    <select id="selectCustomerByCompanyName" parameterType="String" resultMap="ComCustomerResult">
+        <include refid="selectComCustomerVo"/>
+        where company_name = #{companyName}
+    </select>
+
+
+
+
         
     <insert id="insertComCustomer" parameterType="ComCustomer" useGeneratedKeys="true" keyProperty="id">
         insert into com_customer

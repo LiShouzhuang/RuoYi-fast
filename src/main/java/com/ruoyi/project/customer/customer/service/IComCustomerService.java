@@ -2,6 +2,7 @@ package com.ruoyi.project.customer.customer.service;
 
 import java.util.List;
 import com.ruoyi.project.customer.customer.domain.ComCustomer;
+import com.ruoyi.project.system.user.domain.User;
 
 /**
  * 客户Service接口
@@ -58,4 +59,10 @@ public interface IComCustomerService
      * @return 结果
      */
     public int deleteComCustomerById(Long id);
+
+
+    /**
+     * 导入用户数据
+     */
+    public String importCustomer(List<ComCustomer> customerList, Boolean isUpdateSupport);
 }

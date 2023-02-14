@@ -19,23 +19,23 @@
                                 <input type="text" name="companyName"/>
                             </li>
                             <li>
-                                <label>状态：</label>
-                                <select name="companyStatus" th:with="type=${@dict.getType('sys_order_status')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>客户联系人名称：</label>
+                                <label>联系人：</label>
                                 <input type="text" name="companyUserName"/>
                             </li>
                             <li>
-                                <label>客户联系人电话：</label>
+                                <label>联系人电话：</label>
                                 <input type="text" name="mobile"/>
                             </li>
                             <li>
                                 <label>创建时间：</label>
                                 <input type="text" class="time-input" placeholder="请选择创建时间" name="createDate"/>
+                            </li>
+                            <li>
+                                <label>状态：</label>
+                                <select name="companyStatus" th:with="type=${@dict.getType('sys_order_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
                             </li>
                             <li>
                                 <label>是否删除：</label>
@@ -97,6 +97,8 @@
                 detailUrl: prefix + "/detail/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+                importUrl: prefix + "/importData",
+                importTemplateUrl: prefix + "/importTemplate",
                 modalName: "客户",
                 columns: [{
                     checkbox: true
@@ -128,15 +130,15 @@
                 },
                 {
                     field: 'companyUserName',
-                    title: '客户联系人名称'
+                    title: '联系人'
                 },
                 {
                     field: 'companyTitle',
-                    title: '客户职务'
+                    title: '联系人职务'
                 },
                 {
                     field: 'mobile',
-                    title: '客户联系人电话'
+                    title: '联系人电话'
                 },
                 {
                     field: 'telephone',
