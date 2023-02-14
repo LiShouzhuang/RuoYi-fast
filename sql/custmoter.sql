@@ -1,25 +1,44 @@
-CREATE TABLE `com_contacts` (
-                                `contacts_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '联系人ID',
+CREATE TABLE `com_sea` (
+                                `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                `company_code` varchar(20) DEFAULT NULL COMMENT '客户代码',
+                                `company_name` varchar(200) DEFAULT NULL COMMENT '客户名称',
+                                `user_name` varchar(200) DEFAULT NULL COMMENT '联系人',
+                                `phone` varchar(20) DEFAULT NULL COMMENT '手机',
+                                `tel` varchar(20) DEFAULT NULL COMMENT '电话',
+                                `email` varchar(50) DEFAULT NULL COMMENT '用户邮箱',
+                                `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+                                `level` varchar(5) DEFAULT NULL COMMENT '客户级别，1一般 2重要客户 3特别重要',
+                                `source` varchar(20) DEFAULT NULL COMMENT '来源，1网站采集 2预约上门 3广告 4搜索引擎 5促销活动',
+                                `industry` varchar(20) DEFAULT NULL COMMENT '行业',
+                                `status` varchar(20)DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+                                `follow_status` varchar(20) DEFAULT '0' COMMENT '跟进状态（0待沟通 1有意向 2初次沟通 3二次跟进 4已成交 5合同）',
+                                `invoice_no` int(11) DEFAULT NULL COMMENT '纳税人识别号',
+                                `classification` varchar(50) DEFAULT NULL COMMENT '企业分类',
+                                `reg_address` varchar(255) DEFAULT NULL COMMENT '注册地址',
+                                `enterprise_type` varchar(50) DEFAULT NULL COMMENT '企业类型',
+                                `reg_capital` varchar(150) DEFAULT NULL COMMENT '注册资本',
+                                `establish_date` datetime DEFAULT NULL COMMENT '成立日期',
+                                `legal_representative` varchar(50) DEFAULT NULL COMMENT '法人代表',
+                                `reg_authority` varchar(255) DEFAULT NULL COMMENT '登记机关',
+                                `business_scope` varchar(2000) DEFAULT NULL COMMENT '经营范围',
+                                `industry_type` varchar(50) DEFAULT NULL COMMENT '行业类型',
+                                `close_date` datetime DEFAULT NULL COMMENT '关停企业日期',
+                                `close_reason` varchar(128) DEFAULT NULL COMMENT '关停原因',
                                 `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
                                 `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
-                                `dept_name` varchar(200) DEFAULT '' COMMENT '部门名称',
+                                `dept_name` varchar(200) DEFAULT NULL COMMENT '部门名称',
                                 `post_id` bigint(20) DEFAULT NULL COMMENT '岗位ID',
                                 `post_code` varchar(64) DEFAULT NULL COMMENT '岗位编码',
                                 `post_name` varchar(200) DEFAULT NULL COMMENT '岗位名称',
                                 `login_name` varchar(30) DEFAULT NULL COMMENT '登录账号',
-                                `user_name` varchar(200) DEFAULT '' COMMENT '联系人名称',
-                                `email` varchar(50) DEFAULT '' COMMENT '用户邮箱',
-                                `phonenumber` varchar(11) DEFAULT '' COMMENT '手机号码',
-                                `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
-                                `status` char(1) DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
                                 `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-                                `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+                                `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
                                 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+                                `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
                                 `update_time` datetime DEFAULT NULL COMMENT '更新时间',
                                 `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-                                PRIMARY KEY (`contacts_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通讯录';
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户公海';
 
 
 
@@ -103,7 +122,7 @@ CREATE TABLE `com_customer` (
                                 `receive_telephone` varchar(255) DEFAULT NULL COMMENT '收件电话',
                                 `receive_city_name` varchar(255) DEFAULT NULL COMMENT '收件城市名',
                                 `receive_province_name` varchar(255) DEFAULT NULL COMMENT '收件身份名',
-                                `remark` varchar(1024) DEFAULT '' COMMENT '备注信息',
+                                `remark` varchar(1024) DEFAULT NULL COMMENT '备注信息',
                                 `channel_id` bigint(20) DEFAULT NULL COMMENT '渠道id',
                                 `channel_code` varchar(50) DEFAULT NULL COMMENT '渠道code',
                                 `classification` varchar(50) DEFAULT NULL COMMENT '企业分类',
@@ -133,3 +152,28 @@ CREATE TABLE `com_customer` (
                                 `is_deleted` int(1) DEFAULT '0' COMMENT '是否删除',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2164 DEFAULT CHARSET=utf8 COMMENT='客户表';
+
+
+
+CREATE TABLE `com_contacts` (
+                                `contacts_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '联系人ID',
+                                `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+                                `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+                                `dept_name` varchar(200) DEFAULT '' COMMENT '部门名称',
+                                `post_id` bigint(20) DEFAULT NULL COMMENT '岗位ID',
+                                `post_code` varchar(64) DEFAULT NULL COMMENT '岗位编码',
+                                `post_name` varchar(200) DEFAULT NULL COMMENT '岗位名称',
+                                `login_name` varchar(30) DEFAULT NULL COMMENT '登录账号',
+                                `user_name` varchar(200) DEFAULT '' COMMENT '联系人名称',
+                                `email` varchar(50) DEFAULT '' COMMENT '用户邮箱',
+                                `phonenumber` varchar(11) DEFAULT '' COMMENT '手机号码',
+                                `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+                                `status` char(1) DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+                                `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                                `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+                                PRIMARY KEY (`contacts_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通讯录';

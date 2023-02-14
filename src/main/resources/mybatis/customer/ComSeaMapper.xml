@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.sea.mapper.ComSeaMapper">
+    
+    <resultMap type="ComSea" id="ComSeaResult">
+        <result property="id"    column="id"    />
+        <result property="companyCode"    column="company_code"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="userName"    column="user_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="tel"    column="tel"    />
+        <result property="email"    column="email"    />
+        <result property="sex"    column="sex"    />
+        <result property="level"    column="level"    />
+        <result property="source"    column="source"    />
+        <result property="industry"    column="industry"    />
+        <result property="status"    column="status"    />
+        <result property="followStatus"    column="follow_status"    />
+        <result property="invoiceNo"    column="invoice_no"    />
+        <result property="classification"    column="classification"    />
+        <result property="regAddress"    column="reg_address"    />
+        <result property="enterpriseType"    column="enterprise_type"    />
+        <result property="regCapital"    column="reg_capital"    />
+        <result property="establishDate"    column="establish_date"    />
+        <result property="legalRepresentative"    column="legal_representative"    />
+        <result property="regAuthority"    column="reg_authority"    />
+        <result property="businessScope"    column="business_scope"    />
+        <result property="industryType"    column="industry_type"    />
+        <result property="closeDate"    column="close_date"    />
+        <result property="closeReason"    column="close_reason"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="postId"    column="post_id"    />
+        <result property="postCode"    column="post_code"    />
+        <result property="postName"    column="post_name"    />
+        <result property="loginName"    column="login_name"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectComSeaVo">
+        select id, company_code, company_name, user_name, phone, tel, email, sex, level, source, industry, status, follow_status, invoice_no, classification, reg_address, enterprise_type, reg_capital, establish_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, user_id, dept_id, dept_name, post_id, post_code, post_name, login_name, del_flag, create_by, create_time, update_by, update_time, remark from com_sea
+    </sql>
+
+    <select id="selectComSeaList" parameterType="ComSea" resultMap="ComSeaResult">
+        <include refid="selectComSeaVo"/>
+        <where>  
+            <if test="companyCode != null  and companyCode != ''"> and company_code = #{companyCode}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="level != null  and level != ''"> and level = #{level}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="industry != null  and industry != ''"> and industry = #{industry}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="followStatus != null  and followStatus != ''"> and follow_status = #{followStatus}</if>
+            <if test="invoiceNo != null "> and invoice_no = #{invoiceNo}</if>
+            <if test="classification != null  and classification != ''"> and classification = #{classification}</if>
+            <if test="regAddress != null  and regAddress != ''"> and reg_address = #{regAddress}</if>
+            <if test="enterpriseType != null  and enterpriseType != ''"> and enterprise_type = #{enterpriseType}</if>
+            <if test="regCapital != null  and regCapital != ''"> and reg_capital = #{regCapital}</if>
+            <if test="establishDate != null "> and establish_date = #{establishDate}</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''"> and legal_representative = #{legalRepresentative}</if>
+            <if test="regAuthority != null  and regAuthority != ''"> and reg_authority = #{regAuthority}</if>
+            <if test="businessScope != null  and businessScope != ''"> and business_scope = #{businessScope}</if>
+            <if test="industryType != null  and industryType != ''"> and industry_type = #{industryType}</if>
+            <if test="closeDate != null "> and close_date = #{closeDate}</if>
+            <if test="closeReason != null  and closeReason != ''"> and close_reason = #{closeReason}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="postId != null "> and post_id = #{postId}</if>
+            <if test="postCode != null  and postCode != ''"> and post_code = #{postCode}</if>
+            <if test="postName != null  and postName != ''"> and post_name like concat('%', #{postName}, '%')</if>
+            <if test="loginName != null  and loginName != ''"> and login_name like concat('%', #{loginName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectComSeaById" parameterType="Long" resultMap="ComSeaResult">
+        <include refid="selectComSeaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComSea" parameterType="ComSea" useGeneratedKeys="true" keyProperty="id">
+        insert into com_sea
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">company_code,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="tel != null">tel,</if>
+            <if test="email != null">email,</if>
+            <if test="sex != null">sex,</if>
+            <if test="level != null">level,</if>
+            <if test="source != null">source,</if>
+            <if test="industry != null">industry,</if>
+            <if test="status != null">status,</if>
+            <if test="followStatus != null">follow_status,</if>
+            <if test="invoiceNo != null">invoice_no,</if>
+            <if test="classification != null">classification,</if>
+            <if test="regAddress != null">reg_address,</if>
+            <if test="enterpriseType != null">enterprise_type,</if>
+            <if test="regCapital != null">reg_capital,</if>
+            <if test="establishDate != null">establish_date,</if>
+            <if test="legalRepresentative != null">legal_representative,</if>
+            <if test="regAuthority != null">reg_authority,</if>
+            <if test="businessScope != null">business_scope,</if>
+            <if test="industryType != null">industry_type,</if>
+            <if test="closeDate != null">close_date,</if>
+            <if test="closeReason != null">close_reason,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="deptName != null">dept_name,</if>
+            <if test="postId != null">post_id,</if>
+            <if test="postCode != null">post_code,</if>
+            <if test="postName != null">post_name,</if>
+            <if test="loginName != null">login_name,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">#{companyCode},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="tel != null">#{tel},</if>
+            <if test="email != null">#{email},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="level != null">#{level},</if>
+            <if test="source != null">#{source},</if>
+            <if test="industry != null">#{industry},</if>
+            <if test="status != null">#{status},</if>
+            <if test="followStatus != null">#{followStatus},</if>
+            <if test="invoiceNo != null">#{invoiceNo},</if>
+            <if test="classification != null">#{classification},</if>
+            <if test="regAddress != null">#{regAddress},</if>
+            <if test="enterpriseType != null">#{enterpriseType},</if>
+            <if test="regCapital != null">#{regCapital},</if>
+            <if test="establishDate != null">#{establishDate},</if>
+            <if test="legalRepresentative != null">#{legalRepresentative},</if>
+            <if test="regAuthority != null">#{regAuthority},</if>
+            <if test="businessScope != null">#{businessScope},</if>
+            <if test="industryType != null">#{industryType},</if>
+            <if test="closeDate != null">#{closeDate},</if>
+            <if test="closeReason != null">#{closeReason},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="postId != null">#{postId},</if>
+            <if test="postCode != null">#{postCode},</if>
+            <if test="postName != null">#{postName},</if>
+            <if test="loginName != null">#{loginName},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComSea" parameterType="ComSea">
+        update com_sea
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyCode != null">company_code = #{companyCode},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="tel != null">tel = #{tel},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="followStatus != null">follow_status = #{followStatus},</if>
+            <if test="invoiceNo != null">invoice_no = #{invoiceNo},</if>
+            <if test="classification != null">classification = #{classification},</if>
+            <if test="regAddress != null">reg_address = #{regAddress},</if>
+            <if test="enterpriseType != null">enterprise_type = #{enterpriseType},</if>
+            <if test="regCapital != null">reg_capital = #{regCapital},</if>
+            <if test="establishDate != null">establish_date = #{establishDate},</if>
+            <if test="legalRepresentative != null">legal_representative = #{legalRepresentative},</if>
+            <if test="regAuthority != null">reg_authority = #{regAuthority},</if>
+            <if test="businessScope != null">business_scope = #{businessScope},</if>
+            <if test="industryType != null">industry_type = #{industryType},</if>
+            <if test="closeDate != null">close_date = #{closeDate},</if>
+            <if test="closeReason != null">close_reason = #{closeReason},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="deptName != null">dept_name = #{deptName},</if>
+            <if test="postId != null">post_id = #{postId},</if>
+            <if test="postCode != null">post_code = #{postCode},</if>
+            <if test="postName != null">post_name = #{postName},</if>
+            <if test="loginName != null">login_name = #{loginName},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComSeaById" parameterType="Long">
+        delete from com_sea where id = #{id}
+    </delete>
+
+    <delete id="deleteComSeaByIds" parameterType="String">
+        delete from com_sea where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
