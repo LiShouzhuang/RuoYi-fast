@@ -78,6 +78,7 @@
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('customer:ComContactsOut:edit')}]];
+        var detailFlag = [[${@permission.hasPermi('customer:ComContactsOut:detail')}]];
         var removeFlag = [[${@permission.hasPermi('customer:ComContactsOut:remove')}]];
         var sexDatas = [[${@dict.getType('sys_user_sex')}]];
         var delFlagDatas = [[${@dict.getType('sys_delete_status')}]];

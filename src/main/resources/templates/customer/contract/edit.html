@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改合同')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-contract-edit" th:object="${comContract}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同编号：</label>
+                <div class="col-sm-8">
+                    <input name="contractCode" th:field="*{contractCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同名称：</label>
+                <div class="col-sm-8">
+                    <input name="contractName" th:field="*{contractName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractStartDate" th:value="${#dates.format(comContract.contractStartDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="contractEndDate" th:value="${#dates.format(comContract.contractEndDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同金额：</label>
+                <div class="col-sm-8">
+                    <input name="contractAmount" th:field="*{contractAmount}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户id：</label>
+                <div class="col-sm-8">
+                    <input name="companyId" th:field="*{companyId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户编码：</label>
+                <div class="col-sm-8">
+                    <input name="companyCode" th:field="*{companyCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户名称：</label>
+                <div class="col-sm-8">
+                    <input name="companyName" th:field="*{companyName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">客户合同状态：</label>
+                <div class="col-sm-8">
+                    <select name="companyStatus" class="form-control m-b" th:with="type=${@dict.getType('com_company_contract_type')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{companyStatus}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系人名称：</label>
+                <div class="col-sm-8">
+                    <input name="companyUserName" th:field="*{companyUserName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系人职务：</label>
+                <div class="col-sm-8">
+                    <input name="companyTitle" th:field="*{companyTitle}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">联系人手机：</label>
+                <div class="col-sm-8">
+                    <input name="mobile" th:field="*{mobile}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同状态：</label>
+                <div class="col-sm-8">
+                    <select name="status" class="form-control m-b" th:with="type=${@dict.getType('sys_order_status')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{status}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同审核状态：</label>
+                <div class="col-sm-8">
+                    <select name="contractStatus" class="form-control m-b" th:with="type=${@dict.getType('com_audit_contract_status')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{contractStatus}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同图片：</label>
+                <div class="col-sm-8">
+                    <input name="contractPicture" th:field="*{contractPicture}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">合同附件：</label>
+                <div class="col-sm-8">
+                    <input name="contractAccessory" th:field="*{contractAccessory}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">拓展字段：</label>
+                <div class="col-sm-8">
+                    <textarea name="ext" class="form-control">[[*{ext}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control">[[*{remark}]]</textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "customer/contract";
+        $("#form-contract-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-contract-edit').serialize());
+            }
+        }
+
+        $("input[name='contractStartDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='contractEndDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

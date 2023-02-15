@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.contract.mapper.ComContractMapper">
+    
+    <resultMap type="ComContract" id="ComContractResult">
+        <result property="id"    column="id"    />
+        <result property="contractCode"    column="contract_code"    />
+        <result property="contractName"    column="contract_name"    />
+        <result property="contractStartDate"    column="contract_start_date"    />
+        <result property="contractEndDate"    column="contract_end_date"    />
+        <result property="contractAmount"    column="contract_amount"    />
+        <result property="companyId"    column="company_id"    />
+        <result property="companyCode"    column="company_code"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyStatus"    column="company_status"    />
+        <result property="companyUserName"    column="company_user_name"    />
+        <result property="companyTitle"    column="company_title"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="status"    column="status"    />
+        <result property="contractStatus"    column="contract_status"    />
+        <result property="contractPicture"    column="contract_picture"    />
+        <result property="contractAccessory"    column="contract_accessory"    />
+        <result property="ext"    column="ext"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectComContractVo">
+        select id, contract_code, contract_name, contract_start_date, contract_end_date, contract_amount, company_id, company_code, company_name, company_status, company_user_name, company_title, mobile, status, contract_status, contract_picture, contract_accessory, ext, del_flag, create_by, create_time, update_by, update_time, remark from com_contract
+    </sql>
+
+    <select id="selectComContractList" parameterType="ComContract" resultMap="ComContractResult">
+        <include refid="selectComContractVo"/>
+        <where>  
+            <if test="contractCode != null  and contractCode != ''"> and contract_code = #{contractCode}</if>
+            <if test="contractName != null  and contractName != ''"> and contract_name like concat('%', #{contractName}, '%')</if>
+            <if test="contractStartDate != null "> and contract_start_date = #{contractStartDate}</if>
+            <if test="contractEndDate != null "> and contract_end_date = #{contractEndDate}</if>
+            <if test="contractAmount != null "> and contract_amount = #{contractAmount}</if>
+            <if test="companyId != null  and companyId != ''"> and company_id = #{companyId}</if>
+            <if test="companyCode != null  and companyCode != ''"> and company_code = #{companyCode}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyStatus != null "> and company_status = #{companyStatus}</if>
+            <if test="companyUserName != null  and companyUserName != ''"> and company_user_name like concat('%', #{companyUserName}, '%')</if>
+            <if test="companyTitle != null  and companyTitle != ''"> and company_title = #{companyTitle}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="contractStatus != null  and contractStatus != ''"> and contract_status = #{contractStatus}</if>
+            <if test="contractPicture != null  and contractPicture != ''"> and contract_picture = #{contractPicture}</if>
+            <if test="contractAccessory != null  and contractAccessory != ''"> and contract_accessory = #{contractAccessory}</if>
+            <if test="ext != null  and ext != ''"> and ext = #{ext}</if>
+        </where>
+    </select>
+    
+    <select id="selectComContractById" parameterType="Long" resultMap="ComContractResult">
+        <include refid="selectComContractVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComContract" parameterType="ComContract" useGeneratedKeys="true" keyProperty="id">
+        insert into com_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractCode != null">contract_code,</if>
+            <if test="contractName != null">contract_name,</if>
+            <if test="contractStartDate != null">contract_start_date,</if>
+            <if test="contractEndDate != null">contract_end_date,</if>
+            <if test="contractAmount != null">contract_amount,</if>
+            <if test="companyId != null">company_id,</if>
+            <if test="companyCode != null">company_code,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyStatus != null">company_status,</if>
+            <if test="companyUserName != null">company_user_name,</if>
+            <if test="companyTitle != null">company_title,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="status != null">status,</if>
+            <if test="contractStatus != null">contract_status,</if>
+            <if test="contractPicture != null">contract_picture,</if>
+            <if test="contractAccessory != null">contract_accessory,</if>
+            <if test="ext != null">ext,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractCode != null">#{contractCode},</if>
+            <if test="contractName != null">#{contractName},</if>
+            <if test="contractStartDate != null">#{contractStartDate},</if>
+            <if test="contractEndDate != null">#{contractEndDate},</if>
+            <if test="contractAmount != null">#{contractAmount},</if>
+            <if test="companyId != null">#{companyId},</if>
+            <if test="companyCode != null">#{companyCode},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyStatus != null">#{companyStatus},</if>
+            <if test="companyUserName != null">#{companyUserName},</if>
+            <if test="companyTitle != null">#{companyTitle},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="status != null">#{status},</if>
+            <if test="contractStatus != null">#{contractStatus},</if>
+            <if test="contractPicture != null">#{contractPicture},</if>
+            <if test="contractAccessory != null">#{contractAccessory},</if>
+            <if test="ext != null">#{ext},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComContract" parameterType="ComContract">
+        update com_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractCode != null">contract_code = #{contractCode},</if>
+            <if test="contractName != null">contract_name = #{contractName},</if>
+            <if test="contractStartDate != null">contract_start_date = #{contractStartDate},</if>
+            <if test="contractEndDate != null">contract_end_date = #{contractEndDate},</if>
+            <if test="contractAmount != null">contract_amount = #{contractAmount},</if>
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="companyCode != null">company_code = #{companyCode},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyStatus != null">company_status = #{companyStatus},</if>
+            <if test="companyUserName != null">company_user_name = #{companyUserName},</if>
+            <if test="companyTitle != null">company_title = #{companyTitle},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="contractStatus != null">contract_status = #{contractStatus},</if>
+            <if test="contractPicture != null">contract_picture = #{contractPicture},</if>
+            <if test="contractAccessory != null">contract_accessory = #{contractAccessory},</if>
+            <if test="ext != null">ext = #{ext},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComContractById" parameterType="Long">
+        delete from com_contract where id = #{id}
+    </delete>
+
+    <delete id="deleteComContractByIds" parameterType="String">
+        delete from com_contract where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
