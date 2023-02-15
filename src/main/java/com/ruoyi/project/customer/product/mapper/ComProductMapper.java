@@ -1,6 +1,8 @@
 package com.ruoyi.project.customer.product.mapper;
 
 import java.util.List;
+
+import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.project.customer.product.domain.ComProduct;
 
 /**
@@ -58,4 +60,7 @@ public interface ComProductMapper
      * @return 结果
      */
     public int deleteComProductByIds(String[] ids);
+
+
+    public ComProduct selectComProductByProductCode(String productCode);
 }

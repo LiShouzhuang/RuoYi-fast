@@ -32,30 +32,30 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li>
-                                <label>产品单价：</label>
-                                <input type="text" name="price"/>
-                            </li>
-                            <li>
-                                <label>产品负责人id：</label>
-                                <input type="text" name="staffId"/>
-                            </li>
-                            <li>
-                                <label>产品负责人编码：</label>
-                                <input type="text" name="staffCode"/>
-                            </li>
-                            <li>
-                                <label>产品负责人名称：</label>
-                                <input type="text" name="staffName"/>
-                            </li>
-                            <li>
-                                <label>图片：</label>
-                                <input type="text" name="contractPicture"/>
-                            </li>
-                            <li>
-                                <label>附件：</label>
-                                <input type="text" name="contractAccessory"/>
-                            </li>
+                            <!--                           <li>
+                                                           <label>产品单价：</label>
+                                                           <input type="text" name="price"/>
+                                                       </li>
+                                                       <li>
+                                                           <label>产品负责人id：</label>
+                                                           <input type="text" name="staffId"/>
+                                                       </li>
+                                                       <li>
+                                                           <label>产品负责人编码：</label>
+                                                           <input type="text" name="staffCode"/>
+                                                       </li>
+                                                       <li>
+                                                           <label>产品负责人名称：</label>
+                                                           <input type="text" name="staffName"/>
+                                                       </li>
+                                                       <li>
+                                                           <label>图片：</label>
+                                                           <input type="text" name="contractPicture"/>
+                                                       </li>
+                                                       <li>
+                                                           <label>附件：</label>
+                                                           <input type="text" name="contractAccessory"/>
+                                                       </li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -74,6 +74,9 @@
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="customer:product:remove">
                     <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="customer:sea:import">
+                    <i class="fa fa-upload"></i> 导入
                 </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="customer:product:export">
                     <i class="fa fa-download"></i> 导出
@@ -100,6 +103,8 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+                importUrl: prefix + "/importData",
+                importTemplateUrl: prefix + "/importTemplate",
                 modalName: "产品",
                 columns: [{
                     checkbox: true
@@ -137,11 +142,13 @@
                 },
                 {
                     field: 'staffId',
-                    title: '产品负责人id'
+                    title: '产品负责人id',
+                    visible: false
                 },
                 {
                     field: 'staffCode',
-                    title: '产品负责人编码'
+                    title: '产品负责人编码',
+                    visible: false
                 },
                 {
                     field: 'staffName',
@@ -153,15 +160,18 @@
                 },
                 {
                     field: 'contractPicture',
-                    title: '图片'
+                    title: '图片',
+                    visible: false
                 },
                 {
                     field: 'contractAccessory',
-                    title: '附件'
+                    title: '附件',
+                    visible: false
                 },
                 {
                     field: 'ext',
-                    title: '拓展字段'
+                    title: '拓展字段',
+                    visible: false
                 },
                 {
                     field: 'remark',
@@ -182,4 +192,19 @@
         });
     </script>
 </body>
+<!-- 导入区域 -->
+<script id="importTpl" type="text/template">
+    <form enctype="multipart/form-data" class="mt20 mb10">
+        <div class="col-xs-offset-1">
+            <input type="file" id="file" name="file"/>
+            <div class="mt10 pt5">
+                <input type="checkbox" id="updateSupport" name="updateSupport" title="如果登录账户已经存在，更新这条数据。"> 是否更新已经存在的用户数据
+                &nbsp;	<a onclick="$.table.importTemplate()" class="btn btn-default btn-xs"><i class="fa fa-file-excel-o"></i> 下载模板</a>
+            </div>
+            <font color="red" class="pull-left mt10">
+                提示：仅允许导入“xls”或“xlsx”格式文件！
+            </font>
+        </div>
+    </form>
+</script>
 </html>

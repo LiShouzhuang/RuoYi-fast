@@ -2,6 +2,7 @@ package com.ruoyi.project.customer.product.service;
 
 import java.util.List;
 import com.ruoyi.project.customer.product.domain.ComProduct;
+import com.ruoyi.project.customer.sea.domain.ComSea;
 
 /**
  * 产品Service接口
@@ -58,4 +59,9 @@ public interface IComProductService
      * @return 结果
      */
     public int deleteComProductById(Long id);
+
+    /**
+     * 导入数据
+     */
+    public String importProduct(List<ComProduct> comSeaList, Boolean isUpdateSupport);
 }

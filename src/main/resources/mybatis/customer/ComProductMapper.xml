@@ -52,6 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectComProductVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectComProductByProductCode" parameterType="String" resultMap="ComProductResult">
+        <include refid="selectComProductVo"/>
+        where product_code = #{productCode}
+    </select>
         
     <insert id="insertComProduct" parameterType="ComProduct" useGeneratedKeys="true" keyProperty="id">
         insert into com_product

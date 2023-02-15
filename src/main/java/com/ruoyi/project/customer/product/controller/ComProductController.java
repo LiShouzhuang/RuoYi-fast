@@ -1,6 +1,8 @@
 package com.ruoyi.project.customer.product.controller;
 
 import java.util.List;
+
+import com.ruoyi.project.customer.sea.domain.ComSea;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 产品Controller
@@ -123,5 +126,32 @@ public class ComProductController extends BaseController
     public AjaxResult remove(String ids)
     {
         return toAjax(comProductService.deleteComProductByIds(ids));
+    }
+
+    /**
+     * 导入数据
+     */
+    @Log(title = "产品", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:product:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<ComProduct> util = new ExcelUtil<ComProduct>(ComProduct.class);
+        List<ComProduct> list = util.importExcel(file.getInputStream());
+        String message = comProductService.importProduct(list, updateSupport);
+        return AjaxResult.success(message);
+    }
+
+    /**
+     * 导入-下载模版
+     */
+    @RequiresPermissions("customer:product:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<ComProduct> util = new ExcelUtil<ComProduct>(ComProduct.class);
+        return util.importTemplateExcel("产品数据");
     }
 }
