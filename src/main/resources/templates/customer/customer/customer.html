@@ -60,9 +60,6 @@
                 <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="customer:customer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.detail()" shiro:hasPermission="customer:customer:detail">
-                    <i class="fa fa-list"></i> 详细
-                </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="customer:customer:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
@@ -71,6 +68,9 @@
                 </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="customer:customer:export">
                     <i class="fa fa-download"></i> 导出
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.detail()" shiro:hasPermission="customer:customer:detail">
+                    <i class="fa fa-list"></i> 详细
                 </a>
 
 

@@ -66,6 +66,9 @@
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="customer:ComContactsOut:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.detail()" shiro:hasPermission="customer:ComContactsOut:detail">
+                    <i class="fa fa-list"></i> 详细
+                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -89,6 +92,7 @@
                 exportUrl: prefix + "/export",
                 importUrl: prefix + "/importData",
                 importTemplateUrl: prefix + "/importTemplate",
+                detailUrl: prefix + "/detail/{id}",
                 modalName: "外部通讯录",
                 columns: [{
                     checkbox: true
@@ -143,6 +147,7 @@
                     formatter: function(value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push("<a class='btn btn-info btn-xs " + detailFlag + "' href='javascript:void(0)' onclick='$.operate.detail(" + row.id + ")'><i class='fa fa-search'></i>详细</a> ");
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
