@@ -105,7 +105,7 @@ public class ComContactsKeyValueMappingServiceImpl implements IComContactsKeyVal
      * @return 扩展关系表
      */
     @Override
-    public ComContactsKeyValueMapping selectComContactsKeyValueMappingByTableName(String tableName)
+    public List<ComContactsKeyValueMapping> selectComContactsKeyValueMappingByTableName(String tableName)
     {
         return comContactsKeyValueMappingMapper.selectComContactsKeyValueMappingByTableName(tableName);
     }

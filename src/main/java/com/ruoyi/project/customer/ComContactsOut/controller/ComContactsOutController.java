@@ -1,13 +1,26 @@
 package com.ruoyi.project.customer.ComContactsOut.controller;
 
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.project.customer.mapping.domain.ComContactsKeyValueMapping;
 import com.ruoyi.project.customer.mapping.service.IComContactsKeyValueMappingService;
 import com.ruoyi.project.customer.product.domain.ComProduct;
 import com.ruoyi.project.customer.sea.domain.ComSea;
+import com.ruoyi.project.tool.gen.domain.GenTable;
+import com.ruoyi.project.tool.gen.util.VelocityInitializer;
+import com.ruoyi.project.tool.gen.util.VelocityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -191,13 +204,61 @@ public class ComContactsOutController extends BaseController
     {
         ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutByPhone(phone);
         String extension = comContactsOut.getExtension();
-        String tableName = "extension";
+        String tableName = "com_contacts_out";
         JSON json = JSON.parseObject(extension);
-        ComContactsKeyValueMapping mapping = comContactsKeyValueMappingService.selectComContactsKeyValueMappingByTableName(tableName);
+        JSONObject jsonObject = JSONObject.parseObject(extension);
+        if (StringUtils.isEmpty(json.toString())){
+            AjaxResult.success("没有扩展字段，json体为空");
+        }
+        List<ComContactsKeyValueMapping> mappingList = comContactsKeyValueMappingService.selectComContactsKeyValueMappingByTableName(tableName);
+        if (0==mappingList.size()){
+            AjaxResult.success("没有扩展字段，mappingList体为空");
+        }
 
-        System.out.println("success");
-        return toAjax(comContactsOutService.insertComContactsOut(comContactsOut));
+        Map<String, String> dataMap = new HashMap<>();
+        String handler_string ="";
+        for (ComContactsKeyValueMapping list:mappingList){
+            String mappingKey = list.getMappingKey();
+            String mappingValue = list.getMappingValue();
+            String value = jsonObject.getString(mappingKey);
+            handler_string += "【"+mappingKey+"】" +mappingValue+":"+value;
+        }
+
+        System.out.println(handler_string);
+        return  AjaxResult.success("成功        ：           "+handler_string);
     }
+
+/*
+
+
+    @Override
+    public Map<String, String> previewCode(Long tableId)
+    {
+        Map<String, String> dataMap = new LinkedHashMap<>();
+        // 查询表信息
+        GenTable table = genTableMapper.selectGenTableById(tableId);
+        // 设置主子表信息
+        setSubTable(table);
+        // 设置主键列信息
+        setPkColumn(table);
+        VelocityInitializer.initVelocity();
+
+        VelocityContext context = VelocityUtils.prepareContext(table);
+
+        // 获取模板列表
+        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        for (String template : templates)
+        {
+            // 渲染模板
+            StringWriter sw = new StringWriter();
+            Template tpl = Velocity.getTemplate(template, Constants.UTF8);
+            tpl.merge(context, sw);
+            dataMap.put(template, sw.toString());
+        }
+        return dataMap;
+    }
+*/
+
 
 
 

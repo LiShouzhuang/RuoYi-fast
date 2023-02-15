@@ -67,5 +67,5 @@ public interface ComContactsKeyValueMappingMapper
      * @param tableName 扩展关系表主键
      * @return 扩展关系表
      */
-    public ComContactsKeyValueMapping selectComContactsKeyValueMappingByTableName(String tableName);
+    public List<ComContactsKeyValueMapping> selectComContactsKeyValueMappingByTableName(String tableName);
 }
