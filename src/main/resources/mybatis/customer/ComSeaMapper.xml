@@ -43,10 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="userDept"    column="user_dept"    />
+        <result property="userTitle"    column="user_title"    />
+        <result property="extension"    column="extension"    />
     </resultMap>
 
     <sql id="selectComSeaVo">
-        select id, company_code, company_name, user_name, phone, tel, email, sex, level, source, industry, status, follow_status, invoice_no, classification, reg_address, enterprise_type, reg_capital, establish_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, user_id, dept_id, dept_name, post_id, post_code, post_name, login_name, del_flag, create_by, create_time, update_by, update_time, remark from com_sea
+        select id, company_code, company_name, user_name, phone, tel, email, sex, level, source, industry, status, follow_status, invoice_no, classification, reg_address, enterprise_type, reg_capital, establish_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, user_id, dept_id, dept_name, post_id, post_code, post_name, login_name, del_flag, create_by, create_time, update_by, update_time, remark, user_dept, user_title, extension from com_sea
     </sql>
 
     <select id="selectComSeaList" parameterType="ComSea" resultMap="ComSeaResult">
@@ -83,6 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="postCode != null  and postCode != ''"> and post_code = #{postCode}</if>
             <if test="postName != null  and postName != ''"> and post_name like concat('%', #{postName}, '%')</if>
             <if test="loginName != null  and loginName != ''"> and login_name like concat('%', #{loginName}, '%')</if>
+            <if test="userDept != null  and userDept != ''"> and user_dept = #{userDept}</if>
+            <if test="userTitle != null  and userTitle != ''"> and user_title = #{userTitle}</if>
+            <if test="extension != null  and extension != ''"> and extension = #{extension}</if>
         </where>
     </select>
     
@@ -136,6 +142,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
+            <if test="userDept != null">user_dept,</if>
+            <if test="userTitle != null">user_title,</if>
+            <if test="extension != null">extension,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="companyCode != null">#{companyCode},</if>
@@ -175,6 +184,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="userDept != null">#{userDept},</if>
+            <if test="userTitle != null">#{userTitle},</if>
+            <if test="extension != null">#{extension},</if>
          </trim>
     </insert>
 
@@ -218,6 +230,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="userDept != null">user_dept = #{userDept},</if>
+            <if test="userTitle != null">user_title = #{userTitle},</if>
+            <if test="extension != null">extension = #{extension},</if>
         </trim>
         where id = #{id}
     </update>
