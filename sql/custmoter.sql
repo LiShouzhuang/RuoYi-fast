@@ -233,4 +233,42 @@ CREATE TABLE `com_product` (
                                 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品表';
 
+drop table com_contacts_out;
+CREATE TABLE `com_contacts_out` (
+                                    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                    `company_code` varchar(20) DEFAULT NULL COMMENT '客户代码',
+                                    `company_name` varchar(200) DEFAULT NULL COMMENT '客户名称',
+                                    `user_name` varchar(200) DEFAULT NULL COMMENT '联系人',
+                                    `phone` varchar(20) DEFAULT NULL COMMENT '手机',
+                                    `tel` varchar(20) DEFAULT NULL COMMENT '电话',
+                                    `email` varchar(50) DEFAULT NULL COMMENT '用户邮箱',
+                                    `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+                                    `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                                    `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
+                                    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                    `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
+                                    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+                                    `extension` varchar(5000) DEFAULT NULL COMMENT '扩展字段',
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8 COMMENT='外部通讯录';
+
+
+
+drop table com_key_value_mapping;
+CREATE TABLE `com_key_value_mapping` (
+                                    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                    `table_name` varchar(20) DEFAULT NULL COMMENT '业务表名称',
+                                    `key` varchar(64) DEFAULT NULL COMMENT '扩展字段外键',
+                                    `value` varchar(64) DEFAULT NULL COMMENT '值,扩展字段中文名',
+                                    `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                                    `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
+                                    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                    `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
+                                    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8 COMMENT='内外部对应关系表';
+
+
+
 
