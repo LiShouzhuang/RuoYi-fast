@@ -271,4 +271,33 @@ CREATE TABLE `com_key_value_mapping` (
 
 
 
-
+CREATE TABLE `com_contract` (
+                                `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+                                `contract_code` varchar(20) DEFAULT NULL COMMENT '合同编号',
+                                `contract_name` varchar(255) DEFAULT NULL COMMENT '合同名称',
+                                `contract_start_date` datetime DEFAULT NULL COMMENT '合同开始时间',
+                                `contract_end_date` datetime DEFAULT NULL COMMENT '合同结束时间',
+                                `contract_amount` double DEFAULT NULL COMMENT '合同金额',
+                                `company_id` varchar(64) DEFAULT NULL COMMENT '客户id',
+                                `company_code` varchar(64) DEFAULT NULL COMMENT '客户编码',
+                                `company_name` varchar(255) DEFAULT NULL COMMENT '客户名称',
+                                `company_status` tinyint(2) DEFAULT NULL COMMENT '状态,1新增 2续签 3已过期',
+                                `company_user_name` varchar(255) DEFAULT NULL COMMENT '联系人名称',
+                                `company_title` varchar(255) DEFAULT NULL COMMENT '联系人职务',
+                                `mobile` varchar(64) DEFAULT NULL COMMENT '联系人手机',
+                                `status` varchar(64) DEFAULT '0' COMMENT '合同状态（0正常 1停用）',
+                                `contract_status` varchar(64) DEFAULT '0' COMMENT '合同审核状态（0待审核 1审核中 2未通过 3审核通过）',
+                                `product_id` bigint(20) DEFAULT NULL COMMENT '产品ID',
+                                `product_code` varchar(20) DEFAULT NULL COMMENT '产品编号',
+                                `product_name` varchar(200) DEFAULT NULL COMMENT '产品名称',
+                                `contract_picture` varchar(255) DEFAULT NULL COMMENT '合同图片',
+                                `contract_accessory` varchar(255) DEFAULT NULL COMMENT '合同附件',
+                                `ext` varchar(2550) DEFAULT NULL COMMENT '拓展字段',
+                                `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+                                `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合同表';

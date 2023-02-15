@@ -35,7 +35,7 @@
                                 <input type="text" name="companyName"/>
                             </li>
                             <li>
-                                <label>客户合同状态：</label>
+                                <label>客户状态：</label>
                                 <select name="companyStatus" th:with="type=${@dict.getType('com_company_contract_type')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -98,7 +98,6 @@
         var companyStatusDatas = [[${@dict.getType('com_company_contract_type')}]];
         var statusDatas = [[${@dict.getType('sys_order_status')}]];
         var contractStatusDatas = [[${@dict.getType('com_audit_contract_status')}]];
-        var delFlagDatas = [[${@dict.getType('sys_delete_status')}]];
         var prefix = ctx + "customer/contract";
 
         $(function() {
@@ -144,8 +143,7 @@
                 },
                 {
                     field: 'companyCode',
-                    title: '客户编码',
-                    visible: false
+                    title: '客户编码'
                 },
                 {
                     field: 'companyName',
@@ -153,7 +151,7 @@
                 },
                 {
                     field: 'companyStatus',
-                    title: '客户合同状态',
+                    title: '客户状态',
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(companyStatusDatas, value);
                     }
@@ -164,8 +162,7 @@
                 },
                 {
                     field: 'companyTitle',
-                    title: '联系人职务',
-                    visible: false
+                    title: '联系人职务'
                 },
                 {
                     field: 'mobile',

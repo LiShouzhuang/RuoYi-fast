@@ -7,6 +7,7 @@
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-contract-add">
+            <h4 class="form-header h4">合同信息</h4>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">合同编号：</label>
                 <div class="col-sm-8">
@@ -62,11 +63,12 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">客户合同状态：</label>
+                <label class="col-sm-3 control-label">客户状态：</label>
                 <div class="col-sm-8">
-                    <select name="companyStatus" class="form-control m-b" th:with="type=${@dict.getType('com_company_contract_type')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
+                    <div class="radio-box" th:each="dict : ${@dict.getType('com_company_contract_type')}">
+                        <input type="radio" th:id="${'companyStatus_' + dict.dictCode}" name="companyStatus" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'companyStatus_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
@@ -90,17 +92,19 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">合同状态：</label>
                 <div class="col-sm-8">
-                    <select name="status" class="form-control m-b" th:with="type=${@dict.getType('sys_order_status')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
+                    <div class="radio-box" th:each="dict : ${@dict.getType('sys_order_status')}">
+                        <input type="radio" th:id="${'status_' + dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'status_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">合同审核状态：</label>
                 <div class="col-sm-8">
-                    <select name="contractStatus" class="form-control m-b" th:with="type=${@dict.getType('com_audit_contract_status')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
+                    <div class="radio-box" th:each="dict : ${@dict.getType('com_audit_contract_status')}">
+                        <input type="radio" th:id="${'contractStatus_' + dict.dictCode}" name="contractStatus" th:value="${dict.dictValue}" th:checked="${dict.default}">
+                        <label th:for="${'contractStatus_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
                 </div>
             </div>
             <div class="form-group">    
@@ -124,9 +128,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">删除标志：</label>
                 <div class="col-sm-8">
-                    <select name="delFlag" class="form-control m-b" th:with="type=${@dict.getType('sys_delete_status')}">
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                    </select>
+                    <input name="delFlag" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">
@@ -135,12 +137,24 @@
                     <textarea name="remark" class="form-control"></textarea>
                 </div>
             </div>
+            <h4 class="form-header h4">客户信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
     <script th:inline="javascript">
         var prefix = ctx + "customer/contract"
+        var companyStatusDatas = [[${@dict.getType('sys_order_status')}]];
+        var isDeletedDatas = [[${@dict.getType('sys_delete_status')}]];
         $("#form-contract-add").validate({
             focusCleanup: true
         });
@@ -162,6 +176,626 @@
             minView: "month",
             autoclose: true
         });
+
+        $(function() {
+            var options = {
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                sidePagination: "client",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'index',
+                    align: 'center',
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
+                    	return columnIndex + $.table.serialNumber(index);
+                    }
+                },
+                {
+                    field: 'companyName',
+                    align: 'center',
+                    title: '客户名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].companyName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'companyStatus',
+                    align: 'center',
+                    title: '状态',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("comCustomerList[%s].companyStatus", index);
+                        return $.common.dictToSelect(companyStatusDatas, value, name);
+                    }
+                },
+                {
+                    field: 'companyUserName',
+                    align: 'center',
+                    title: '客户联系人名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].companyUserName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'companyTitle',
+                    align: 'center',
+                    title: '客户职务',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].companyTitle' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'mobile',
+                    align: 'center',
+                    title: '客户联系人电话',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].mobile' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'telephone',
+                    align: 'center',
+                    title: '客户联系人手机',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].telephone' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'address',
+                    align: 'center',
+                    title: '公司地址',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].address' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'bankName',
+                    align: 'center',
+                    title: '开户行',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].bankName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'bankNo',
+                    align: 'center',
+                    title: '银行账户',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].bankNo' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'accountNo',
+                    align: 'center',
+                    title: '账户',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].accountNo' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'cityId',
+                    align: 'center',
+                    title: '城市id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].cityId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'cityName',
+                    align: 'center',
+                    title: '城市名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].cityName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'provinceId',
+                    align: 'center',
+                    title: '省份id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].provinceId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'provinceName',
+                    align: 'center',
+                    title: '省份名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].provinceName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'industry',
+                    align: 'center',
+                    title: '产业',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].industry' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'kefuId',
+                    align: 'center',
+                    title: '客服id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].kefuId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'kefuName',
+                    align: 'center',
+                    title: '客服姓名',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].kefuName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'kefuMobile',
+                    align: 'center',
+                    title: '客服手机号码',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].kefuMobile' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'kefuEmail',
+                    align: 'center',
+                    title: '联系邮箱',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].kefuEmail' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'salesId',
+                    align: 'center',
+                    title: '对接销售id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].salesId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'salesName',
+                    align: 'center',
+                    title: '销售姓名',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].salesName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'salesMobile',
+                    align: 'center',
+                    title: '销售手机',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].salesMobile' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'salesEmail',
+                    align: 'center',
+                    title: '销售邮箱',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].salesEmail' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveAddress',
+                    align: 'center',
+                    title: '收件地址',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveAddress' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveCityId',
+                    align: 'center',
+                    title: '收件城市id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveCityId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveName',
+                    align: 'center',
+                    title: '收件人名',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveProvinceId',
+                    align: 'center',
+                    title: '收件省份id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveProvinceId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveTelephone',
+                    align: 'center',
+                    title: '收件电话',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveTelephone' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveCityName',
+                    align: 'center',
+                    title: '收件城市名',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveCityName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'receiveProvinceName',
+                    align: 'center',
+                    title: '收件身份名',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].receiveProvinceName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'remark',
+                    align: 'center',
+                    title: '备注信息',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].remark' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'channelId',
+                    align: 'center',
+                    title: '渠道id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].channelId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'channelCode',
+                    align: 'center',
+                    title: '渠道code',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].channelCode' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'classification',
+                    align: 'center',
+                    title: '企业分类',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].classification' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'regAddress',
+                    align: 'center',
+                    title: '注册地址',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].regAddress' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'enterpriseType',
+                    align: 'center',
+                    title: '企业类型',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].enterpriseType' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'regCapital',
+                    align: 'center',
+                    title: '注册资本',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].regCapital' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'establisDate',
+                    align: 'center',
+                    title: '成立日期',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].establisDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'legalRepresentative',
+                    align: 'center',
+                    title: '法人代表',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].legalRepresentative' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'regAuthority',
+                    align: 'center',
+                    title: '登记机关',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].regAuthority' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'businessScope',
+                    align: 'center',
+                    title: '经营范围',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].businessScope' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'industryType',
+                    align: 'center',
+                    title: '行业类型',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].industryType' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'closeDate',
+                    align: 'center',
+                    title: '关停企业日期',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].closeDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'closeReason',
+                    align: 'center',
+                    title: '关停原因',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].closeReason' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'companyContractId',
+                    align: 'center',
+                    title: '合同id',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].companyContractId' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'companyContractCode',
+                    align: 'center',
+                    title: '客户合同号',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].companyContractCode' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'contractStartDate',
+                    align: 'center',
+                    title: '合同开始时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].contractStartDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'contractEndDate',
+                    align: 'center',
+                    title: '合同结束时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].contractEndDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'contractAmount',
+                    align: 'center',
+                    title: '合同金额',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].contractAmount' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'contractTotalAmount',
+                    align: 'center',
+                    title: '累计金流',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].contractTotalAmount' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'contractIsContinue',
+                    align: 'center',
+                    title: '是否续签客户',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].contractIsContinue' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'invoiceName',
+                    align: 'center',
+                    title: '发票名称',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].invoiceName' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'invoiceNo',
+                    align: 'center',
+                    title: '纳税人识别号',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].invoiceNo' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'createDate',
+                    align: 'center',
+                    title: '创建时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].createDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'createBy',
+                    align: 'center',
+                    title: '创建人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].createBy' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'updateDate',
+                    align: 'center',
+                    title: '更新时间',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].updateDate' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'updateBy',
+                    align: 'center',
+                    title: '更新人',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='comCustomerList[%s].updateBy' value='%s'>", index, value);
+                        return html;
+                    }
+                },
+                {
+                    field: 'isDeleted',
+                    align: 'center',
+                    title: '是否删除',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("comCustomerList[%s].isDeleted", index);
+                        return $.common.dictToSelect(isDeletedDatas, value, name);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var value = $.common.isNotEmpty(row.index) ? row.index : $.table.serialNumber(index);
+                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + value + '\')"><i class="fa fa-remove"></i>删除</a>';
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+
+        function addRow() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            var row = {
+                index: $.table.serialNumber(count),
+                companyName: "",
+                companyStatus: "",
+                companyUserName: "",
+                companyTitle: "",
+                mobile: "",
+                telephone: "",
+                address: "",
+                bankName: "",
+                bankNo: "",
+                accountNo: "",
+                cityId: "",
+                cityName: "",
+                provinceId: "",
+                provinceName: "",
+                industry: "",
+                kefuId: "",
+                kefuName: "",
+                kefuMobile: "",
+                kefuEmail: "",
+                salesId: "",
+                salesName: "",
+                salesMobile: "",
+                salesEmail: "",
+                receiveAddress: "",
+                receiveCityId: "",
+                receiveName: "",
+                receiveProvinceId: "",
+                receiveTelephone: "",
+                receiveCityName: "",
+                receiveProvinceName: "",
+                remark: "",
+                channelId: "",
+                channelCode: "",
+                classification: "",
+                regAddress: "",
+                enterpriseType: "",
+                regCapital: "",
+                establisDate: "",
+                legalRepresentative: "",
+                regAuthority: "",
+                businessScope: "",
+                industryType: "",
+                closeDate: "",
+                closeReason: "",
+                companyContractId: "",
+                companyContractCode: "",
+                contractStartDate: "",
+                contractEndDate: "",
+                contractAmount: "",
+                contractTotalAmount: "",
+                contractIsContinue: "",
+                invoiceName: "",
+                invoiceNo: "",
+                createDate: "",
+                createBy: "",
+                updateDate: "",
+                updateBy: "",
+                isDeleted: "",
+            }
+            sub.addRow(row);
+        }
     </script>
 </body>
 </html>
