@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="productCode"    column="product_code"    />
         <result property="productType"    column="product_type"    />
-        <result property="productName"    column="product__name"    />
+        <result property="productName"    column="product_name"    />
         <result property="status"    column="status"    />
         <result property="price"    column="price"    />
         <result property="staffId"    column="staff_id"    />
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectComProductVo">
-        select id, product_code, product_type, product__name, status, price, staff_id, staff_code, staff_name, description, contract_picture, contract_accessory, ext, del_flag, create_by, create_time, update_by, update_time, remark from com_product
+        select id, product_code, product_type, product_name, status, price, staff_id, staff_code, staff_name, description, contract_picture, contract_accessory, ext, del_flag, create_by, create_time, update_by, update_time, remark from com_product
     </sql>
 
     <select id="selectComProductList" parameterType="ComProduct" resultMap="ComProductResult">
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
             <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
-            <if test="productName != null  and productName != ''"> and product__name like concat('%', #{productName}, '%')</if>
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="price != null "> and price = #{price}</if>
             <if test="staffId != null  and staffId != ''"> and staff_id = #{staffId}</if>
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="productCode != null">product_code,</if>
             <if test="productType != null">product_type,</if>
-            <if test="productName != null">product__name,</if>
+            <if test="productName != null">product_name,</if>
             <if test="status != null">status,</if>
             <if test="price != null">price,</if>
             <if test="staffId != null">staff_id,</if>
@@ -107,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="productCode != null">product_code = #{productCode},</if>
             <if test="productType != null">product_type = #{productType},</if>
-            <if test="productName != null">product__name = #{productName},</if>
+            <if test="productName != null">product_name = #{productName},</if>
             <if test="status != null">status = #{status},</if>
             <if test="price != null">price = #{price},</if>
             <if test="staffId != null">staff_id = #{staffId},</if>
