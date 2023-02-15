@@ -2,6 +2,9 @@ package com.ruoyi.project.customer.ComContactsOut.controller;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.project.customer.mapping.domain.ComContactsKeyValueMapping;
+import com.ruoyi.project.customer.mapping.service.IComContactsKeyValueMappingService;
 import com.ruoyi.project.customer.product.domain.ComProduct;
 import com.ruoyi.project.customer.sea.domain.ComSea;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -37,6 +40,9 @@ public class ComContactsOutController extends BaseController
 
     @Autowired
     private IComContactsOutService comContactsOutService;
+
+    @Autowired
+    private IComContactsKeyValueMappingService comContactsKeyValueMappingService;
 
     @RequiresPermissions("customer:ComContactsOut:view")
     @GetMapping()
@@ -179,12 +185,17 @@ public class ComContactsOutController extends BaseController
      * 测试查询
      */
 //    @RequiresPermissions("customer:sea:testAddExtension")
-    @GetMapping("/testGetExtension")
+    @GetMapping("/testGetExtension/{phone}")
     @ResponseBody
-    public AjaxResult getExtension()
+    public AjaxResult getExtension(@PathVariable("phone") String phone)
     {
-        ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutByPhone("888");
-//        comContactsOut.setExtension(i);
+        ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutByPhone(phone);
+        String extension = comContactsOut.getExtension();
+        String tableName = "extension";
+        JSON json = JSON.parseObject(extension);
+        ComContactsKeyValueMapping mapping = comContactsKeyValueMappingService.selectComContactsKeyValueMappingByTableName(tableName);
+
+        System.out.println("success");
         return toAjax(comContactsOutService.insertComContactsOut(comContactsOut));
     }
 

@@ -94,4 +94,19 @@ public class ComContactsKeyValueMappingServiceImpl implements IComContactsKeyVal
     {
         return comContactsKeyValueMappingMapper.deleteComContactsKeyValueMappingById(id);
     }
+
+
+
+
+    /**
+     * 查询扩展关系表
+     *
+     * @param tableName 扩展关系表主键
+     * @return 扩展关系表
+     */
+    @Override
+    public ComContactsKeyValueMapping selectComContactsKeyValueMappingByTableName(String tableName)
+    {
+        return comContactsKeyValueMappingMapper.selectComContactsKeyValueMappingByTableName(tableName);
+    }
 }

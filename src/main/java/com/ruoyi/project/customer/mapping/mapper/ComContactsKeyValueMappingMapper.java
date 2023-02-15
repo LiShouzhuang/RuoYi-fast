@@ -58,4 +58,14 @@ public interface ComContactsKeyValueMappingMapper
      * @return 结果
      */
     public int deleteComContactsKeyValueMappingByIds(String[] ids);
+
+
+
+    /**
+     * 查询扩展关系表
+     *
+     * @param tableName 扩展关系表主键
+     * @return 扩展关系表
+     */
+    public ComContactsKeyValueMapping selectComContactsKeyValueMappingByTableName(String tableName);
 }
