@@ -1,0 +1,41 @@
+MAC安装redis的简单方法
+
+
+
+一、安装命令
+使用mac的包管理工具brew一行命令搞定安装。若未安装brew，命令行先输入以下命令安装brew。
+
+/bin/bash -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+安装redis
+
+brew install redis@6.2 #后面@接版本号可指定版本
+二、使用redis的常用命令
+1.启动redis服务
+
+brew services start redis
+2.关闭redis服务
+
+brew services stop redis
+3.重启redis服务
+
+brew services restart redis
+4.打开图形化界面
+
+redis-cli
+三、一些常用的配置
+1.开机启动redis命令
+
+ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+2.使用配置文件启动redis-server
+
+redis-server /usr/local/etc/redis.conf
+3.停止redis服务
+
+redis-cli shutdown
+4. redis配置文件位置
+
+/usr/local/etc/redis.conf
+ 5.卸载redis
+
+brewuninstallredis rm ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+

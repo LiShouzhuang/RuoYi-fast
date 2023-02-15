@@ -1,0 +1,26 @@
+需要redis
+window安装一下下载地址：
+https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504
+linux自己安装一下即可
+
+
+一，服务器、mysql
+
+ip：124.70.179.210
+用户名：root
+密码：Lsz930914!
+
+代码位置：/opt/official
+
+github
+lishouzhuang   Li930914
+
+
+
+nohup java -jar ruoyi.jar  > log.file  2>&1 &
+ps aux | grep java
+
+
+
+重要：
+买了服务器，部署了redeis/mysql 之后，备案，之后，找网站运维直接就可以网址输入。指向地址，等待部署文档

@@ -157,4 +157,37 @@ public class ComSeaController extends BaseController
         return util.importTemplateExcel("客户数据");
     }
 
+
+
+    /**
+     * 测试插入
+     */
+//    @RequiresPermissions("customer:sea:testAddExtension")
+    @GetMapping("/testAddExtension")
+    @ResponseBody
+    public AjaxResult addExtension()
+    {
+        ComSea comSea = new ComSea();
+        comSea.setId(Long.parseLong("11111"));
+        String i = "{\"name\":\"lucy\",\"age\":18,\"love\":\"写代码\",\"education\":\"本科\"}";
+        comSea.setExtension(i);
+        return toAjax(comSeaService.insertComSea(comSea));
+    }
+
+//    /**
+//     * 测试查询
+//     */
+////    @RequiresPermissions("customer:sea:testAddExtension")
+//    @GetMapping("/testAddExtension")
+//    @ResponseBody
+//    public AjaxResult getExtension()
+//    {
+//        ComSea comSea = comSeaService.selectComSea(comSea);
+//        comSea.setId(Long.parseLong("11111"));
+//        String i = "{\"name\":\"lucy\",\"age\":18,\"love\":\"写代码\",\"education\":\"本科\"}";
+//        comSea.setExtension(i);
+//        return toAjax(comSeaService.insertComSea(comSea));
+//    }
+
+
 }

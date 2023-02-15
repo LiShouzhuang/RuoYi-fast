@@ -9,7 +9,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 客户公海对象 com_sea
- * 
+ *
  * @author 李守壮
  * @date 2023-02-14
  */
@@ -40,32 +40,32 @@ public class ComSea extends BaseEntity
     @Excel(name = "电话")
     private String tel;
 
-    /** 邮箱 */
-    @Excel(name = "邮箱")
+    /** 用户邮箱 */
+    @Excel(name = "用户邮箱")
     private String email;
 
-    /** 性别 */
-    @Excel(name = "性别")
+    /** 用户性别（0男 1女 2未知） */
+    @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
 
-    /** 级别 */
-    @Excel(name = "级别")
+    /** 客户级别，1一般 2重要客户 3特别重要 */
+    @Excel(name = "客户级别，1一般 2重要客户 3特别重要")
     private String level;
 
-    /** 来源 */
-    @Excel(name = "来源")
+    /** 来源，1网站采集 2预约上门 3广告 4搜索引擎 5促销活动 */
+    @Excel(name = "来源，1网站采集 2预约上门 3广告 4搜索引擎 5促销活动")
     private String source;
 
     /** 行业 */
     @Excel(name = "行业")
     private String industry;
 
-    /** 帐号状态 */
-    @Excel(name = "帐号状态")
+    /** 帐号状态（0正常 1停用） */
+    @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
-    /** 跟进状态 */
-    @Excel(name = "跟进状态")
+    /** 跟进状态（0待沟通 1有意向 2初次沟通 3二次跟进 4已成交 5合同） */
+    @Excel(name = "跟进状态", readConverterExp = "0=待沟通,1=有意向,2=初次沟通,3=二次跟进,4=已成交,5=合同")
     private String followStatus;
 
     /** 纳税人识别号 */
@@ -146,8 +146,20 @@ public class ComSea extends BaseEntity
     @Excel(name = "登录账号")
     private String loginName;
 
-    /** 删除标志 */
+    /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
+
+    /** 联系人岗位 */
+    @Excel(name = "联系人岗位")
+    private String userDept;
+
+    /** 联系人职务 */
+    @Excel(name = "联系人职务")
+    private String userTitle;
+
+    /** 扩展字段 */
+    @Excel(name = "扩展字段")
+    private String extension;
 
     public void setId(Long id)
     {
@@ -446,48 +458,78 @@ public class ComSea extends BaseEntity
     {
         return delFlag;
     }
+    public void setUserDept(String userDept)
+    {
+        this.userDept = userDept;
+    }
+
+    public String getUserDept()
+    {
+        return userDept;
+    }
+    public void setUserTitle(String userTitle)
+    {
+        this.userTitle = userTitle;
+    }
+
+    public String getUserTitle()
+    {
+        return userTitle;
+    }
+    public void setExtension(String extension)
+    {
+        this.extension = extension;
+    }
+
+    public String getExtension()
+    {
+        return extension;
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("companyCode", getCompanyCode())
-            .append("companyName", getCompanyName())
-            .append("userName", getUserName())
-            .append("phone", getPhone())
-            .append("tel", getTel())
-            .append("email", getEmail())
-            .append("sex", getSex())
-            .append("level", getLevel())
-            .append("source", getSource())
-            .append("industry", getIndustry())
-            .append("status", getStatus())
-            .append("followStatus", getFollowStatus())
-            .append("invoiceNo", getInvoiceNo())
-            .append("classification", getClassification())
-            .append("regAddress", getRegAddress())
-            .append("enterpriseType", getEnterpriseType())
-            .append("regCapital", getRegCapital())
-            .append("establishDate", getEstablishDate())
-            .append("legalRepresentative", getLegalRepresentative())
-            .append("regAuthority", getRegAuthority())
-            .append("businessScope", getBusinessScope())
-            .append("industryType", getIndustryType())
-            .append("closeDate", getCloseDate())
-            .append("closeReason", getCloseReason())
-            .append("userId", getUserId())
-            .append("deptId", getDeptId())
-            .append("deptName", getDeptName())
-            .append("postId", getPostId())
-            .append("postCode", getPostCode())
-            .append("postName", getPostName())
-            .append("loginName", getLoginName())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+                .append("id", getId())
+                .append("companyCode", getCompanyCode())
+                .append("companyName", getCompanyName())
+                .append("userName", getUserName())
+                .append("phone", getPhone())
+                .append("tel", getTel())
+                .append("email", getEmail())
+                .append("sex", getSex())
+                .append("level", getLevel())
+                .append("source", getSource())
+                .append("industry", getIndustry())
+                .append("status", getStatus())
+                .append("followStatus", getFollowStatus())
+                .append("invoiceNo", getInvoiceNo())
+                .append("classification", getClassification())
+                .append("regAddress", getRegAddress())
+                .append("enterpriseType", getEnterpriseType())
+                .append("regCapital", getRegCapital())
+                .append("establishDate", getEstablishDate())
+                .append("legalRepresentative", getLegalRepresentative())
+                .append("regAuthority", getRegAuthority())
+                .append("businessScope", getBusinessScope())
+                .append("industryType", getIndustryType())
+                .append("closeDate", getCloseDate())
+                .append("closeReason", getCloseReason())
+                .append("userId", getUserId())
+                .append("deptId", getDeptId())
+                .append("deptName", getDeptName())
+                .append("postId", getPostId())
+                .append("postCode", getPostCode())
+                .append("postName", getPostName())
+                .append("loginName", getLoginName())
+                .append("delFlag", getDelFlag())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("remark", getRemark())
+                .append("userDept", getUserDept())
+                .append("userTitle", getUserTitle())
+                .append("extension", getExtension())
+                .toString();
     }
 }

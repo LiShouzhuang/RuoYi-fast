@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.product.mapper.ComProductMapper">
+    
+    <resultMap type="ComProduct" id="ComProductResult">
+        <result property="id"    column="id"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="productType"    column="product_type"    />
+        <result property="productName"    column="product__name"    />
+        <result property="status"    column="status"    />
+        <result property="price"    column="price"    />
+        <result property="staffId"    column="staff_id"    />
+        <result property="staffCode"    column="staff_code"    />
+        <result property="staffName"    column="staff_name"    />
+        <result property="description"    column="description"    />
+        <result property="contractPicture"    column="contract_picture"    />
+        <result property="contractAccessory"    column="contract_accessory"    />
+        <result property="ext"    column="ext"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectComProductVo">
+        select id, product_code, product_type, product__name, status, price, staff_id, staff_code, staff_name, description, contract_picture, contract_accessory, ext, del_flag, create_by, create_time, update_by, update_time, remark from com_product
+    </sql>
+
+    <select id="selectComProductList" parameterType="ComProduct" resultMap="ComProductResult">
+        <include refid="selectComProductVo"/>
+        <where>  
+            <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+            <if test="productType != null  and productType != ''"> and product_type = #{productType}</if>
+            <if test="productName != null  and productName != ''"> and product__name like concat('%', #{productName}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="staffId != null  and staffId != ''"> and staff_id = #{staffId}</if>
+            <if test="staffCode != null  and staffCode != ''"> and staff_code = #{staffCode}</if>
+            <if test="staffName != null  and staffName != ''"> and staff_name like concat('%', #{staffName}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="contractPicture != null  and contractPicture != ''"> and contract_picture = #{contractPicture}</if>
+            <if test="contractAccessory != null  and contractAccessory != ''"> and contract_accessory = #{contractAccessory}</if>
+            <if test="ext != null  and ext != ''"> and ext = #{ext}</if>
+        </where>
+    </select>
+    
+    <select id="selectComProductById" parameterType="Long" resultMap="ComProductResult">
+        <include refid="selectComProductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComProduct" parameterType="ComProduct" useGeneratedKeys="true" keyProperty="id">
+        insert into com_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">product_code,</if>
+            <if test="productType != null">product_type,</if>
+            <if test="productName != null">product__name,</if>
+            <if test="status != null">status,</if>
+            <if test="price != null">price,</if>
+            <if test="staffId != null">staff_id,</if>
+            <if test="staffCode != null">staff_code,</if>
+            <if test="staffName != null">staff_name,</if>
+            <if test="description != null">description,</if>
+            <if test="contractPicture != null">contract_picture,</if>
+            <if test="contractAccessory != null">contract_accessory,</if>
+            <if test="ext != null">ext,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productCode != null">#{productCode},</if>
+            <if test="productType != null">#{productType},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="price != null">#{price},</if>
+            <if test="staffId != null">#{staffId},</if>
+            <if test="staffCode != null">#{staffCode},</if>
+            <if test="staffName != null">#{staffName},</if>
+            <if test="description != null">#{description},</if>
+            <if test="contractPicture != null">#{contractPicture},</if>
+            <if test="contractAccessory != null">#{contractAccessory},</if>
+            <if test="ext != null">#{ext},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComProduct" parameterType="ComProduct">
+        update com_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productCode != null">product_code = #{productCode},</if>
+            <if test="productType != null">product_type = #{productType},</if>
+            <if test="productName != null">product__name = #{productName},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="staffId != null">staff_id = #{staffId},</if>
+            <if test="staffCode != null">staff_code = #{staffCode},</if>
+            <if test="staffName != null">staff_name = #{staffName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="contractPicture != null">contract_picture = #{contractPicture},</if>
+            <if test="contractAccessory != null">contract_accessory = #{contractAccessory},</if>
+            <if test="ext != null">ext = #{ext},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComProductById" parameterType="Long">
+        delete from com_product where id = #{id}
+    </delete>
+
+    <delete id="deleteComProductByIds" parameterType="String">
+        delete from com_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
