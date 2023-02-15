@@ -44,6 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectComContactsOutVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectComContactsOutByPhone" parameterType="String" resultMap="ComContactsOutResult">
+        <include refid="selectComContactsOutVo"/>
+        where phone = #{phone}
+    </select>
         
     <insert id="insertComContactsOut" parameterType="ComContactsOut" useGeneratedKeys="true" keyProperty="id">
         insert into com_contacts_out

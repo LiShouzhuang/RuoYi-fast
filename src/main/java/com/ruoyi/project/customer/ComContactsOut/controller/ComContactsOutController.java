@@ -165,30 +165,28 @@ public class ComContactsOutController extends BaseController
      * 测试插入
      */
 //    @RequiresPermissions("customer:sea:testAddExtension")
-    @GetMapping("/testAddExtension")
+    @GetMapping("/testAddExtension/{extension}")
     @ResponseBody
-    public AjaxResult addExtension()
+    public AjaxResult addExtension(@PathVariable("extension") String extension)
     {
         ComContactsOut comContactsOut  = new ComContactsOut();
-        comContactsOut.setId(Long.parseLong("11111"));
-        String i = "{\"name\":\"lucy\",\"age\":18,\"love\":\"写代码\",\"education\":\"本科\"}";
-        comContactsOut.setExtension(i);
+        comContactsOut.setPhone("888");
+        comContactsOut.setExtension(extension);
         return toAjax(comContactsOutService.insertComContactsOut(comContactsOut));
     }
 
-//    /**
-//     * 测试查询
-//     */
-////    @RequiresPermissions("customer:sea:testAddExtension")
-//    @GetMapping("/testGetExtension")
-//    @ResponseBody
-//    public AjaxResult getExtension()
-//    {
-//        ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutById(Long.parseLong("8"));
-//
+    /**
+     * 测试查询
+     */
+//    @RequiresPermissions("customer:sea:testAddExtension")
+    @GetMapping("/testGetExtension")
+    @ResponseBody
+    public AjaxResult getExtension()
+    {
+        ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutByPhone("888");
 //        comContactsOut.setExtension(i);
-//        return toAjax(comContactsOutService.insertComContactsOut(comContactsOut));
-//    }
+        return toAjax(comContactsOutService.insertComContactsOut(comContactsOut));
+    }
 
 
 

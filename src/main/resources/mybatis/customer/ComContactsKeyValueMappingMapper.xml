@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.customer.mapping.mapper.ComContactsKeyValueMappingMapper">
+    
+    <resultMap type="ComContactsKeyValueMapping" id="ComContactsKeyValueMappingResult">
+        <result property="id"    column="id"    />
+        <result property="tableName"    column="table_name"    />
+        <result property="mappingKey"    column="mapping_key"    />
+        <result property="mappingValue"    column="mapping_value"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectComContactsKeyValueMappingVo">
+        select id, table_name, mapping_key, mapping_value, del_flag, create_by, create_time, update_by, update_time from com_contacts_key_value_mapping
+    </sql>
+
+    <select id="selectComContactsKeyValueMappingList" parameterType="ComContactsKeyValueMapping" resultMap="ComContactsKeyValueMappingResult">
+        <include refid="selectComContactsKeyValueMappingVo"/>
+        <where>  
+            <if test="tableName != null  and tableName != ''"> and table_name like concat('%', #{tableName}, '%')</if>
+            <if test="mappingKey != null  and mappingKey != ''"> and mapping_key = #{mappingKey}</if>
+            <if test="mappingValue != null  and mappingValue != ''"> and mapping_value = #{mappingValue}</if>
+        </where>
+    </select>
+    
+    <select id="selectComContactsKeyValueMappingById" parameterType="Long" resultMap="ComContactsKeyValueMappingResult">
+        <include refid="selectComContactsKeyValueMappingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComContactsKeyValueMapping" parameterType="ComContactsKeyValueMapping" useGeneratedKeys="true" keyProperty="id">
+        insert into com_contacts_key_value_mapping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableName != null">table_name,</if>
+            <if test="mappingKey != null">mapping_key,</if>
+            <if test="mappingValue != null">mapping_value,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tableName != null">#{tableName},</if>
+            <if test="mappingKey != null">#{mappingKey},</if>
+            <if test="mappingValue != null">#{mappingValue},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateComContactsKeyValueMapping" parameterType="ComContactsKeyValueMapping">
+        update com_contacts_key_value_mapping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tableName != null">table_name = #{tableName},</if>
+            <if test="mappingKey != null">mapping_key = #{mappingKey},</if>
+            <if test="mappingValue != null">mapping_value = #{mappingValue},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteComContactsKeyValueMappingById" parameterType="Long">
+        delete from com_contacts_key_value_mapping where id = #{id}
+    </delete>
+
+    <delete id="deleteComContactsKeyValueMappingByIds" parameterType="String">
+        delete from com_contacts_key_value_mapping where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

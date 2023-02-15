@@ -185,4 +185,19 @@ public class ComContactsOutServiceImpl implements IComContactsOutService
     }
 
 
+
+    /**
+     * 查询外部通讯录
+     *
+     * @param phone 外部通讯录主键
+     * @return 外部通讯录
+     */
+    @Override
+    public ComContactsOut selectComContactsOutByPhone(String phone)
+    {
+        ComContactsOut c= comContactsOutMapper.selectComContactsOutByPhone(phone);
+        return c;
+    }
+
+
 }

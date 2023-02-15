@@ -64,4 +64,13 @@ public interface IComContactsOutService
      * 导入数据
      */
     public String importContactsOut(List<ComContactsOut> comContactsOutList, Boolean isUpdateSupport);
+
+
+    /**
+     * 查询外部通讯录
+     *
+     * @param phone 外部通讯录主键
+     * @return 外部通讯录
+     */
+    public ComContactsOut selectComContactsOutByPhone(String phone);
 }
