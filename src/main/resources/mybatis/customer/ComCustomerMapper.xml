@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="regAddress"    column="reg_address"    />
         <result property="enterpriseType"    column="enterprise_type"    />
         <result property="regCapital"    column="reg_capital"    />
-        <result property="establisDate"    column="establis_date"    />
+        <result property="establishDate"    column="establish_date"    />
         <result property="legalRepresentative"    column="legal_representative"    />
         <result property="regAuthority"    column="reg_authority"    />
         <result property="businessScope"    column="business_scope"    />
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectComCustomerVo">
-        select id, company_code, company_name, company_status, company_user_name, company_title, mobile, telephone, address, bank_name, bank_no, account_no, city_id, city_name, province_id, province_name, industry, kefu_id, kefu_name, kefu_mobile, kefu_email, sales_id, sales_name, sales_mobile, sales_email, receive_address, receive_city_id, receive_name, receive_province_id, receive_telephone, receive_city_name, receive_province_name, remark, channel_id, channel_code, classification, reg_address, enterprise_type, reg_capital, establis_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, company_contract_id, company_contract_code, contract_start_date, contract_end_date, contract_amount, contract_total_amount, contract_is_continue, invoice_name, invoice_no, create_date, create_by, update_date, update_by, is_deleted from com_customer
+        select id, company_code, company_name, company_status, company_user_name, company_title, mobile, telephone, address, bank_name, bank_no, account_no, city_id, city_name, province_id, province_name, industry, kefu_id, kefu_name, kefu_mobile, kefu_email, sales_id, sales_name, sales_mobile, sales_email, receive_address, receive_city_id, receive_name, receive_province_id, receive_telephone, receive_city_name, receive_province_name, remark, channel_id, channel_code, classification, reg_address, enterprise_type, reg_capital, establish_date, legal_representative, reg_authority, business_scope, industry_type, close_date, close_reason, company_contract_id, company_contract_code, contract_start_date, contract_end_date, contract_amount, contract_total_amount, contract_is_continue, invoice_name, invoice_no, create_date, create_by, update_date, update_by, is_deleted from com_customer
     </sql>
 
     <select id="selectComCustomerList" parameterType="ComCustomer" resultMap="ComCustomerResult">
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="regAddress != null  and regAddress != ''"> and reg_address = #{regAddress}</if>
             <if test="enterpriseType != null  and enterpriseType != ''"> and enterprise_type = #{enterpriseType}</if>
             <if test="regCapital != null  and regCapital != ''"> and reg_capital = #{regCapital}</if>
-            <if test="establisDate != null "> and establis_date = #{establisDate}</if>
+            <if test="establishDate != null "> and establish_date = #{establishDate}</if>
             <if test="legalRepresentative != null  and legalRepresentative != ''"> and legal_representative = #{legalRepresentative}</if>
             <if test="regAuthority != null  and regAuthority != ''"> and reg_authority = #{regAuthority}</if>
             <if test="businessScope != null  and businessScope != ''"> and business_scope = #{businessScope}</if>
@@ -189,7 +189,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="regAddress != null">reg_address,</if>
             <if test="enterpriseType != null">enterprise_type,</if>
             <if test="regCapital != null">reg_capital,</if>
-            <if test="establisDate != null">establis_date,</if>
+            <if test="establishDate != null">establish_date,</if>
             <if test="legalRepresentative != null">legal_representative,</if>
             <if test="regAuthority != null">reg_authority,</if>
             <if test="businessScope != null">business_scope,</if>
@@ -250,7 +250,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="regAddress != null">#{regAddress},</if>
             <if test="enterpriseType != null">#{enterpriseType},</if>
             <if test="regCapital != null">#{regCapital},</if>
-            <if test="establisDate != null">#{establisDate},</if>
+            <if test="establishDate != null">#{establishDate},</if>
             <if test="legalRepresentative != null">#{legalRepresentative},</if>
             <if test="regAuthority != null">#{regAuthority},</if>
             <if test="businessScope != null">#{businessScope},</if>
@@ -315,7 +315,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="regAddress != null">reg_address = #{regAddress},</if>
             <if test="enterpriseType != null">enterprise_type = #{enterpriseType},</if>
             <if test="regCapital != null">reg_capital = #{regCapital},</if>
-            <if test="establisDate != null">establis_date = #{establisDate},</if>
+            <if test="establishDate != null">establish_date = #{establishDate},</if>
             <if test="legalRepresentative != null">legal_representative = #{legalRepresentative},</if>
             <if test="regAuthority != null">reg_authority = #{regAuthority},</if>
             <if test="businessScope != null">business_scope = #{businessScope},</if>

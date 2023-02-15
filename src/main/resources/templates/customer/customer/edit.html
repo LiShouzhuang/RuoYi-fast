@@ -237,7 +237,7 @@
                 <label class="col-sm-3 control-label">成立日期：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <input name="establisDate" th:value="${#dates.format(comCustomer.establisDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <input name="establishDate" th:value="${#dates.format(comCustomer.establishDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -375,7 +375,7 @@
             }
         }
 
-        $("input[name='establisDate']").datetimepicker({
+        $("input[name='establishDate']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true

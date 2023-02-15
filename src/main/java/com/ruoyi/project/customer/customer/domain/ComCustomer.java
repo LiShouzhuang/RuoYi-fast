@@ -171,7 +171,7 @@ public class ComCustomer extends BaseEntity
     /** 成立日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "成立日期", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date establisDate;
+    private Date establishDate;
 
     /** 法人代表 */
     @Excel(name = "法人代表")
@@ -592,14 +592,14 @@ public class ComCustomer extends BaseEntity
     {
         return regCapital;
     }
-    public void setEstablisDate(Date establisDate)
+    public void setEstablishDate(Date establishDate)
     {
-        this.establisDate = establisDate;
+        this.establishDate = establishDate;
     }
 
-    public Date getEstablisDate()
+    public Date getEstablishDate()
     {
-        return establisDate;
+        return establishDate;
     }
     public void setLegalRepresentative(String legalRepresentative)
     {
@@ -806,7 +806,7 @@ public class ComCustomer extends BaseEntity
             .append("regAddress", getRegAddress())
             .append("enterpriseType", getEnterpriseType())
             .append("regCapital", getRegCapital())
-            .append("establisDate", getEstablisDate())
+            .append("establishDate", getEstablishDate())
             .append("legalRepresentative", getLegalRepresentative())
             .append("regAuthority", getRegAuthority())
             .append("businessScope", getBusinessScope())

@@ -129,7 +129,7 @@ CREATE TABLE `com_customer` (
                                 `reg_address` varchar(255) DEFAULT NULL COMMENT '注册地址',
                                 `enterprise_type` varchar(50) DEFAULT NULL COMMENT '企业类型',
                                 `reg_capital` varchar(150) DEFAULT NULL COMMENT '注册资本',
-                                `establis_date` datetime DEFAULT NULL COMMENT '成立日期',
+                                `establish_date` datetime DEFAULT NULL COMMENT '成立日期',
                                 `legal_representative` varchar(50) DEFAULT NULL COMMENT '法人代表',
                                 `reg_authority` varchar(255) DEFAULT NULL COMMENT '登记机关',
                                 `business_scope` varchar(2000) DEFAULT NULL COMMENT '经营范围',
