@@ -2,6 +2,7 @@ package com.ruoyi.project.customer.ComContactsOut.controller;
 
 import java.util.List;
 
+import com.ruoyi.project.customer.product.domain.ComProduct;
 import com.ruoyi.project.customer.sea.domain.ComSea;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 外部通讯录Controller
@@ -128,6 +130,33 @@ public class ComContactsOutController extends BaseController
     }
 
 
+
+    /**
+     * 导入数据
+     */
+    @Log(title = "外部通讯录", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:ComContactsOut:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<ComContactsOut> util = new ExcelUtil<ComContactsOut>(ComContactsOut.class);
+        List<ComContactsOut> list = util.importExcel(file.getInputStream());
+        String message = comContactsOutService.importContactsOut(list, updateSupport);
+        return AjaxResult.success(message);
+    }
+
+    /**
+     * 导入-下载模版
+     */
+    @RequiresPermissions("customer:ComContactsOut:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<ComContactsOut> util = new ExcelUtil<ComContactsOut>(ComContactsOut.class);
+        return util.importTemplateExcel("外部通讯录数据");
+    }
 
 
 
