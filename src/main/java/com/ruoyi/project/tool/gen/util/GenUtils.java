@@ -21,11 +21,14 @@ public class GenUtils
     public static void initTable(GenTable genTable, String operName)
     {
         genTable.setClassName(convertClassName(genTable.getTableName()));
-        genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
-        genTable.setFunctionAuthor(GenConfig.getAuthor());
+//        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
+//        genTable.setPackageName(GenConfig.getPackageName());
+//        genTable.setFunctionAuthor(GenConfig.getAuthor());
+        genTable.setModuleName("customer");
+        genTable.setPackageName("com.ruoyi.project.customer");
+        genTable.setFunctionAuthor("李守壮");
         genTable.setCreateBy(operName);
     }
 
