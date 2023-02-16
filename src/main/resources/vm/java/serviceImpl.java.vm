@@ -24,6 +24,10 @@ import ${packageName}.${businessName}.domain.${ClassName};
 import ${packageName}.${businessName}.service.I${ClassName}Service;
 import com.ruoyi.common.utils.text.Convert;
 
+import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.bean.BeanValidators;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.config.service.IConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -250,13 +254,13 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
             try
             {
                 // 验证是否存在这个客户
-                ${ClassName} c= ${className}Mapper.select${ClassName}ById(Long.parseLong(item.getId()));
+                ${ClassName} c= ${className}Mapper.select${ClassName}By${pkColumn.capJavaField}(item.get${pkColumn.capJavaField}());
                 if (StringUtils.isNull(c))
                 {
                     BeanValidators.validateWithException(validator, item);
                     this.insert${ClassName}(item);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + item.getId() + " 导入成功");
+                    successMsg.append("<br/>" + successNum + "、账号 " + item.get${pkColumn.capJavaField}() + " 导入成功");
                 }
                 else if (isUpdateSupport)
                 {
@@ -264,18 +268,18 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
                     item.setUpdateBy(operName);
                     this.update${ClassName}(item);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + item.getId() + " 更新成功");
+                    successMsg.append("<br/>" + successNum + "、账号 " + item.get${pkColumn.capJavaField}() + " 更新成功");
                 }
                 else
                 {
                     failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、账号 " + item.getId() + " 已存在");
+                    failureMsg.append("<br/>" + failureNum + "、账号 " + item.get${pkColumn.capJavaField}() + " 已存在");
                 }
             }
             catch (Exception e)
             {
                 failureNum++;
-                String msg = "<br/>" + failureNum + "、账号 " + item.getId() + " 导入失败：";
+                String msg = "<br/>" + failureNum + "、账号 " + item.get${pkColumn.capJavaField}() + " 导入失败：";
                 failureMsg.append(msg + e.getMessage());
                 log.error(msg, e);
             }
