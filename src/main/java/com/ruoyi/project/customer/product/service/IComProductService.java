@@ -2,7 +2,6 @@ package com.ruoyi.project.customer.product.service;
 
 import java.util.List;
 import com.ruoyi.project.customer.product.domain.ComProduct;
-import com.ruoyi.project.customer.sea.domain.ComSea;
 
 /**
  * 产品Service接口

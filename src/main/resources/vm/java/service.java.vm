@@ -70,4 +70,11 @@ public interface I${ClassName}Service
      */
     public List<Ztree> select${ClassName}Tree();
 #end
+
+
+    /**
+ * 导入数据
+ */
+    public String importData(List<${ClassName}> list, Boolean isUpdateSupport);
+
 }

@@ -2,7 +2,6 @@ package com.ruoyi.project.customer.sea.service;
 
 import java.util.List;
 
-import com.ruoyi.project.customer.customer.domain.ComCustomer;
 import com.ruoyi.project.customer.sea.domain.ComSea;
 
 /**

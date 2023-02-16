@@ -7,12 +7,6 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.customer.customer.domain.ComCustomer;
-import com.ruoyi.project.customer.sea.domain.ComSea;
-import com.ruoyi.project.customer.sea.service.impl.ComSeaServiceImpl;
-import com.ruoyi.project.system.config.service.IConfigService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.customer.product.mapper.ComProductMapper;
@@ -20,6 +14,9 @@ import com.ruoyi.project.customer.product.domain.ComProduct;
 import com.ruoyi.project.customer.product.service.IComProductService;
 import com.ruoyi.common.utils.text.Convert;
 
+import com.ruoyi.project.system.config.service.IConfigService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.validation.Validator;
 
 /**

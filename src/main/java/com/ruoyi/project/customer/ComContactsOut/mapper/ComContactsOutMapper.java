@@ -2,7 +2,6 @@ package com.ruoyi.project.customer.ComContactsOut.mapper;
 
 import java.util.List;
 import com.ruoyi.project.customer.ComContactsOut.domain.ComContactsOut;
-import com.ruoyi.project.customer.product.domain.ComProduct;
 
 /**
  * 外部通讯录Mapper接口

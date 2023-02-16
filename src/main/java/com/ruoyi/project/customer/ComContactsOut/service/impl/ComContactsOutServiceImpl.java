@@ -7,8 +7,6 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.customer.product.domain.ComProduct;
-import com.ruoyi.project.customer.product.service.impl.ComProductServiceImpl;
 import com.ruoyi.project.system.config.service.IConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
