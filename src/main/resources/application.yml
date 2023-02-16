@@ -125,7 +125,7 @@ shiro:
     kickoutAfter: false
   rememberMe:
     # 是否开启记住我
-    enabled: true
+    enabled: false
 
 # 防止XSS攻击
 xss: 
@@ -144,9 +144,9 @@ swagger:
 # 代码生成
 gen: 
   # 作者
-  author: ruoyi
+  author: 李守壮
   # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
-  packageName: com.ruoyi.project.system
+  packageName: com.ruoyi.project.customer
   # 自动去除表前缀，默认是true
   autoRemovePre: true
   # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
