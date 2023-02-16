@@ -116,7 +116,7 @@
                 },
                 {
                     field: 'productCode',
-                    title: '编号'
+                    title: '产品编码'
                 },
                 {
                     field: 'productType',
@@ -127,15 +127,9 @@
                 },
                 {
                     field: 'productName',
-                    title: '名称'
+                    title: '产品名称'
                 },
-                {
-                    field: 'status',
-                    title: '状态',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(statusDatas, value);
-                    }
-                },
+
                 {
                     field: 'price',
                     title: '产品单价'
@@ -146,14 +140,13 @@
                     visible: false
                 },
                 {
-                    field: 'staffCode',
-                    title: '产品负责人编码',
-                    visible: false
-                },
-                {
                     field: 'staffName',
-                    title: '产品负责人名称'
+                    title: '产品负责人'
                 },
+                    {
+                        field: 'staffCode',
+                        title: '员工号'
+                    },
                 {
                     field: 'description',
                     title: '产品描述'
@@ -173,6 +166,13 @@
                     title: '拓展字段',
                     visible: false
                 },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        formatter: function(value, row, index) {
+                            return $.table.selectDictLabel(statusDatas, value);
+                        }
+                    },
                 {
                     field: 'remark',
                     title: '备注'
