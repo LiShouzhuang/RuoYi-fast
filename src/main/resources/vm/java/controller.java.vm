@@ -17,12 +17,13 @@ import ${packageName}.${businessName}.service.I${ClassName}Service;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import org.springframework.web.multipart.MultipartFile;
 #if($table.crud || $table.sub)
 import com.ruoyi.framework.web.page.TableDataInfo;
 #elseif($table.tree)
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.domain.Ztree;
-import org.springframework.web.multipart.MultipartFile;
+
 #end
 
 /**
@@ -154,14 +155,18 @@ public class ${ClassName}Controller extends BaseController
      */
     @RequiresPermissions("${permissionPrefix}:detail")
     @Log(title = "${functionName}", businessType = BusinessType.UPDATE)
-    @PostMapping("/detail")
+    @PostMapping("/detail/{id}")
     @ResponseBody
-    public AjaxResult detail(${ClassName} ${className})
+    public String detail(@PathVariable("id") Long id, ModelMap mmap)
     {
-        ${ClassName} ${className} = ${className}Service.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+        ${ClassName} ${className} = ${className}Service.select${ClassName}By${pkColumn.capJavaField}(id);
         mmap.put("${className}", ${className});
         return prefix + "/detail";
     }
+
+
+
+
 
 
 #if($table.crud || $table.sub)
