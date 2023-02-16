@@ -124,6 +124,20 @@ public class ComContactsOutController extends BaseController
         return prefix + "/edit";
     }
 
+
+    /**
+     * 查看详细
+     */
+    @RequiresPermissions("customer:ComContactsOut:detail")
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id, ModelMap mmap)
+    {
+        ComContactsOut comContactsOut = comContactsOutService.selectComContactsOutById(id);
+        mmap.put("comContactsOut", comContactsOut);
+        return prefix + "/detail";
+    }
+
+
     /**
      * 修改保存外部通讯录
      */

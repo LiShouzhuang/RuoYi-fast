@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('${functionName}详细')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-user-edit">
+            #foreach($column in $columns)
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">${comment}：</label>
+                    <div class="col-sm-8">
+                        <div class="form-control-static" th:text=""></div>
+                    </div>
+                </div>
+            #end
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+</body>
+</html>

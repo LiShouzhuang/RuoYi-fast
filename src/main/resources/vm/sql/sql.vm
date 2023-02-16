@@ -19,4 +19,10 @@ insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, 
 values('${functionName}删除', @parentId, '4',  '#',  'F', '0', '${permissionPrefix}:remove',       '#', 'admin', sysdate(), '', null, '');
 
 insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
-values('${functionName}导出', @parentId, '5',  '#',  'F', '0', '${permissionPrefix}:export',       '#', 'admin', sysdate(), '', null, '');
+values('${functionName}导入', @parentId, '5',  '#',  'F', '0', '${permissionPrefix}:import',       '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}导出', @parentId, '6',  '#',  'F', '0', '${permissionPrefix}:export',       '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('${functionName}详情', @parentId, '7',  '#',  'F', '0', '${permissionPrefix}:detail',       '#', 'admin', sysdate(), '', null, '');

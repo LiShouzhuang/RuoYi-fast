@@ -147,6 +147,22 @@ public class ${ClassName}Controller extends BaseController
         return toAjax(${className}Service.update${ClassName}(${className}));
     }
 
+
+    /**
+     * 查看详细${functionName}
+     */
+    @RequiresPermissions("${permissionPrefix}:detail")
+    @Log(title = "${functionName}", businessType = BusinessType.UPDATE)
+    @PostMapping("/detail")
+    @ResponseBody
+    public AjaxResult detail(${ClassName} ${className})
+    {
+        ${ClassName} ${className} = ${className}Service.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+        mmap.put("${className}", ${className});
+        return prefix + "/detail";
+    }
+
+
 #if($table.crud || $table.sub)
     /**
      * 删除${functionName}
